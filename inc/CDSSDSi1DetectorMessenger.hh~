@@ -1,0 +1,51 @@
+#ifndef DEMOGasDetectorMessenger_h
+#define DEMOGasDetectorMessenger_h 1
+
+#include "globals.hh"
+#include "G4UImessenger.hh"
+
+class DEMODetectorConstruction;
+class DEMOGasDetectorConstruction;
+//class ActarSimPrimaryGeneratorAction;
+
+class G4UIdirectory;
+class G4UIcmdWithAString;
+class G4UIcmdWithAnInteger;
+class G4UIcmdWithADouble;
+class G4UIcmdWithoutParameter;
+class G4UIcmdWithADoubleAndUnit;
+class G4UIcmdWith3Vector;
+class G4UIcmdWith3VectorAndUnit;
+class G4UIcmdWithoutParameter;
+
+class DEMOGasDetectorMessenger: public G4UImessenger {
+private:
+  DEMODetectorConstruction* DEMODetector;         ///< Pointer to main detector geometry class
+  DEMOGasDetectorConstruction* DEMOGasDetector;   ///< Pointer to main gas detector geometry class
+
+  G4UIcmdWithAnInteger*      gasMixtureFlagCmd;           ///< Set a Gas Mixture with N number of elements (default 0).
+  G4UIcommand*               gasMixtureCmd;               ///< Set a Gas Mixture (for the Gas box and the Chamber).
+
+  G4UIdirectory*             gasDir;                      ///< Directory
+  G4UIdirectory*             gasDirMix;                   ///< Directory for gas mix
+
+  G4UIcmdWithAString*        gasMaterCmd;                 ///< Select Material of the Gas (for the Gas box and the Chamber).
+  G4UIcmdWithADoubleAndUnit* gasPresCmd;                  ///< Select the Gas Pressure (for the Gas box and the Chamber).
+  G4UIcmdWithADoubleAndUnit* gasTempCmd;                  ///< Select the Gas Temperature (for the Gas box and the Chamber).
+
+  
+  //For the gas mixture
+  G4int fGasNumber;                                       ///< Gas mixture parameters: number
+  G4String fGasMaterial;                                  ///< Gas mixture parameters: material
+  G4double fGasRatio;                                     ///< Gas mixture parameters: ratio
+
+  void GasMixtureCommand(G4String newValues);
+  
+  void SetNewValue(G4UIcommand*, G4String);
+
+public:
+  DEMOGasDetectorMessenger(DEMOGasDetectorConstruction*);
+  ~DEMOGasDetectorMessenger();
+
+};
+#endif

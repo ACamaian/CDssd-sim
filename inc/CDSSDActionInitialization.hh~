@@ -1,0 +1,31 @@
+/// \file DEMOActionInitialization.hh
+/// \brief Definition of the DEMOActionInitialization class
+
+#ifndef DEMOActionInitialization_h
+#define DEMOActionInitialization_h 1
+
+#include "DEMODetectorConstruction.hh"
+
+#include "G4VUserActionInitialization.hh"
+
+/// Action initialization class.
+
+class DEMOActionInitialization : public G4VUserActionInitialization
+{
+  public:
+    DEMOActionInitialization(DEMODetectorConstruction *);
+    ~DEMOActionInitialization() override;
+
+    void BuildForMaster() const override;
+    void Build() const override;
+
+private:
+  DEMODetectorConstruction *fDetConstruction = nullptr;
+
+};
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+#endif
+
+    

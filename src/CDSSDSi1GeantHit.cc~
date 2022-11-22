@@ -1,0 +1,113 @@
+
+//////////////////////////////////////////////////////////////////
+/// \class DEMOGasGeantHit
+/// A Geant Hit in the calorimeter volume. It represents the
+/// information of each step with energy deposited in the
+/// calorimeter volume.
+/////////////////////////////////////////////////////////////////
+
+#include "DEMOGasGeantHit.hh"
+#include "G4UnitsTable.hh"
+#include "G4VVisManager.hh"
+#include "G4Circle.hh"
+#include "G4Colour.hh"
+#include "G4VisAttributes.hh"
+
+#include "G4PhysicalConstants.hh"
+#include "G4SystemOfUnits.hh"
+
+G4Allocator<DEMOGasGeantHit>* DEMOGasGeantHitAllocator;
+
+//////////////////////////////////////////////////////////////////
+/// Constructor
+DEMOGasGeantHit::DEMOGasGeantHit() {
+}
+
+//////////////////////////////////////////////////////////////////
+/// Destructor
+DEMOGasGeantHit::~DEMOGasGeantHit() {
+}
+
+//////////////////////////////////////////////////////////////////
+/// Copy constructor
+DEMOGasGeantHit::DEMOGasGeantHit(const DEMOGasGeantHit& right) : G4VHit() {
+  trackID = right.trackID;
+  parentID = right.parentID;
+  e0 = right.e0;
+  edep = right.edep;
+  particleCharge = right.particleCharge;
+  particleMass = right.particleMass;
+  particleID = right.particleID;
+  prePos = right.prePos;
+  postPos = right.postPos;
+  detName = right.detName;
+  detID = right.detID;
+  preToF = right.preToF;
+  postToF = right.postToF;
+  stepLength = right.stepLength;
+  stepEnergy = right.stepEnergy;
+}
+
+//////////////////////////////////////////////////////////////////
+/// Operator =
+const DEMOGasGeantHit& DEMOGasGeantHit::operator=(const DEMOGasGeantHit& right){
+  trackID = right.trackID;
+  parentID = right.parentID;
+  e0 = right.e0;
+  edep = right.edep;
+  particleCharge = right.particleCharge;
+  particleMass = right.particleMass;
+  particleID = right.particleID;
+  prePos = right.prePos;
+  postPos = right.postPos;
+  detName = right.detName;
+  detID = right.detID;
+  preToF = right.preToF;
+  postToF = right.postToF;
+  stepLength = right.stepLength;
+  stepEnergy = right.stepEnergy;
+
+  return *this;
+}
+
+//////////////////////////////////////////////////////////////////
+/// Operator ==
+G4int DEMOGasGeantHit::operator==(const DEMOGasGeantHit& right) const{
+  return (this==&right) ? 1 : 0;
+}
+
+//////////////////////////////////////////////////////////////////
+/// Draws the Hit. A clear red point on the Hit position
+void DEMOGasGeantHit::Draw(){
+  G4VVisManager* pVVisManager = G4VVisManager::GetConcreteInstance();
+  if(pVVisManager) {
+    G4Circle circle(prePos);
+    circle.SetScreenSize(4);
+    circle.SetFillStyle(G4Circle::filled);
+    G4Colour colour(1.,0.,0.);
+    G4VisAttributes attribs(colour);
+    circle.SetVisAttributes(attribs);
+    pVVisManager->Draw(circle);
+  }
+}
+
+//////////////////////////////////////////////////////////////////
+/// Prints full information about the calGeantHit
+void DEMOGasGeantHit::Print(){
+  G4cout << "##################################################################"
+         << G4endl
+         << "############     DEMOGasGeantHit::Print()     ################" << G4endl
+         << "trackID: " << trackID
+         << "parentID: " << parentID
+         << ", detID: " << detID
+         << ", detName: " << detName << G4endl;
+  G4cout << "edep: " << edep  / MeV << " MeV"
+         << ", stepEnergy: " << stepEnergy
+         << ", prePos: " << prePos
+         << ", postPos: " << postPos
+         << ", stepLength: " << stepLength  / mm << " mm"
+         << ", preToF: " << preToF  / ns << " ns"
+         << ", posToF: " << postToF  / ns << " ns"       << G4endl;
+  G4cout << "##################################################################"
+         << G4endl;
+}

@@ -1,0 +1,496 @@
+#include "DEMODetectorConstruction.hh"
+#include "DEMODetectorMessenger.hh"
+
+#include "DEMOGasDetectorConstruction.hh"
+#include "DEMODSSDDetectorConstruction.hh"
+
+#include "DEMOGasSD.hh"
+
+#include "G4RotationMatrix.hh"
+#include "G4Box.hh"
+#include "G4Tubs.hh"
+#include "G4LogicalVolume.hh"
+#include "G4PVPlacement.hh"
+#include "G4VisAttributes.hh"
+#include "G4Colour.hh"
+#include "G4RunManager.hh"
+#include "globals.hh"
+#include "G4AssemblyVolume.hh"
+
+#include "G4PhysicalConstants.hh"
+#include "G4SystemOfUnits.hh"
+
+
+//////////////////////////////////////////////////////////////////
+/// Constructor: initialize all variables, materials and pointers
+DEMODetectorConstruction::DEMODetectorConstruction()
+  : gasSD(0), solidWorld(0), worldLog(0), chamberLog(0), AlplateLog(0), SupportLog(0),
+    worldPhys(0), chamberPhys(0), AlplatePhys(0), SupportPhys(0),
+    mediumMaterial(0), defaultMaterial(0), chamberMaterial(0), windowMaterial(0),
+     gasDet(0) {
+
+  G4cout << "DEMO Detector Construction" << G4endl;
+
+  //initialize the G4NISTMaterial manager
+  nistman = G4NistManager::Instance();
+
+  //default values of half-length -> size of World (2x2x2 m3)
+  worldSizeX = 1.*m;
+  worldSizeY = 1.*m;
+  worldSizeZ = 1.*m;
+  //default values of half-length -> size of Chamber (1x1x1 m3)
+  chamberSizeX = 0.5*m;
+  chamberSizeY = 0.5*m;
+  chamberSizeZ = 0.5*m;
+
+ 
+  //define default materials and set medium, default, chamber, window default materials
+  DefineMaterials();
+  SetMediumMaterial("G4_Galactic");
+  SetDefaultMaterial("G4_Galactic");
+  SetChamberMaterial("G4_Galactic");
+  SetGasDeadMaterial("G4_Galactic");
+  SetWindowMaterial("G4_MYLAR");
+  SetSupportMaterial("Peek");
+
+  //define some geometry
+  front_gap = 55 * mm;
+  side_gap = 58 * mm; //distance from ancillary side detectors to the inner field cage
+  back_gap = 46.8 * mm; ////distance from ancillary downstream detector to the inner field cage
+
+ 
+
+  //Modular detector construction objects
+  gasDet = new DEMOGasDetectorConstruction(this);
+  dssdDet = new DEMODSSDDetectorConstruction(this);
+
+  //Create Step Limits
+  limit = new G4UserLimits(0.1*mm);
+
+  // create commands for interactive definition of the detector
+  detectorMessenger = new DEMODetectorMessenger(this);
+}
+
+//////////////////////////////////////////////////////////////////
+/// Destructor
+DEMODetectorConstruction::~DEMODetectorConstruction() {
+
+  if(detectorMessenger != NULL) delete detectorMessenger;
+ 
+}
+
+//////////////////////////////////////////////////////////////////
+/// GEANT4 mandatory method for the geometry implementation.
+
+G4VPhysicalVolume* DEMODetectorConstruction::Construct() {
+
+  return ConstructActarTPCDEMO();
+
+}
+
+/////////////////////////////////////////////////////////////////
+/// Constructs an empty World volume with default sizes.
+///
+/// It is used if no geometry is specified when inizialization is called.
+G4VPhysicalVolume* DEMODetectorConstruction::ConstructEmptyWorld() {
+
+  solidWorld = new G4Box("World",                //its name
+			 worldSizeX,worldSizeY,worldSizeZ);  //its size
+
+  worldLog = new G4LogicalVolume(solidWorld,     //its solid
+				 mediumMaterial,                 //its material
+				 "World");                       //its name
+
+  worldPhys = new G4PVPlacement(0,     //no rotation
+				G4ThreeVector(),       //at (0,0,0)
+				worldLog,              //its logical volume
+				"World",               //its name
+				0,                     //its mother  volume
+				false,                 //no boolean operation
+				0);                    //copy number
+
+  return worldPhys;
+}
+
+
+////////////////////////////////////////////////////////////////
+/// Constructs the ActarTPC DEMONSTRATOR geometry
+
+G4VPhysicalVolume* DEMODetectorConstruction::ConstructActarTPCDEMO() {
+  //--------------------------
+  //World Volume
+  //--------------------------
+
+  //Geometrical definition of the world, half sizes
+  SetWorldSizeX(1*m);
+  SetWorldSizeY(1*m);
+  SetWorldSizeZ(1*m);
+
+  solidWorld = new G4Box("World",                //its name
+			 worldSizeX,worldSizeY,worldSizeZ);  //its size
+
+  worldLog = new G4LogicalVolume(solidWorld,     //its solid
+				 mediumMaterial,                 //its material
+				 "World");                       //its name
+
+  worldPhys = new G4PVPlacement(0,     //no rotation
+				G4ThreeVector(),       //at (0,0,0)
+				worldLog,              //its logical volume
+				"World",               //its name
+				0,                     //its mother  volume
+				false,                 //no boolean operation
+				0);                    //copy number
+
+  //--------------------------
+  //Scattering Chamber
+  //--------------------------
+  //Definition of the ACTAR-TPC Demonstrator
+  //Chamber half-lengths are (98.2, 105, 130)mm,
+  chamberSizeX = 98.2*mm;
+  chamberSizeY = 105.*mm;
+  chamberSizeZ = 130.*mm;
+
+  //Chamber X,Y,Z Center
+  chamberCenterX = 0.*m;
+  chamberCenterY = 0.*m;                     
+  chamberCenterZ = 0.*m;                     
+
+  G4Box* solidChamber = new G4Box("Chamber", chamberSizeX,chamberSizeY,chamberSizeZ);
+  chamberLog = new G4LogicalVolume(solidChamber,chamberMaterial,"Chamber");
+  chamberPhys = new G4PVPlacement(0,G4ThreeVector(chamberCenterX,chamberCenterY,chamberCenterZ),chamberLog,"Chamber",worldLog,false,0);
+
+  if(chamberPhys){;}
+
+  //--------------------------
+  //Support of the field cage
+  //--------------------------
+  G4RotationMatrix* rotLeft = new G4RotationMatrix(pi/2,pi/2,-pi/2);//ZY planes
+  G4RotationMatrix* rotRight = new G4RotationMatrix(-pi/2,pi/2,pi/2);//ZY planes
+
+  G4double Support_x  =  8. *mm; //sono le mezze lunghezze
+  G4double Support_y  = 170/2. *mm;
+  G4double Support_z  =  1.6*mm;
+
+  G4double gap_z = 2.5*mm;
+  G4double gap_x = 2.5*mm;
+
+  G4Box* SupportBox = new G4Box("SupportBox", Support_x, Support_y, Support_z);
+  G4Box* SupportBox3 = new G4Box("SupportBox3", Support_z, Support_y, Support_z);
+
+  SupportLog=new G4LogicalVolume(SupportBox,supportMaterial,"SupportLog");
+
+  SupportPhys=new G4PVPlacement(0,G4ThreeVector(32+gap_x*2-Support_x,-105+85+4.54,64+gap_z*2+Support_z),SupportLog,"Support",chamberLog,false,0,true);
+  SupportPhys=new G4PVPlacement(0,G4ThreeVector(-32-gap_x*2+Support_x,-105+85+4.54,64+gap_z*2+Support_z),SupportLog,"Support",chamberLog,false,0,true);
+  SupportPhys=new G4PVPlacement(0,G4ThreeVector(32+gap_x*2-Support_x,-105+85+4.54,-64-gap_z*2-Support_z),SupportLog,"Support",chamberLog,false,0,true);
+  SupportPhys=new G4PVPlacement(0,G4ThreeVector(-32-gap_x*2+Support_x,-105+85+4.54,-64-gap_z*2-Support_z),SupportLog,"Support",chamberLog,false,0,true);
+
+  SupportPhys=new G4PVPlacement(rotRight,G4ThreeVector(32+gap_x*2+Support_z,-105+85+4.54,+64+gap_z*2-Support_x),SupportLog,"Support",chamberLog,false,0,true);
+  SupportPhys=new G4PVPlacement(rotLeft,G4ThreeVector(-32-gap_x*2-Support_z,-105+85+4.54,+64+gap_z*2-Support_x),SupportLog,"Support",chamberLog,false,0,true);
+  SupportPhys=new G4PVPlacement(rotRight,G4ThreeVector(32+gap_x*2+Support_z,-105+85+4.54,-64-gap_z*2+Support_x),SupportLog,"Support",chamberLog,false,0,true);
+  SupportPhys=new G4PVPlacement(rotLeft,G4ThreeVector(-32-gap_x*2-Support_z,-105+85+4.54,-64-gap_z*2+Support_x),SupportLog,"Support",chamberLog,false,0,true);
+  
+  G4VisAttributes* SupportVisAtt= new G4VisAttributes(G4Colour(1.0,1.0,1.0));
+  SupportVisAtt->SetVisibility(false);
+  SupportLog->SetVisAttributes(SupportVisAtt);
+
+  SupportLog=new G4LogicalVolume(SupportBox3,supportMaterial,"SupportLog");
+
+  SupportPhys=new G4PVPlacement(0,G4ThreeVector(32+gap_x*2+Support_z,-105+85+4.54,64+gap_z*2+Support_z),SupportLog,"Support",chamberLog,false,0,true);
+  SupportPhys=new G4PVPlacement(0,G4ThreeVector(-32-gap_x*2-Support_z,-105+85+4.54,64+gap_z*2+Support_z),SupportLog,"Support",chamberLog,false,0,true);
+
+  SupportPhys=new G4PVPlacement(0,G4ThreeVector(32+gap_x*2+Support_z,-105+85+4.54,-64-gap_z*2-Support_z),SupportLog,"Support",chamberLog,false,0,true);
+  SupportPhys=new G4PVPlacement(0,G4ThreeVector(-32-gap_x*2-Support_z,-105+85+4.54,-64-gap_z*2-Support_z),SupportLog,"Support",chamberLog,false,0,true);
+
+  SupportVisAtt->SetVisibility(true);
+  SupportLog->SetVisAttributes(SupportVisAtt);
+
+
+
+  //--------------------------
+  // Gas volume
+  //--------------------------
+ 
+  gasDet->Construct(chamberLog);
+  if(gasStepMax){
+    //gasStepMax = 0.00000001*mm;
+    G4cout << "Setting the Step Limit: " << gasStepMax << G4endl;
+   // limit->SetMaxAllowedStep(gasStepMax);
+    gasDet->GetLogicalVolume()->SetUserLimits(limit);
+  }
+
+
+  //--------------------------
+  //Gas Dead Region
+  //--------------------------
+
+  gasDeadMaterial = gasDet->GetGasMaterial();
+ 
+  G4double lenght_x = 64/2.*mm;
+  G4double lenght_y =  170/2.*mm;
+  G4double lenght_front = front_gap/2.*mm;
+
+  G4double lenght_side = side_gap/2*mm;
+
+  G4double lenght_back = back_gap/2*mm;
+
+  G4Box* Dead1 = new G4Box("Dead1Box", lenght_x+gap_x*2, chamberSizeY, gap_z);
+  G4Box* Dead2 = new G4Box("Dead2Box", lenght_x+gap_x*2-Support_x*2,  chamberSizeY, Support_z);
+
+  G4Box* Dead3 = new G4Box("Dead3Box", lenght_side*2+32+gap_x*2+Support_z*2, chamberSizeY, lenght_front);
+  G4Box* Dead4 = new G4Box("Dead3Box", lenght_side*2+32+gap_x*2+Support_z*2, chamberSizeY, lenght_back);
+  
+  G4VisAttributes* DeadVisAtt= new G4VisAttributes(G4Colour(0.0,1.0,1.0));
+  DeadVisAtt->SetVisibility(false);
+
+  gasLog_dead = new G4LogicalVolume(Dead1,gasDeadMaterial,"gasDeadLog_dead");  
+  gasPhys_dead = new G4PVPlacement(0,G4ThreeVector(0, 0,64+gap_z),gasLog_dead,"gasPhys_dead",chamberLog,false,0,true);
+  gasPhys_dead = new G4PVPlacement(0,G4ThreeVector(0, 0,-64-gap_z),gasLog_dead,"gasPhys_dead",chamberLog,false,0,true);
+  
+  gasLog_dead->SetVisAttributes(DeadVisAtt);
+
+  gasLog_dead = new G4LogicalVolume(Dead2,gasDeadMaterial,"gasDeadLog_dead");  
+  gasPhys_dead = new G4PVPlacement(0,G4ThreeVector(0, 0,64+gap_z*2+Support_z),gasLog_dead,"gasPhys_dead",chamberLog,false,0,true);
+  gasPhys_dead = new G4PVPlacement(0,G4ThreeVector(0, 0,-64-gap_z*2-Support_z),gasLog_dead,"gasPhys_dead",chamberLog,false,0,true);
+
+  gasLog_dead->SetVisAttributes(DeadVisAtt);
+
+  gasLog_dead = new G4LogicalVolume(Dead3,gasDeadMaterial,"gasDeadLog_dead");  
+  gasPhys_dead = new G4PVPlacement(0,G4ThreeVector(0,0,-64-gap_z*2-Support_z*2-lenght_front),gasLog_dead,"gasPhys_dead",chamberLog,false,0,true);
+
+  gasLog_dead->SetVisAttributes(DeadVisAtt);
+
+  gasLog_dead_down = new G4LogicalVolume(Dead4,gasDeadMaterial,"gasDeadLog_dead");  
+  gasPhys_dead = new G4PVPlacement(0,G4ThreeVector(0,0,+64+gap_z*2+Support_z*2+lenght_back),gasLog_dead_down,"gasPhys_dead",chamberLog,false,0,true);
+  gasLog_dead_down->SetVisAttributes(DeadVisAtt);
+
+  G4Box* Dead1_x = new G4Box("Dead1Box_x", gap_x,  chamberSizeY, 64);
+  G4Box* Dead2_x = new G4Box("Dead2Box_x", Support_z,  chamberSizeY, 64+gap_x*2-Support_x*2);
+  G4Box* Dead3_x = new G4Box("Dead2Box_x", lenght_side, chamberSizeY,64+gap_z*2+Support_z*2);
+
+  gasLog_dead = new G4LogicalVolume(Dead1_x,gasDeadMaterial,"gasDeadLog_dead");
+  gasPhys_dead = new G4PVPlacement(0,G4ThreeVector(32+gap_x, 0,0),gasLog_dead,"gasPhys_dead",chamberLog,false,0,true);
+  gasPhys_dead = new G4PVPlacement(0,G4ThreeVector(-32-gap_x,0,0),gasLog_dead,"gasPhys_dead",chamberLog,false,0,true);
+
+  gasLog_dead->SetVisAttributes(DeadVisAtt);
+
+  gasLog_dead = new G4LogicalVolume(Dead2_x,gasDeadMaterial,"gasDeadLog_dead");
+  gasPhys_dead = new G4PVPlacement(0,G4ThreeVector(32+gap_x*2+Support_z,0,0),gasLog_dead,"gasPhys_dead",chamberLog,false,0,true);
+  gasPhys_dead = new G4PVPlacement(0,G4ThreeVector(-32-gap_x*2-Support_z,0,0),gasLog_dead,"gasPhys_dead",chamberLog,false,0,true);
+
+  gasLog_dead->SetVisAttributes(DeadVisAtt);
+  
+  gasLog_dead = new G4LogicalVolume(Dead3_x,gasDeadMaterial,"gasDeadLog_dead");
+  gasPhys_dead = new G4PVPlacement(0,G4ThreeVector(32+gap_x*2+Support_z*2+lenght_side,0,0),gasLog_dead,"gasPhys_dead",chamberLog,false,0,true);
+  gasPhys_dead = new G4PVPlacement(0,G4ThreeVector(-32-gap_x*2-Support_z*2-lenght_side,0,0),gasLog_dead,"gasPhys_dead",chamberLog,false,0,true);
+
+  gasLog_dead->SetVisAttributes(DeadVisAtt);
+  //--------------------------
+  //Beam entrance Window in Chamber
+  //--------------------------
+  G4double window_outer_radius =  5.*mm;
+  G4double window_inner_radius =   0.*mm;
+  G4double window_half_length  =   window_thickness/2.;
+  G4double startAngle          =   0.*deg;
+  G4double spanningAngle       = 360.*deg;
+
+  G4Tubs *window = new G4Tubs("Window",window_inner_radius,window_outer_radius,window_half_length,startAngle,spanningAngle);
+  G4VisAttributes* windowVisAtt= new G4VisAttributes(G4Colour(1.0,0.,0.));
+  windowVisAtt->SetVisibility(true);
+
+  G4LogicalVolume* window_log = new G4LogicalVolume(window,windowMaterial,"window_log",0,0,0);
+  window_log->SetVisAttributes(windowVisAtt);
+
+  G4double windowPosX = 0.*mm;
+  G4double windowPosY = 0.*mm;
+  G4double windowPosZ = -64 - gap_z*2 - Support_z*2 - lenght_front*2 - window_half_length;
+  G4VPhysicalVolume* window_phys=new G4PVPlacement(0,G4ThreeVector(windowPosX,windowPosY,windowPosZ),window_log,"window",chamberLog,false,0,true);
+
+  //--
+  //FC or Beam dump
+  //--
+  G4double cupSizeX = 43/2.*mm;
+  G4double cupSizeY = 43/2.*mm;
+  G4double cupSizeZ = 40/2.*mm;
+  
+
+//   G4Box *Cup=new G4Box("Cup",cupSizeX,cupSizeY,cupSizeZ);
+//   G4LogicalVolume *CupLog=new G4LogicalVolume(Cup,nistman->FindOrBuildMaterial("G4_Al"),"Cup");
+//   G4PVPlacement *CupPhys=new G4PVPlacement(0,G4ThreeVector(0,0,0),CupLog,"Cup",gasLog_dead_down,false,0,true);
+
+  //--------------------------
+  //An Aluminium plate to see the Pads active area just below the gas volume
+  //--------------------------
+  G4double plateSizeX = 32.*mm;
+  G4double plateSizeY = 4.54/2*mm;
+  G4double plateSizeZ = 64.*mm;
+
+  G4Box *Alplate=new G4Box("Al_plate",plateSizeX,plateSizeY,plateSizeZ);
+  AlplateLog=new G4LogicalVolume(Alplate,nistman->FindOrBuildMaterial("G4_Al"),"Al_plate");
+
+  G4double platePosX = 0.*cm;
+  G4double platePosY =-chamberSizeY + plateSizeY;
+  G4double platePosZ = 0.*cm;
+
+  AlplatePhys=new G4PVPlacement(0,G4ThreeVector( platePosX,platePosY,platePosZ),AlplateLog,"Al_plate",chamberLog,false,0);
+
+  G4VisAttributes* plateVisAtt= new G4VisAttributes(G4Colour(1.0,0.,1.0));
+  plateVisAtt->SetVisibility(true);
+  AlplateLog->SetVisAttributes(plateVisAtt);
+
+  //visibility
+  worldLog->SetVisAttributes (G4VisAttributes::Invisible);
+
+
+  //--------------------------
+  // Si volume
+  //--------------------------
+  
+  dssdDet->Construct(chamberLog);
+
+
+  return worldPhys;
+
+}
+
+////////////////////////////////////////////////////////////////
+/// Sets the Sensitive Detectors 
+void DEMODetectorConstruction::ConstructSDandField(){
+
+  G4cout << "Setting the SD volumes" << G4endl;
+
+  //The SD manager
+  SDman = G4SDManager::GetSDMpointer();
+  
+  // gas volume sensitive detector
+  G4String gasSDname = "gasSD";
+  gasSD = new DEMOGasSD(gasSDname);
+  
+  SDman->AddNewDetector(gasSD);
+  SetSensitiveDetector(gasDet->GetLogicalVolume()->GetName(), gasSD);  
+
+  // DSSD sensitive detector 
+  G4LogicalVolume *dssdLog = dssdDet->GetLogicalVolume();
+    for(int istrip=0; istrip<64; istrip++){
+      char stripname[50];
+      if(istrip<32)sprintf(stripname,"dssdCollection_stripPhys_front_%d",istrip+1);
+      if(istrip>=32)sprintf(stripname,"dssdCollection_stripPhys_back_%d",istrip-31);
+      dssdSD[istrip] = new DEMODSSDSD(stripname);
+  
+      SDman->AddNewDetector(dssdSD[istrip]);
+      SetSensitiveDetector(dssdLog->GetDaughter(istrip)->GetLogicalVolume(),dssdSD[istrip]);  
+    }
+
+}
+
+
+void DEMODetectorConstruction::SetMediumMaterial(G4String mat) {
+  G4Material* pttoMaterial = nistman->FindOrBuildMaterial(mat);
+  if (pttoMaterial) mediumMaterial = pttoMaterial;
+}
+
+////////////////////////////////////////////////////////////////
+/// Sets the default material
+void DEMODetectorConstruction::SetDefaultMaterial(G4String mat) {
+  G4Material* pttoMaterial = nistman->FindOrBuildMaterial(mat);
+  if (pttoMaterial) defaultMaterial = pttoMaterial;
+}
+////////////////////////////////////////////////////////////////
+/// Sets the support material
+void DEMODetectorConstruction::SetSupportMaterial(G4String mat) {
+  G4Material* pttoMaterial = nistman->FindOrBuildMaterial(mat);
+  if (pttoMaterial) supportMaterial = pttoMaterial;
+}
+
+
+////////////////////////////////////////////////////////////////
+/// Sets the material the chamber is made of (the same as GasBox)
+void DEMODetectorConstruction::SetGasDeadMaterial(G4String mat) {
+  G4Material* pttoMaterial = nistman->FindOrBuildMaterial(mat);
+  if (pttoMaterial) gasDeadMaterial = pttoMaterial;
+}
+
+
+////////////////////////////////////////////////////////////////
+/// Sets the material the chamber is made of (the same as GasBox)
+void DEMODetectorConstruction::SetChamberMaterial(G4String mat) {
+  G4Material* pttoMaterial = nistman->FindOrBuildMaterial(mat);
+  if (pttoMaterial) chamberMaterial = pttoMaterial;
+}
+
+////////////////////////////////////////////////////////////////
+/// Sets the material the chamber is made of (the same as GasBox)
+/// define by user (T and P)
+void DEMODetectorConstruction::SetUpdateChamberMaterial(G4Material* mater) {
+  chamberMaterial = mater;
+  //G4cout << " The chamber gas material is: " << chamberMaterial  << G4endl;
+}
+
+////////////////////////////////////////////////////////////////
+/// Sets the material the chamber is made of (the same as GasBox)
+/// define by user (T and P)
+void DEMODetectorConstruction::SetUpdateGasDeadMaterial(G4Material* mater) {
+  gasDeadMaterial = mater;
+  //G4cout << " The chamber gas material is: " << chamberMaterial  << G4endl;
+}
+
+////////////////////////////////////////////////////////////////
+/// Sets the material the window is made of
+void DEMODetectorConstruction::SetWindowMaterial (G4String mat) {
+  G4Material* pttoMaterial = nistman->FindOrBuildMaterial(mat);
+  if (pttoMaterial) windowMaterial = pttoMaterial;
+}
+
+////////////////////////////////////////////////////////////////
+/// Updates any change on the geometry of the detectors
+void DEMODetectorConstruction::UpdateGeometry() {
+  G4RunManager::GetRunManager()->DefineWorldVolume(this->Construct());
+}
+
+
+
+////////////////////////////////////////////////////////////////
+/// Define the materials to be used
+void DEMODetectorConstruction::DefineMaterials() {
+
+  //
+  // define materials
+  //
+  G4double density, pressure, temperature;
+  G4int ncomponents, natoms;
+  G4double fractionmass;
+
+  /* How to set a GAS
+  density	=0.0688*mg/cm3;
+  pressure	=0.3*bar;
+  temperature	=298.2*kelvin;
+  G4Material* HeCF4300=
+    new G4Material("HeCF4_300", density,ncomponents=3,kStateGas, temperature, pressure);
+  HeCF4300->AddElement (He,natoms=98);
+  HeCF4300->AddElement (C,natoms=2);
+  HeCF4300->AddElement (F,natoms=8); */
+
+
+  /* How to set Material from element
+  G4Material* H2O =
+    new G4Material("Water", density= 1.000*g/cm3, ncomponents=2);
+  H2O->AddElement(H, natoms=2);
+  H2O->AddElement(O, natoms=1);
+  H2O->SetChemicalFormula("H_2O");
+  H2O->GetIonisation()->SetMeanExcitationEnergy(75.0*eV); */
+
+  /*How to set material from material */
+  //  Peek chemical formula (C19H12O3)
+  // C 114/150 = 76
+  // H 12/150  = 8
+  // O 24/150  = 16
+
+  G4Material *Peek = new G4Material("Peek",   density = 1.31*g/cm3, ncomponents=3);
+  Peek->AddMaterial(nistman->FindOrBuildMaterial("G4_C"), 0.76);
+  Peek->AddMaterial(nistman->FindOrBuildMaterial("G4_H"),  0.08);
+  Peek->AddMaterial(nistman->FindOrBuildMaterial("G4_O"), 0.16);
+
+  defaultMaterial  = nistman->FindOrBuildMaterial("G4_Galactic");
+
+
+}
+
