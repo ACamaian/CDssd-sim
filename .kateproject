@@ -1,0 +1,4 @@
+{
+  "name": "CDSSD-sim"
+, "files": [ { "directory": ["."], "filters": ["*.*"], "recursive": 1 } ]
+}

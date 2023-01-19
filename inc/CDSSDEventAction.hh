@@ -5,7 +5,7 @@
 #include "G4SDManager.hh"
 #include "globals.hh"
 
-//#include "CDSSDSi1GeantHit.hh"
+#include "CDSSDSi1GeantHit.hh"
 
 class CDSSDRunAction;
 
@@ -23,11 +23,11 @@ public:
   
 private:
   
-  CDSSDSi1GeantHitsCollection* GetHitsCollectionGas(G4int hcID,    const G4Event* event) const;
+  CDSSDSi1GeantHitsCollection* GetHitsCollectionSi1(G4int hcID,    const G4Event* event) const;
  
 
   G4int fsi1HCID=-1; 
- 
+      
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

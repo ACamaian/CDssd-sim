@@ -20,23 +20,11 @@
 #include "G4EmExtraPhysics.hh"
 #include "G4StoppingPhysics.hh"
 
-#include "PhysListEmStandard.hh"
-#include "PhysListEmStandardWVI.hh"
-#include "PhysListEmStandardSS.hh"
-#include "PhysListEmStandardGS.hh"
-#include "HadrontherapyIonStandard.hh"
-
-//TESTING PAI MODELS (as in test_em8)
-#include "G4PAIModel.hh"
-#include "G4PAIPhotModel.hh"
-
 //#include "CDSSDParticlesBuilder.hh"
-#include "CDSSDStepLimiterBuilder.hh"
 
 #include "G4UnitsTable.hh"
 #include "G4LossTableManager.hh"
 #include "G4EmParameters.hh"
-#include "G4EmProcessOptions.hh"
 
 #include "G4PhysicalConstants.hh"
 #include "G4SystemOfUnits.hh"
@@ -55,14 +43,11 @@
 
 #include "G4IonPhysics.hh"
 
-#include "G4EmParameters.hh"
-
 //////////////////////////////////////////////////////////////////
 /// Constructor. Initializing values
 CDSSDPhysicsList::CDSSDPhysicsList():  G4VModularPhysicsList(){
 
   emBuilderIsRegisted = false;
-  stepLimiterIsRegisted = false;
   helIsRegisted = false;
   bicIsRegisted = false;
   ionIsRegisted = false;
@@ -87,9 +72,7 @@ CDSSDPhysicsList::CDSSDPhysicsList():  G4VModularPhysicsList(){
   pMessenger = new CDSSDPhysicsListMessenger(this);
 
   // Add Physics builders
-  
-  stepLimiter = new CDSSDStepLimiterBuilder();
-  
+    
   
 }
 
@@ -185,9 +168,9 @@ void CDSSDPhysicsList::ConstructProcess() {
   
   
   // Define energy interval for loss processes
-  G4EmParameters::Instance()->SetMinEnergy(2*eV);
-  G4EmParameters::Instance()->SetMaxEnergy(2.*GeV);
-  G4EmParameters::Instance()->SetNumberOfBins(10000);
+//   G4EmParameters::Instance()->SetMinEnergy(2*eV);
+//   G4EmParameters::Instance()->SetMaxEnergy(2.*GeV);
+//   G4EmParameters::Instance()->SetNumberOfBins(10000);
   
   SetCuts();
 }

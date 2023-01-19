@@ -22,13 +22,15 @@ class G4VPhysicalVolume;
 class G4AssemblyVolume;
 
 class CDSSDDetectorMessenger;
+class CDSSDSi1DetectorConstruction;
+class CDSSDSi1SD;
 
 class CDSSDDetectorConstruction : public G4VUserDetectorConstruction {
 private:
 
   G4NistManager *nistman; //Pointer to NIST Material Manager 
   
-  G4SDManager* SDman;         ///< Pointer to gas sensitive detector manager
+  G4SDManager* SDman;         ///< Pointer to si1 sensitive detector manager
     
   G4UserLimits* limit;
 
@@ -40,11 +42,13 @@ private:
   G4double worldSizeY;    ///< World Y half-lengths (always centered at (0,0,0))
   G4double worldSizeZ;    ///< World Z half-lengths (always centered at (0,0,0))
 
-  G4Material targetMat;
-  G4double targetThickness;
-
+  G4Material *vacuumMaterial;
+  G4Material *targetMaterial;
+  G4double  targetThickness;
+  
   CDSSDSi1DetectorConstruction* si1Det;          ///< Pointer to target constructor 
-
+  CDSSDSi1SD *si1SD;
+  
   CDSSDDetectorMessenger* detectorMessenger;  ///< Pointer to the Messenger
 
   void DefineMaterials();
@@ -61,11 +65,11 @@ public:
   void SetWorldSizeX(G4double val){worldSizeX = val;}
   void SetWorldSizeY(G4double val){worldSizeY = val;}
   void SetWorldSizeZ(G4double val){worldSizeZ = val;}
-
-  void SetTargetThickness(G4double val){targetThickness = val;}
-  void SetTargetMaterial(G4Material mat){targetMaterial = mat;}
-
-  CDSSDSi1SD* GetSi1SD(void){return gasSD;}
+  
+  void SetTargetThickness (G4double val){targetThickness = val;}
+  void SetTargetMaterial (G4String mat);
+ 
+  CDSSDSi1SD* GetSi1SD(void){return si1SD;}
 
   CDSSDDetectorMessenger* GetDetectorMessenger(){return detectorMessenger;};
 
@@ -76,7 +80,7 @@ public:
   G4double GetWorldSizeY(void){return worldSizeY;}
   G4double GetWorldSizeZ(void){return worldSizeZ;}
 
-  CDSSDSi1DetectorConstruction* GetGasDetector() {return gasDet;}
+  CDSSDSi1DetectorConstruction* GetSi1Detector() {return si1Det;}
 
   void UpdateGeometry();
     

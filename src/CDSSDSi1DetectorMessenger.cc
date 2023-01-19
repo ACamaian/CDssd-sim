@@ -34,7 +34,7 @@ CDSSDSi1DetectorMessenger:: CDSSDSi1DetectorMessenger(CDSSDSi1DetectorConstructi
 //////////////////////////////////////////////////////////////////
 /// Destructor
 CDSSDSi1DetectorMessenger::~CDSSDSi1DetectorMessenger() {
-  delete si1ir;
+  delete si1Dir;
  
 }
 

@@ -338,6 +338,8 @@ CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4GMocren.so
 CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4visHepRep.so
 CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4RayTracer.so
 CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4VRML.so
+CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4OpenGL.so
+CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4gl2ps.so
 CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4vis_management.so
 CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4modeling.so
 CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4interfaces.so
@@ -347,6 +349,18 @@ CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4readout.so
 CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4physicslists.so
 CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4tasking.so
 CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4parmodels.so
+CDssdsim: /usr/lib/x86_64-linux-gnu/libGL.so
+CDssdsim: /usr/lib/x86_64-linux-gnu/libQt5OpenGL.so.5.9.5
+CDssdsim: /usr/lib/x86_64-linux-gnu/libQt5PrintSupport.so.5.9.5
+CDssdsim: /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.9.5
+CDssdsim: /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.9.5
+CDssdsim: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.9.5
+CDssdsim: /usr/lib/x86_64-linux-gnu/libXmu.so
+CDssdsim: /usr/lib/x86_64-linux-gnu/libXext.so
+CDssdsim: /usr/lib/x86_64-linux-gnu/libXt.so
+CDssdsim: /usr/lib/x86_64-linux-gnu/libICE.so
+CDssdsim: /usr/lib/x86_64-linux-gnu/libSM.so
+CDssdsim: /usr/lib/x86_64-linux-gnu/libX11.so
 CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4run.so
 CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4event.so
 CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4tracking.so

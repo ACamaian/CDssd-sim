@@ -22,9 +22,8 @@
 
 //////////////////////////////////////////////////////////////////
 /// Constructor: initialize all variables, materials and pointers
-CDSSDDetectorConstruction::CDSSDDetectorConstruction()
-  : si1SD(0), solidWorld(0), worldLog(0),  worldPhys(0), si1Det(0) {
-
+CDSSDDetectorConstruction::CDSSDDetectorConstruction(): 
+    si1SD(0), solidWorld(0), worldLog(0),  worldPhys(0){
   G4cout << "CDSSD Detector Construction" << G4endl;
 
   //initialize the G4NISTMaterial manager
@@ -37,7 +36,6 @@ CDSSDDetectorConstruction::CDSSDDetectorConstruction()
  
   //define default materials
   DefineMaterials();
-
  
   //Modular detector construction objects
   si1Det = new CDSSDSi1DetectorConstruction(this);
@@ -116,8 +114,8 @@ void CDSSDDetectorConstruction::ConstructSDandField(){
   SDman = G4SDManager::GetSDMpointer();
   
   // Si1 volume sensitive detector
-  G4String gasSDname = "si1SD";
-  si1SD = new CDSSDGasSD(gasSDname);
+  G4String si1SDname = "si1SD";
+  si1SD = new CDSSDSi1SD(si1SDname);
   
   SDman->AddNewDetector(si1SD);
   SetSensitiveDetector(si1Det->GetLogicalVolume()->GetName(), si1SD);  
@@ -141,7 +139,7 @@ void CDSSDDetectorConstruction::DefineMaterials() {
   pressure	=0.3*bar;
   temperature	=298.2*kelvin;
   G4Material* HeCF4300=
-    new G4Material("HeCF4_300", density,ncomponents=3,kStateGas, temperature, pressure);
+    new G4Material("HeCF4_300", density,ncomponents=3,kStateSi1, temperature, pressure);
   HeCF4300->AddElement (He,natoms=98);
   HeCF4300->AddElement (C,natoms=2);
   HeCF4300->AddElement (F,natoms=8); */
@@ -166,8 +164,15 @@ void CDSSDDetectorConstruction::DefineMaterials() {
   Peek->AddMaterial(nistman->FindOrBuildMaterial("G4_H"),  0.08);
   Peek->AddMaterial(nistman->FindOrBuildMaterial("G4_O"), 0.16);
 
-  defaultMaterial  = nistman->FindOrBuildMaterial("G4_Galactic");
+  vacuumMaterial  = nistman->FindOrBuildMaterial("G4_Galactic");
 
 
+}
+
+////////////////////////////////////////////////////////////////
+/// Sets the material the target is made of
+void CDSSDDetectorConstruction::SetTargetMaterial (G4String mat) {
+  G4Material* pttoMaterial = nistman->FindOrBuildMaterial(mat);
+  if (pttoMaterial) targetMaterial = pttoMaterial;
 }
 

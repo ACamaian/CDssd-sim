@@ -9,8 +9,8 @@
 #include "CDSSDPrimaryGeneratorAction.hh"
 #include "CDSSDPrimaryGeneratorMessenger.hh"
 
-#include "CDSSDKinePrimGenerator.hh"
-#include "CDSSDEulerTransformation.hh"
+#include "CDSSDKine.hh"
+// #include "CDSSDEulerTransformation.hh"
 
 #include "G4LogicalVolumeStore.hh"
 #include "G4LogicalVolume.hh"
@@ -41,7 +41,7 @@ CDSSDPrimaryGeneratorAction::CDSSDPrimaryGeneratorAction()
   particleGun->SetParticlePosition(G4ThreeVector(0,0,0));
   particleGun->SetParticleCharge(1.0);
   particleGun->SetParticleEnergy(1*MeV);
-  particleGun->SetParticleDirection(G4ThreeVector(0,0,1));
+  particleGun->SetParticleMomentumDirection(G4ThreeVector(0,0,1));
 
   thetaLabAngle = 45 * deg;   // 45 degrees (TH)
 
@@ -95,7 +95,7 @@ void CDSSDPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   }  
 
   //KINE object...
-  CDSSDKinePrimGenerator* KINE = new CDSSDKinePrimGenerator();
+  CDSSDKine* KINE = new CDSSDKine();
   
   KINE->SetMassOfProjectile(GetMassOfProjectile());
   KINE->SetMassOfTarget(GetMassOfTarget());
@@ -117,15 +117,15 @@ void CDSSDPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   KINE->SetThetaCMAngle(GetThetaCMAngle()/deg);  // units: degree
   
   if(verboseLevel>1){
-    G4cout << " KINE: Setting (atomic) masses to :" << GetIncidentIon()->GetAtomicMass()
-	   << " " << GetTargetIon()->GetAtomicMass()
+    G4cout << " KINE: Setting (atomic) masses to :" << GetMassOfProjectile()
+	   << " " << GetMassOfTarget()
 	   << " " << GetScatteredIon()->GetAtomicMass()
 	   << " " << GetRecoilIon()->GetAtomicMass()<< " "<< G4endl;
     G4cout << " KINE: Setting labEnergy to:" << KINE->GetLabEnergy() << G4endl;
     G4cout << " KINE: Setting targetExcitationEnergy to:"
-	   << GetTargetIon()->GetExcitationEnergy() << G4endl;
+	   << GetExEnergyOfTarget() << G4endl;
     G4cout << " KINE: Setting projectileExcitationEnergy to:"
-	   << GetIncidentIon()->GetExcitationEnergy() << G4endl;
+	   << GetExEnergyOfProjectile() << G4endl;
     G4cout << " Kine: Setting excitation energy of Scattered particle to:"
 	   << GetScatteredIon()->GetExcitationEnergy() << G4endl;
     G4cout << " KINE: Setting CM Angle to:" << GetThetaCMAngle()/deg << " deg" << G4endl;
@@ -170,29 +170,29 @@ void CDSSDPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   }
   
   //-- Set the second gun to the desired vertex
-  prodGun->SetParticlePosition(G4ThreeVector(0.0,0.0,vertex_z0));
+  particleGun->SetParticlePosition(G4ThreeVector(0.0,0.0,vertex_z0));
 
   //---Generating the primary vertex for scattered Ion
   G4ThreeVector direction1 = G4ThreeVector(sin(thetaLab1)*cos(phiLab1),
 					   sin(thetaLab1)*sin(phiLab1),
 					   cos(thetaLab1));
-  prodGun->SetParticleDefinition(scatteredIon);
-  prodGun->SetParticleCharge(scatteredIonCharge);
-  prodGun->SetParticleMomentumDirection(direction1);
-  prodGun->SetParticleEnergy(energy1);
+  particleGun->SetParticleDefinition(scatteredIon);
+  particleGun->SetParticleCharge(scatteredIonCharge);
+  particleGun->SetParticleMomentumDirection(direction1);
+  particleGun->SetParticleEnergy(energy1);
   
-  prodGun->GeneratePrimaryVertex(anEvent);
+  particleGun->GeneratePrimaryVertex(anEvent);
 
   //---Generating the primary vertex for recoil Ion
   G4ThreeVector direction2 = G4ThreeVector(sin(thetaLab2)*cos(phiLab2),
 					   sin(thetaLab2)*sin(phiLab2),
 					   cos(thetaLab2));
-  prodGun->SetParticleDefinition(recoilIon);
-  prodGun->SetParticleCharge(recoilIonCharge);
-  prodGun->SetParticleMomentumDirection(direction2);
-  prodGun->SetParticleEnergy(energy2);
+  particleGun->SetParticleDefinition(recoilIon);
+  particleGun->SetParticleCharge(recoilIonCharge);
+  particleGun->SetParticleMomentumDirection(direction2);
+  particleGun->SetParticleEnergy(energy2);
   
-  prodGun->GeneratePrimaryVertex(anEvent);
+  particleGun->GeneratePrimaryVertex(anEvent);
 }
 
 

@@ -32,7 +32,7 @@ CDSSDDetectorMessenger(CDSSDDetectorConstruction* CDSSDDet)
   
   targetMaterialCmd = new G4UIcmdWithAString("/CDSSD/det/setTargetMat",this);
   targetMaterialCmd->SetGuidance("Select Material outside the Chamber.");
-  targetMaterialCmd->SetParameterName("windowMat",false);
+  targetMaterialCmd->SetParameterName("targetMat",false);
   targetMaterialCmd->SetDefaultValue("G4_C");
   targetMaterialCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
   

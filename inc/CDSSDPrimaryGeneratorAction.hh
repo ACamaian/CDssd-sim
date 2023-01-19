@@ -17,7 +17,6 @@
 #include "G4IonTable.hh"
 
 #include "CDSSDDetectorConstruction.hh"
-#include "CDSSDGasDetectorConstruction.hh"
 
 #include "CDSSDPrimaryGeneratorMessenger.hh"
 
@@ -43,6 +42,7 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   
   //needed by KINE
   void SetThetaCMAngle(G4double val){thetaCMAngle=val; }
+  void SetPhiCMAngle(G4double val){phiCMAngle=val; }
 
   G4double GetThetaCMAngle(){return thetaCMAngle;}
   
@@ -143,8 +143,7 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 
   //reaction global parameter
   G4double  thetaCMAngle;          ///< Center of mass polar angle
-  G4double  userThetaAngle;        ///< User theta angle
-  G4double  userPhiAngle;          ///< User phi angle
+  G4double  phiCMAngle;          ///< Center of mass azimuthal angle
   G4double  massOfProjectile;      ///< Mass of the projectile ion
   G4double  massOfTarget;          ///< Mass of target ion
   G4double  massOfScattered;       ///< Mass of the scattered ion
@@ -154,6 +153,11 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   G4double  exEnergyOfScattered;   ///< Energy of the scattered ion
   G4double  exEnergyOfRecoiled;    ///< Energy of the recoil ion
   G4ThreeVector vertexPosition;    ///< Position of the vertex
+  
+  G4double thetaLab1;
+  G4double phiLab1;
+  G4double thetaLab2;
+  G4double phiLab2;
 
 };
 

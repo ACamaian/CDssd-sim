@@ -5,8 +5,8 @@
 #include "CDSSDSi1SD.hh"
 #include "CDSSDSi1GeantHit.hh"
 
-//#include "CDSSDDSSDSi1Hit.hh"
 #include "G4RunManager.hh"
+#include "G4AnalysisManager.hh"
 
 #include "G4Event.hh"
 #include "G4SDManager.hh"
@@ -48,10 +48,10 @@ void CDSSDEventAction::EndOfEventAction(const G4Event* evt)
 
   // Get hits collections IDs (only once)
   if (fsi1HCID == -1) {
-    fsi1HCID = G4SDManager::GetSDMpointer()->GetCollectionID("gasCollection");
+    fsi1HCID = G4SDManager::GetSDMpointer()->GetCollectionID("si1Collection");
   }
   // Get hits collections and loop on it
-  auto si1HC = GetHitsCollectionGas(fsi1HCID, evt);
+  auto si1HC = GetHitsCollectionSi1(fsi1HCID, evt);
   G4int si1Nentries = si1HC->entries();   
 
 
@@ -65,7 +65,7 @@ void CDSSDEventAction::EndOfEventAction(const G4Event* evt)
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 
-CDSSDSi1GeantHitsCollection* CDSSDEventAction::GetHitsCollectionGas(G4int hcID, const G4Event* event) const {
+CDSSDSi1GeantHitsCollection* CDSSDEventAction::GetHitsCollectionSi1(G4int hcID, const G4Event* event) const {
   
   auto hitsCollection  = static_cast<CDSSDSi1GeantHitsCollection*>(event->GetHCofThisEvent()->GetHC(hcID));
 

@@ -301,9 +301,6 @@ CDSSDPrimaryGeneratorMessenger::~CDSSDPrimaryGeneratorMessenger() {
   delete randomVertexZPositionRangeCmd;
   delete vertexZPositionCmd;
 
-  delete beamDirectionCmd;
-  delete beamPositionCmd;
-
   delete randomThetaCmd;
   delete randomThetaValCmd;
   delete randomPhiValCmd;
@@ -400,7 +397,7 @@ void CDSSDPrimaryGeneratorMessenger::SetNewValue(G4UIcommand* command,
       SetThetaCMAngle(KineUserThetaCMCmd->GetNewDoubleValue(newValues));
 
   if( command == KineUserPhiAngleCmd )
-    CDSSDActionGun->      SetUserPhiAngle(KineUserPhiAngleCmd->GetNewDoubleValue(newValues));
+    CDSSDActionGun->      SetPhiCMAngle(KineUserPhiAngleCmd->GetNewDoubleValue(newValues));
 
   if( command == reactionQCmd )
     CDSSDActionGun->
@@ -461,7 +458,6 @@ void CDSSDPrimaryGeneratorMessenger::KineIncidentIonCommand(G4String newValues){
   } else {
     CDSSDActionGun->SetMassOfProjectile(fIonMass);
     CDSSDActionGun->SetExEnergyOfProjectile(fIonExciteEnergy);
-    //CDSSDActionGun->SetIncidentIonExcEnergy(fIonExciteEnergy);
   }
 }
 
@@ -492,7 +488,6 @@ void CDSSDPrimaryGeneratorMessenger::KineTargetIonCommand(G4String newValues){
   } else {
     CDSSDActionGun->SetMassOfTarget(fIonMass);
     CDSSDActionGun->SetExEnergyOfTarget(fIonExciteEnergy);
-    //CDSSDActionGun->SetTargetIonExcEnergy(fIonExciteEnergy);
   }
 }
 
@@ -527,7 +522,6 @@ void CDSSDPrimaryGeneratorMessenger::KineScatteredIonCommand(G4String newValues)
     CDSSDActionGun->SetMassOfScattered(fIonMass);
     CDSSDActionGun->SetExEnergyOfScattered(fIonExciteEnergy);
     //G4cout << "CDSSDPrimaryGeneratorMessenger::KineScatteredIonCommand(): excitation energy=" << fIonExciteEnergy << G4endl;
-    CDSSDActionGun->SetScatteredIonExcEnergy(fIonExciteEnergy);
   }
 }
 

@@ -21,7 +21,6 @@ private:
   
   G4int    verbose;                ///< Verbose control
   G4bool   emBuilderIsRegisted;    ///< Register control parameter for library
-  G4bool   stepLimiterIsRegisted;  ///< Register control parameter for library
   G4bool   helIsRegisted;          ///< Register control parameter for library
   G4bool   bicIsRegisted;          ///< Register control parameter for library
   G4bool   ionIsRegisted;          ///< Register control parameter for library
@@ -30,7 +29,7 @@ private:
 
   CDSSDPhysicsListMessenger* pMessenger;  ///< Pointer to messenger
   CDSSDPhysListParticles *particleList; ///< List of particles
-  CDSSDStepLimiterBuilder* stepLimiter;   ///< Pointer to step limiter
+ 
   
 
 public:

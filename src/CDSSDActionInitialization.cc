@@ -24,7 +24,7 @@
 // ********************************************************************
 //
 //
-/// \file DEMOActionInitialization.cc
+/// \file CDSSDActionInitialization.cc
 /// \brief Implementation of the DEMOActionInitialization class
 
 #include "CDSSDActionInitialization.hh"

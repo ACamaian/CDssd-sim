@@ -443,3 +443,99 @@ Parsed CXX implicit link information from above output:
   implicit fwks: []
 
 
+Determining if the function XOpenDisplay exists in the /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so passed with the following output:
+Change Dir: /home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-bFE076
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_3414a/fast && make[1]: ingresso nella directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-bFE076"
+/usr/bin/make  -f CMakeFiles/cmTC_3414a.dir/build.make CMakeFiles/cmTC_3414a.dir/build
+make[2]: ingresso nella directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-bFE076"
+Building C object CMakeFiles/cmTC_3414a.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay -o CMakeFiles/cmTC_3414a.dir/CheckFunctionExists.c.o -c /home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-bFE076/CheckFunctionExists.c
+Linking C executable cmTC_3414a
+/snap/cmake/1204/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3414a.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=XOpenDisplay CMakeFiles/cmTC_3414a.dir/CheckFunctionExists.c.o -o cmTC_3414a  /usr/lib/x86_64-linux-gnu/libX11.so /usr/lib/x86_64-linux-gnu/libXext.so 
+make[2]: uscita dalla directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-bFE076"
+make[1]: uscita dalla directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-bFE076"
+
+
+
+Determining if the function gethostbyname exists passed with the following output:
+Change Dir: /home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-wXG487
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_9a034/fast && make[1]: ingresso nella directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-wXG487"
+/usr/bin/make  -f CMakeFiles/cmTC_9a034.dir/build.make CMakeFiles/cmTC_9a034.dir/build
+make[2]: ingresso nella directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-wXG487"
+Building C object CMakeFiles/cmTC_9a034.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=gethostbyname -o CMakeFiles/cmTC_9a034.dir/CheckFunctionExists.c.o -c /home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-wXG487/CheckFunctionExists.c
+Linking C executable cmTC_9a034
+/snap/cmake/1204/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9a034.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=gethostbyname CMakeFiles/cmTC_9a034.dir/CheckFunctionExists.c.o -o cmTC_9a034 
+make[2]: uscita dalla directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-wXG487"
+make[1]: uscita dalla directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-wXG487"
+
+
+
+Determining if the function connect exists passed with the following output:
+Change Dir: /home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-2BrYl8
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_d361b/fast && make[1]: ingresso nella directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-2BrYl8"
+/usr/bin/make  -f CMakeFiles/cmTC_d361b.dir/build.make CMakeFiles/cmTC_d361b.dir/build
+make[2]: ingresso nella directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-2BrYl8"
+Building C object CMakeFiles/cmTC_d361b.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=connect -o CMakeFiles/cmTC_d361b.dir/CheckFunctionExists.c.o -c /home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-2BrYl8/CheckFunctionExists.c
+Linking C executable cmTC_d361b
+/snap/cmake/1204/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d361b.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=connect CMakeFiles/cmTC_d361b.dir/CheckFunctionExists.c.o -o cmTC_d361b 
+make[2]: uscita dalla directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-2BrYl8"
+make[1]: uscita dalla directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-2BrYl8"
+
+
+
+Determining if the function remove exists passed with the following output:
+Change Dir: /home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-PRlkp8
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_03170/fast && make[1]: ingresso nella directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-PRlkp8"
+/usr/bin/make  -f CMakeFiles/cmTC_03170.dir/build.make CMakeFiles/cmTC_03170.dir/build
+make[2]: ingresso nella directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-PRlkp8"
+Building C object CMakeFiles/cmTC_03170.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=remove -o CMakeFiles/cmTC_03170.dir/CheckFunctionExists.c.o -c /home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-PRlkp8/CheckFunctionExists.c
+Linking C executable cmTC_03170
+/snap/cmake/1204/bin/cmake -E cmake_link_script CMakeFiles/cmTC_03170.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=remove CMakeFiles/cmTC_03170.dir/CheckFunctionExists.c.o -o cmTC_03170 
+make[2]: uscita dalla directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-PRlkp8"
+make[1]: uscita dalla directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-PRlkp8"
+
+
+
+Determining if the function shmat exists passed with the following output:
+Change Dir: /home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-3GteN7
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_17941/fast && make[1]: ingresso nella directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-3GteN7"
+/usr/bin/make  -f CMakeFiles/cmTC_17941.dir/build.make CMakeFiles/cmTC_17941.dir/build
+make[2]: ingresso nella directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-3GteN7"
+Building C object CMakeFiles/cmTC_17941.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=shmat -o CMakeFiles/cmTC_17941.dir/CheckFunctionExists.c.o -c /home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-3GteN7/CheckFunctionExists.c
+Linking C executable cmTC_17941
+/snap/cmake/1204/bin/cmake -E cmake_link_script CMakeFiles/cmTC_17941.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=shmat CMakeFiles/cmTC_17941.dir/CheckFunctionExists.c.o -o cmTC_17941 
+make[2]: uscita dalla directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-3GteN7"
+make[1]: uscita dalla directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-3GteN7"
+
+
+
+Determining if the function IceConnectionNumber exists in the ICE passed with the following output:
+Change Dir: /home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-8L0Zz8
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_dc443/fast && make[1]: ingresso nella directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-8L0Zz8"
+/usr/bin/make  -f CMakeFiles/cmTC_dc443.dir/build.make CMakeFiles/cmTC_dc443.dir/build
+make[2]: ingresso nella directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-8L0Zz8"
+Building C object CMakeFiles/cmTC_dc443.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber -o CMakeFiles/cmTC_dc443.dir/CheckFunctionExists.c.o -c /home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-8L0Zz8/CheckFunctionExists.c
+Linking C executable cmTC_dc443
+/snap/cmake/1204/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dc443.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=IceConnectionNumber CMakeFiles/cmTC_dc443.dir/CheckFunctionExists.c.o -o cmTC_dc443  -lICE 
+make[2]: uscita dalla directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-8L0Zz8"
+make[1]: uscita dalla directory "/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CMakeScratch/TryCompile-8L0Zz8"
+
+
+

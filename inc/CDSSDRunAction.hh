@@ -6,6 +6,7 @@
 
 #include "CDSSDEventAction.hh"
 
+#include "G4AnalysisManager.hh"
 #include "G4UserRunAction.hh"
 #include "globals.hh"
 
@@ -19,6 +20,7 @@ public:
     
   void BeginOfRunAction(const G4Run*) override;
   void  EndOfRunAction(const G4Run*) override;
+  
   
 private:
   CDSSDEventAction *fEventAction = nullptr;

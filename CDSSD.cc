@@ -20,7 +20,6 @@
 #include "CDSSDPrimaryGeneratorAction.hh"
 #include "CDSSDRunAction.hh"
 #include "CDSSDEventAction.hh"
-#include "CDSSDSteppingAction.hh"
 
 #include "G4PhysListFactory.hh"
 #include "G4VModularPhysicsList.hh"

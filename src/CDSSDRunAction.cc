@@ -3,7 +3,6 @@
 
 #include "CDSSDRunAction.hh"
 #include "CDSSDEventAction.hh"
-#include "CDSSDAnalysis.hh"
 
 #include "G4RunManager.hh"
 #include "G4Run.hh"
@@ -26,7 +25,7 @@ CDSSDRunAction::CDSSDRunAction(CDSSDEventAction *event)
   // Creating ntuple
   //
   analysisManager->CreateNtuple("CDSSDevents","CDSSDevents");
-  analysisManager->CreateNtupleDColumn("Edephit", fEventAction->GetEtothit());
+  //analysisManager->CreateNtupleDColumn("Edephit", fEventAction->GetEtothit());
   analysisManager->FinishNtuple();
 
 }

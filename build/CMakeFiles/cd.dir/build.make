@@ -338,6 +338,8 @@ libcd.so: /home/camaiani/Software/install/geant4/lib/libG4GMocren.so
 libcd.so: /home/camaiani/Software/install/geant4/lib/libG4visHepRep.so
 libcd.so: /home/camaiani/Software/install/geant4/lib/libG4RayTracer.so
 libcd.so: /home/camaiani/Software/install/geant4/lib/libG4VRML.so
+libcd.so: /home/camaiani/Software/install/geant4/lib/libG4OpenGL.so
+libcd.so: /home/camaiani/Software/install/geant4/lib/libG4gl2ps.so
 libcd.so: /home/camaiani/Software/install/geant4/lib/libG4vis_management.so
 libcd.so: /home/camaiani/Software/install/geant4/lib/libG4modeling.so
 libcd.so: /home/camaiani/Software/install/geant4/lib/libG4interfaces.so
@@ -347,6 +349,18 @@ libcd.so: /home/camaiani/Software/install/geant4/lib/libG4readout.so
 libcd.so: /home/camaiani/Software/install/geant4/lib/libG4physicslists.so
 libcd.so: /home/camaiani/Software/install/geant4/lib/libG4tasking.so
 libcd.so: /home/camaiani/Software/install/geant4/lib/libG4parmodels.so
+libcd.so: /usr/lib/x86_64-linux-gnu/libGL.so
+libcd.so: /usr/lib/x86_64-linux-gnu/libQt5OpenGL.so.5.9.5
+libcd.so: /usr/lib/x86_64-linux-gnu/libQt5PrintSupport.so.5.9.5
+libcd.so: /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.9.5
+libcd.so: /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.9.5
+libcd.so: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.9.5
+libcd.so: /usr/lib/x86_64-linux-gnu/libXmu.so
+libcd.so: /usr/lib/x86_64-linux-gnu/libXext.so
+libcd.so: /usr/lib/x86_64-linux-gnu/libXt.so
+libcd.so: /usr/lib/x86_64-linux-gnu/libICE.so
+libcd.so: /usr/lib/x86_64-linux-gnu/libSM.so
+libcd.so: /usr/lib/x86_64-linux-gnu/libX11.so
 libcd.so: /home/camaiani/Software/install/geant4/lib/libG4run.so
 libcd.so: /home/camaiani/Software/install/geant4/lib/libG4event.so
 libcd.so: /home/camaiani/Software/install/geant4/lib/libG4tracking.so
