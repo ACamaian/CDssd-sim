@@ -511,6 +511,7 @@ CMakeFiles/cd.dir/src/CDSSDSi1DetectorMessenger.cc.o: \
  /home/camaiani/Software/install/geant4/include/Geant4/G4UIdirectory.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4UIcmdWithAString.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4UIcmdWithAnInteger.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4UIcmdWithADouble.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4UIcmdWithADoubleAndUnit.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4UIcmdWith3VectorAndUnit.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4UIcmdWithoutParameter.hh \

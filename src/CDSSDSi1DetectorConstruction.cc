@@ -9,6 +9,7 @@
 #include "G4Cons.hh"
 #include "G4LogicalVolume.hh"
 #include "G4PVPlacement.hh"
+#include "G4PVReplica.hh"
 #include "G4RotationMatrix.hh"
 #include "G4VisAttributes.hh"
 #include "G4Colour.hh"
@@ -34,15 +35,21 @@ CDSSDSi1DetectorConstruction(CDSSDDetectorConstruction* det)
   //Intialize the Nistmanager
   nistman = G4NistManager::Instance();
 
-  //si1 Box size (half lenght)
-  si1BoxSizeX = 10.*mm; 
-  si1BoxSizeY = 10.*mm; 
-  si1BoxSizeZ = 10.*mm;
+  si1Rmin = 50 * mm;
+  si1Rmax = 150 * mm;
   
-  //Pad Size : GasBox height from chamber floor = 4.54mm
-  si1BoxCenterX = 0.*mm;
-  si1BoxCenterY = 0.*mm; 
-  si1BoxCenterZ = -100*mm + si1BoxSizeY;
+  si1RminActive = 50 * mm;
+  si1RmaxActive = 150 * mm;
+  
+  si1Thickness = 20 * um;
+  si1AlThickness = 0.5 * um;
+  
+  DPhigap = 10*deg;
+  DPhisi = 80 *deg ;
+  
+  si1NSlices = 4;
+  
+  si1PosZ = -100 * mm;
 
   // create commands for interactive definition of the calorimeter
   si1Messenger = new CDSSDSi1DetectorMessenger(this);
@@ -55,7 +62,7 @@ CDSSDSi1DetectorConstruction::~CDSSDSi1DetectorConstruction(){
   if (si1Messenger !=NULL ) delete si1Messenger;
   if (nistman != NULL) delete nistman;
   if (detConstruction != NULL) delete detConstruction;
-  if( si1Log != NULL) delete si1Log;
+  if (motherSi1_log != NULL) delete motherSi1_log;
   
 }
 
@@ -68,14 +75,46 @@ G4VPhysicalVolume* CDSSDSi1DetectorConstruction::Construct(G4LogicalVolume* moth
 //////////////////////////////////////////////////////////////////
 /// Constructs the Si1 volume detector elements
 G4VPhysicalVolume* CDSSDSi1DetectorConstruction::ConstructSi1(G4LogicalVolume* motherLog) {
-   
-  G4VPhysicalVolume* si1Phys; 
-  G4Box* si1Box;
-  si1Box = new G4Box("si1Box",si1BoxSizeX,si1BoxSizeY,si1BoxSizeZ);  
-  si1Log = new G4LogicalVolume(si1Box,nistman->FindOrBuildMaterial("G4_Si"),"si1Log");
-  si1Phys = new G4PVPlacement(0, G4ThreeVector(si1BoxCenterX,si1BoxCenterY,si1BoxCenterZ),si1Log,"si1Phys",motherLog,false,0,true);
+      
+    G4cout << si1Thickness+si1AlThickness << G4endl;
+    
+    G4VSolid* motherSi1 = new G4Tubs("motherSi1", si1RminActive, si1RmaxActive, (si1Thickness+si1AlThickness)/2., 0., 360 *deg);
+    motherSi1_log = new G4LogicalVolume(motherSi1, nistman->FindOrBuildMaterial("G4_Galactic"), "motherSi1_log", 0, 0, 0);
+    G4VPhysicalVolume* motherSi1_phys = new G4PVPlacement(0, G4ThreeVector(0.,0.,si1PosZ-(si1Thickness+si1AlThickness)/2), motherSi1_log, "motherSi1_phys",  motherLog, false, 0, true);
+    
+    G4double DPhiSlice = 360*deg/si1NSlices;
+        
+     //a slice to be replicated
+    auto sliceS  = new G4Tubs("Slice",si1RminActive, si1RmaxActive, (si1Thickness+si1AlThickness)/2., -DPhiSlice/2., DPhiSlice);
+    auto sliceL  = new G4LogicalVolume(sliceS,nistman->FindOrBuildMaterial("G4_Galactic"),"SliceL"); 
+    auto sliceP = new G4PVReplica("SliceP",sliceL, motherSi1_log, kPhi, si1NSlices, DPhiSlice, 0.); 
 
-  return si1Phys;
+    //a slice is done by a gap + active volume (see QQQ1 mesitech)
+    auto gapS = new G4Tubs("Gap",si1RminActive, si1RmaxActive, (si1Thickness+si1AlThickness)/2., -DPhiSlice/2., DPhigap);
+    auto gapL = new G4LogicalVolume(gapS, nistman->FindOrBuildMaterial("G4_TEFLON"),"GapL"); 
+    auto gapP = new G4PVPlacement(0, G4ThreeVector(0.,0.,0.), gapL, "GapP", sliceL, false, 0, true);
+        
+    auto siS = new G4Tubs("Si1", si1RminActive, si1RmaxActive, si1Thickness/2., -DPhiSlice/2. + DPhigap, DPhisi);
+    auto siL = new G4LogicalVolume(siS, nistman->FindOrBuildMaterial("G4_Si"), "Si1L"); 
+    auto siP = new G4PVPlacement(0,G4ThreeVector(0.,0., -si1AlThickness/2.), siL, "Si1P", sliceL, false, 0, true);
+        
+    //and and Al layer on the junction side
+    auto alS = new G4Tubs("Al", si1RminActive, si1RmaxActive, si1AlThickness/2., -DPhiSlice/2. +DPhigap, DPhisi);
+    auto alL = new G4LogicalVolume(alS, nistman->FindOrBuildMaterial("G4_Al"), "AlL"); 
+    auto alP = new G4PVPlacement(0,G4ThreeVector(0.,0., +si1Thickness/2.), alL, "AlP", sliceL, false, 0, true);
+    
+    // dead frame 
+    auto deadSin = new G4Tubs("deadIn", si1Rmin, si1RminActive, (si1Thickness+si1AlThickness)/2., 0., 360*deg);
+    auto deadLin = new G4LogicalVolume(deadSin, nistman->FindOrBuildMaterial("G4_TEFLON"),"dead");
+    auto deadPinP = new G4PVPlacement(0, G4ThreeVector(0.,0.,si1PosZ-(si1Thickness+si1AlThickness)/2.), deadLin, "dead",  motherLog, false, 0, true);
+    
+    auto deadSout = new G4Tubs("deadOut", si1RmaxActive, si1Rmax, (si1Thickness+si1AlThickness)/2., 0., 360*deg);
+    auto deadLout = new G4LogicalVolume(deadSout, nistman->FindOrBuildMaterial("G4_TEFLON"),"dead");
+    auto deadPout = new G4PVPlacement(0, G4ThreeVector(0.,0.,si1PosZ-(si1Thickness+si1AlThickness)/2.), deadLout, "dead",  motherLog, false, 0, true);
+    
+   
+    
+    return motherSi1_phys;
 }
 
 

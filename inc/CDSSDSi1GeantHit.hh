@@ -40,8 +40,8 @@ public:
 
   void Print();
 
-//   void SetTrackID(G4int track){ trackID = track; }
-//   void SetParentID(G4int track){ parentID = track; }
+   void SetTrackID(G4int track){ trackID = track; }
+   void SetParentID(G4int track){ parentID = track; }
 //   //void SetStep(G4Step* astep){bstep=astep;}
 //   void SetE0(G4double ee){ e0 = ee; }
   void SetEdep(G4double de){ edep = de; }

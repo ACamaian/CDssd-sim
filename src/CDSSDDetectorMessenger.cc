@@ -28,12 +28,13 @@ CDSSDDetectorMessenger(CDSSDDetectorConstruction* CDSSDDet)
   targetThicknessCmd->SetGuidance("Select the Target thickness");
   targetThicknessCmd->SetParameterName("targetThickness",false);
   targetThicknessCmd->SetUnitCategory("Length");
+  targetThicknessCmd->SetDefaultUnit("mm");
   targetThicknessCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
   
   targetMaterialCmd = new G4UIcmdWithAString("/CDSSD/det/setTargetMat",this);
   targetMaterialCmd->SetGuidance("Select Material outside the Chamber.");
   targetMaterialCmd->SetParameterName("targetMat",false);
-  targetMaterialCmd->SetDefaultValue("G4_C");
+  targetMaterialCmd->SetDefaultValue("G4_LiF");
   targetMaterialCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
   
 }

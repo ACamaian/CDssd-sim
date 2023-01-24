@@ -25,12 +25,15 @@ class CDSSDDetectorMessenger;
 class CDSSDSi1DetectorConstruction;
 class CDSSDSi1SD;
 
+class CDSSDSi2DetectorConstruction;
+class CDSSDSi2SD;
+
 class CDSSDDetectorConstruction : public G4VUserDetectorConstruction {
 private:
 
   G4NistManager *nistman; //Pointer to NIST Material Manager 
   
-  G4SDManager* SDman;         ///< Pointer to si1 sensitive detector manager
+  G4SDManager* SDman;     //Pointer to SD manager
     
   G4UserLimits* limit;
 
@@ -48,6 +51,8 @@ private:
   
   CDSSDSi1DetectorConstruction* si1Det;          ///< Pointer to target constructor 
   CDSSDSi1SD *si1SD;
+  CDSSDSi2DetectorConstruction* si2Det;          ///< Pointer to target constructor 
+  CDSSDSi2SD *si2SD;
   
   CDSSDDetectorMessenger* detectorMessenger;  ///< Pointer to the Messenger
 
@@ -69,8 +74,6 @@ public:
   void SetTargetThickness (G4double val){targetThickness = val;}
   void SetTargetMaterial (G4String mat);
  
-  CDSSDSi1SD* GetSi1SD(void){return si1SD;}
-
   CDSSDDetectorMessenger* GetDetectorMessenger(){return detectorMessenger;};
 
   G4LogicalVolume* GetWorldLogicalVolume(){return worldLog;}
@@ -81,6 +84,10 @@ public:
   G4double GetWorldSizeZ(void){return worldSizeZ;}
 
   CDSSDSi1DetectorConstruction* GetSi1Detector() {return si1Det;}
+  CDSSDSi2DetectorConstruction* GetSi2Detector() {return si2Det;}
+  
+  CDSSDSi1SD* GetSi1SD(void){return si1SD;}
+  CDSSDSi2SD* GetSi2SD(void){return si2SD;}
 
   void UpdateGeometry();
     

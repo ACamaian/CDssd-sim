@@ -20,7 +20,7 @@ CDSSDSi1SD::CDSSDSi1SD(G4String name):G4VSensitiveDetector(name){
 
   G4cout << "Creating SD with name: " << name << G4endl;
   G4String HCname;
-  collectionName.insert(HCname="gasCollection");
+  collectionName.insert(HCname="si1Collection");
 }
 
 
@@ -43,7 +43,7 @@ void CDSSDSi1SD::Initialize(G4HCofThisEvent* HCE){
 G4bool CDSSDSi1SD::ProcessHits(G4Step* aStep,G4TouchableHistory*){
 
   //function is directly implemented here:
-  G4double edep = -(aStep->GetPostStepPoint()->GetKineticEnergy() - aStep->GetPreStepPoint()->GetKineticEnergy())/MeV;
+  G4double edep += aStep()->GetKineticEnergy())/MeV;
     
   if(edep==0.) return false;
 
@@ -63,7 +63,7 @@ void CDSSDSi1SD::EndOfEvent(G4HCofThisEvent*){
   G4int NbHits = hitsCollection->entries();
   if (verboseLevel>0) {
     G4cout << "Hits Collection: in this event they are " << NbHits
-	   << " (GEANT-like) hits in the gas volume: " << G4endl;
+	   << " (GEANT-like) hits in the si1 volume: " << G4endl;
     for (G4int i=0;i<NbHits;i++) (*hitsCollection)[i]->Print();
   }
 }

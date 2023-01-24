@@ -5,8 +5,6 @@
 #include "G4UImessenger.hh"
 
 class CDSSDSi1DetectorConstruction;
-class CDSSDSi1DetectorConstruction;
-//class ActarSimPrimaryGeneratorAction;
 
 class G4UIdirectory;
 class G4UIcmdWithAString;
@@ -22,11 +20,23 @@ class CDSSDSi1DetectorMessenger: public G4UImessenger {
 
 private:
 
-  CDSSDSi1DetectorConstruction* Si1Detector;         ///< Pointer to main detector geometry class
-  CDSSDSi1DetectorConstruction* CDSSDSi1Detector;   ///< Pointer to main gas detector geometry class
+    
+    
+  CDSSDSi1DetectorConstruction* CDSSDSi1Detector;         ///< Pointer to detector geometry class
 
   G4UIdirectory*             si1Dir;                      ///< Directory
 
+  G4UIcmdWithADoubleAndUnit *RminCmd;
+  G4UIcmdWithADoubleAndUnit *RmaxCmd;
+  G4UIcmdWithADoubleAndUnit *RminActiveCmd;
+  G4UIcmdWithADoubleAndUnit *RmaxActiveCmd;
+  G4UIcmdWithADoubleAndUnit *thickCmd;
+  G4UIcmdWithADoubleAndUnit *thickAlCmd;
+  G4UIcmdWithADoubleAndUnit *zPosCmd;
+  G4UIcmdWithADouble *nSlicesCmd;
+  G4UIcmdWithADoubleAndUnit *dPhiGapCmd;
+  G4UIcmdWithADoubleAndUnit *dPhiSiCmd;
+  
   void SetNewValue(G4UIcommand*, G4String);
 
 public:

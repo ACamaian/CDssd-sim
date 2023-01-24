@@ -1,46 +1,35 @@
 #Setting some general geometry
-/DEMO/det/setWindowMat G4_Ti
-/DEMO/det/setWindowRadius 5 mm
-/DEMO/det/setWindowThickness 5 um
-/DEMO/det/setGasStepMax 0.5 mm 
+/CDSSD/det/setTargetMat G4_LITHIUM_FLUORIDE
+/CDSSD/det/setTargetThickness  0.1 mm
 
-#Setting gas properties
-/DEMO/gas/setGasPressure 0.800 bar
-/DEMO/gas/setGasTemperature 293 K
-/DEMO/gas/setGasMat D2 ## ALWAYS AFTER THE PRESSURE AND TEMPERATURE DEFINITION
-#/DEMO/gas/mixture/
-#/DEMO/gas/mixture/GasMixture
-#/DEMO/gas/mixture/setGasMix
-
-#Setting the Fields inside the gasvolume
-#/DEMO/field/setStepperType 4
-#/DEMO/field/setMinStep 0.01 mm
-#/DEMO/field/setB	
-/DEMO/field/setEdrift 150 #volt/cm
-/DEMO/field/setQbeam 0 #C
+#Settin CDSSD geometry
+/CDSSD/si1/setRmin 150 mm;
+/CDSSD/si1/setRmax 5 mm;
+/CDSSD/si1/setThickness 20 um;
+/CDSSD/si1/setZpos -100 mm;
+/CDSSD/si1/setSliceStartingPhi 0 radian;
+/CDSSD/si1/setSliceDPhi 2 radian
+/CDSSD/si1/setNSlices 4;
+/CDSSD/si1/setSliceOffset 0 radian;
 
 #Setting the physics List
-#/DEMO/phys/addPhysics emstandard
-#/DEMO/phys/addPhysics emstandard_opt1
-#/DEMO/phys/addPhysics emstandard_opt2
-#/DEMO/phys/addPhysics emstandard_opt3
-/DEMO/phys/addPhysics emstandard_opt4
-/DEMO/phys/addPhysics ion-standard
-/DEMO/phys/addPhysics ionGasModel
-#/DEMO/phys/addPhysics elastic
-#/DEMO/phys/addPhysics binary
-#/DEMO/phys/addPhysics binary_ion
-#/DEMO/phys/addPhysics gamma_nuc
+#/CDSSD/phys/addPhysics emstandard
+#/CDSSD/phys/addPhysics emstandard_opt1
+#/CDSSD/phys/addPhysics emstandard_opt2
+#/CDSSD/phys/addPhysics emstandard_opt3
+/CDSSD/phys/addPhysics emstandard_opt4
+/CDSSD/phys/addPhysics ion-standard
+#/CDSSD/phys/addPhysics elastic
+#/CDSSD/phys/addPhysics binary
+#/CDSSD/phys/addPhysics binary_ion
+#/CDSSD/phys/addPhysics gamma_nuc
 
 #Setting cuts for the particles (lenght)
-/DEMO/phys/setCuts 1 mm #default
-#/DEMO/phys/setGCut 1 mm
-#/DEMO/phys/setECut 1 mm
-#/DEMO/phys/setPCut 1 mm
-#/DEMO/phys/setProtonCut 1mm
-
-#Setting cuts for the active gas
-/DEMO/det/setGasStepMax 0.01 mm		
+#/CDSSD/phys/setCuts 1 mm #default
+#/CDSSD/phys/setGCut 1 mm
+#/CDSSD/phys/setECut 1 mm
+#/CDSSD/phys/setPCut 1 mm
+#/CDSSD/phys/setProtonCut 1mm
 
 # Initialize kernel
 /control/saveHistory
@@ -51,24 +40,23 @@
 /run/numberOfThreads 1
 /run/initialize
 
-#/DEMO/field/update	
 
 #Setting the beam and the reaction
-/DEMO/gun/particle ion
-/DEMO/gun/beamPosition 0 0 -127.5 mm
-/DEMO/gun/beamDirection 0 0 1
-/DEMO/gun/Kine/incidentIon 87 209 50 0. 209. #Z A ChargeState E* Mass
-/DEMO/gun/Kine/targetIon 1 2 1 0. 2.
-/DEMO/gun/Kine/scatteredIon 87 209 50 0. 209.
-/DEMO/gun/Kine/recoiledIon 1 2 1 0. 2.
-/DEMO/gun/Kine/reactionQ 0. MeV
-/DEMO/gun/Kine/labEnergy 1567 MeV
-#/DEMO/gun/randomVertexZPosition on
-#/DEMO/gun/randomVertexZRange -64 64
-/DEMO/gun/vertexZPosition -20 mm
-#/DEMO/gun/randomThetaVal 0 180
-#/DEMO/gun/randomPhiVal 0 360
-/DEMO/gun/Kine/userThetaCM 45 deg
+/CDSSD/gun/particle ion
+/CDSSD/gun/beamPosition 0 0 0 mm
+/CDSSD/gun/beamDirection 0 0 1
+/CDSSD/gun/Kine/incidentIon 8 16 8 0. 16. #Z A ChargeState E* Mass
+/CDSSD/gun/Kine/targetIon 3 6 0 0. 6.
+/CDSSD/gun/Kine/scatteredIon 10 20 10 0. 20.
+/CDSSD/gun/Kine/recoiledIon 1 2 1 0. 2.
+/CDSSD/gun/Kine/reactionQ 0. MeV
+/CDSSD/gun/Kine/labEnergy 80 MeV
+#/CDSSD/gun/randomVertexZPosition on
+#/CDSSD/gun/randomVertexZRange -64 64
+/CDSSD/gun/vertexZPosition 0 mm
+#/CDSSD/gun/randomThetaVal 0 180
+#/CDSSD/gun/randomPhiVal 0 360
+/CDSSD/gun/Kine/userThetaCM 45 deg
 
 
-/run/beamOn 5
+/run/beamOn 1

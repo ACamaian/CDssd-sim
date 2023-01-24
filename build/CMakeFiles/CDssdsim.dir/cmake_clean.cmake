@@ -33,6 +33,14 @@ file(REMOVE_RECURSE
   "CMakeFiles/CDssdsim.dir/src/CDSSDSi1GeantHit.cc.o.d"
   "CMakeFiles/CDssdsim.dir/src/CDSSDSi1SD.cc.o"
   "CMakeFiles/CDssdsim.dir/src/CDSSDSi1SD.cc.o.d"
+  "CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorConstruction.cc.o"
+  "CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorConstruction.cc.o.d"
+  "CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorMessenger.cc.o"
+  "CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorMessenger.cc.o.d"
+  "CMakeFiles/CDssdsim.dir/src/CDSSDSi2GeantHit.cc.o"
+  "CMakeFiles/CDssdsim.dir/src/CDSSDSi2GeantHit.cc.o.d"
+  "CMakeFiles/CDssdsim.dir/src/CDSSDSi2SD.cc.o"
+  "CMakeFiles/CDssdsim.dir/src/CDSSDSi2SD.cc.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

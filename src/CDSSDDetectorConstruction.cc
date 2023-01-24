@@ -2,8 +2,10 @@
 #include "CDSSDDetectorMessenger.hh"
 
 #include "CDSSDSi1DetectorConstruction.hh"
-
 #include "CDSSDSi1SD.hh"
+
+#include "CDSSDSi2DetectorConstruction.hh"
+#include "CDSSDSi2SD.hh"
 
 #include "G4RotationMatrix.hh"
 #include "G4Box.hh"
@@ -23,7 +25,7 @@
 //////////////////////////////////////////////////////////////////
 /// Constructor: initialize all variables, materials and pointers
 CDSSDDetectorConstruction::CDSSDDetectorConstruction(): 
-    si1SD(0), solidWorld(0), worldLog(0),  worldPhys(0){
+    si1SD(0), si2SD(0), solidWorld(0), worldLog(0),  worldPhys(0){
   G4cout << "CDSSD Detector Construction" << G4endl;
 
   //initialize the G4NISTMaterial manager
@@ -39,6 +41,7 @@ CDSSDDetectorConstruction::CDSSDDetectorConstruction():
  
   //Modular detector construction objects
   si1Det = new CDSSDSi1DetectorConstruction(this);
+  si2Det = new CDSSDSi2DetectorConstruction(this);
 
   // create commands for interactive definition of the detector
   detectorMessenger = new CDSSDDetectorMessenger(this);
@@ -83,7 +86,7 @@ G4VPhysicalVolume* CDSSDDetectorConstruction::ConstructCDSSD() {
 				 "World");                       //its name
 
   worldPhys = new G4PVPlacement(0,     //no rotation
-				G4ThreeVector(),       //at (0,0,0)
+				G4ThreeVector(0.,0.,0.),       //at (0,0,0)
 				worldLog,              //its logical volume
 				"World",               //its name
 				0,                     //its mother  volume
@@ -91,14 +94,21 @@ G4VPhysicalVolume* CDSSDDetectorConstruction::ConstructCDSSD() {
 				0);                    //copy number
 
   
+  //---
+  //Target
+  //---
+  
+  G4Box *target = new G4Box ("target",1*cm, 1*cm, targetThickness/2.);
+  G4LogicalVolume *targetLog = new G4LogicalVolume(target, targetMaterial, "targetLog");
+  G4PVPlacement *targetPhys = new G4PVPlacement(0, G4ThreeVector(), targetLog, "targetPhys", worldLog, false, 0);
+  
   //--------------------------
   // CDSSD volume
   //--------------------------
  
-  si1Det->Construct(worldLog);
-  
-
-  
+   si1Det->Construct(worldLog);
+   si2Det->Construct(worldLog);
+    
 
   return worldPhys;
 
@@ -116,9 +126,14 @@ void CDSSDDetectorConstruction::ConstructSDandField(){
   // Si1 volume sensitive detector
   G4String si1SDname = "si1SD";
   si1SD = new CDSSDSi1SD(si1SDname);
-  
   SDman->AddNewDetector(si1SD);
   SetSensitiveDetector(si1Det->GetLogicalVolume()->GetName(), si1SD);  
+  
+  // Si2 volume sensitive detector
+  G4String si2SDname = "si2SD";
+  si2SD = new CDSSDSi2SD(si2SDname);
+  SDman->AddNewDetector(si2SD);
+  SetSensitiveDetector(si2Det->GetLogicalVolume()->GetName(), si2SD);  
 
 }
 

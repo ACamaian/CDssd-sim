@@ -61,7 +61,7 @@ void CDSSDRunAction::BeginOfRunAction(const G4Run* aRun)
   G4RunManager::GetRunManager()->SetRandomNumberStore(true);
   
   // Open an output file
-  G4String fileName = "output/CDSSD";
+  G4String fileName = "output/CDSSD.root";
   analysisManager->OpenFile(fileName);
   
 }

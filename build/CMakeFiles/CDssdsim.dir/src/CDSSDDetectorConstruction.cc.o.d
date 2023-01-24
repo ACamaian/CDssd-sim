@@ -388,6 +388,9 @@ CMakeFiles/CDssdsim.dir/src/CDSSDDetectorConstruction.cc.o: \
  /home/camaiani/Software/install/geant4/include/Geant4/G4THitsCollection.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4Allocator.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4Step.hh \
+ /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDSi2DetectorConstruction.hh \
+ /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDSi2SD.hh \
+ /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDSi2GeantHit.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4RotationMatrix.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4Box.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4GeomTypes.hh \

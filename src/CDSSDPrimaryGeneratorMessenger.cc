@@ -36,9 +36,6 @@
 /// - /CDSSD/gun/Kine/recoilIon
 /// - /CDSSD/gun/Kine/userThetaCM
 /// - /CDSSD/gun/Kine/userPhiAngle
-/// - /CDSSD/gun/randomVertexZPosition
-/// - /CDSSD/gun/randomVertexZRange
-/// - /CDSSD/gun/vertexZPosition
 
 CDSSDPrimaryGeneratorMessenger::CDSSDPrimaryGeneratorMessenger(CDSSDPrimaryGeneratorAction* CDSSDGun)
   : CDSSDActionGun(CDSSDGun) {
@@ -258,35 +255,6 @@ CDSSDPrimaryGeneratorMessenger::CDSSDPrimaryGeneratorMessenger(CDSSDPrimaryGener
   reactionQCmd->SetDefaultValue(0.);
   reactionQCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
 
-  randomVertexZPositionCmd = new G4UIcmdWithAString("/CDSSD/gun/randomVertexZPosition",this);
-  randomVertexZPositionCmd->SetGuidance("Randomize the reaction vertex Z position");
-  randomVertexZPositionCmd->SetGuidance("Choice : on(default), off");
-  randomVertexZPositionCmd->SetParameterName("choice",true);
-  randomVertexZPositionCmd->SetDefaultValue("on");
-  randomVertexZPositionCmd->SetCandidates("on off");
-  randomVertexZPositionCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
-
-  randomVertexZPositionRangeCmd = new G4UIcommand("/CDSSD/gun/randomVertexZRange", this);
-  randomVertexZPositionRangeCmd->SetGuidance("Set the min and max Z-value of random vertex position");
-  randomVertexZPositionRangeCmd->SetGuidance("The value is randomly chosen between the limits.");
-  parameter = new G4UIparameter("randomVertexZMin", 'd', omitable = true);
-  parameter->SetDefaultValue(0.);
-  randomVertexZPositionRangeCmd->SetParameter(parameter);
-  parameter = new G4UIparameter("randomVertexZMax", 'd', omitable = true);
-  parameter->SetDefaultValue(300.);
-  randomVertexZPositionRangeCmd->SetParameter(parameter);
-  parameter = new G4UIparameter("unit", 's', omitable = true);
-  parameter->SetDefaultValue("mm");
-  randomVertexZPositionRangeCmd->SetParameter(parameter);
-
-  vertexZPositionCmd = new G4UIcmdWithADoubleAndUnit("/CDSSD/gun/vertexZPosition",this);
-  vertexZPositionCmd->SetGuidance("Set the Z-value of the reaction vertex.");
-  vertexZPositionCmd->SetParameterName("Z0",true,true);
-  vertexZPositionCmd->SetDefaultUnit("mm");
-  vertexZPositionCmd->SetUnitCategory("Length");
-  vertexZPositionCmd->SetDefaultValue(0.0);
-  vertexZPositionCmd->SetUnitCandidates("mm cm m");
-  
 }
 
 //////////////////////////////////////////////////////////////////
@@ -296,10 +264,6 @@ CDSSDPrimaryGeneratorMessenger::~CDSSDPrimaryGeneratorMessenger() {
   delete gunDir;
   delete listCmd;
   delete particleCmd;
-
-  delete randomVertexZPositionCmd;
-  delete randomVertexZPositionRangeCmd;
-  delete vertexZPositionCmd;
 
   delete randomThetaCmd;
   delete randomThetaValCmd;
@@ -408,26 +372,6 @@ void CDSSDPrimaryGeneratorMessenger::SetNewValue(G4UIcommand* command,
 
    if( command == thetaLabAngleCmd )
     CDSSDActionGun->SetThetaLabAngle(thetaLabAngleCmd->GetNewDoubleValue(newValues));
-
-  if(command == randomVertexZPositionCmd) CDSSDActionGun->SetRandomVertexZPosition(newValues);
-
-  if( command==vertexZPositionCmd)
-    CDSSDActionGun->SetVertexZPosition(vertexZPositionCmd->GetNewDoubleValue(newValues));
-
-  if( command == randomVertexZPositionRangeCmd ){
-    G4double vertexZMin, vertexZMax;
-
-    G4double x, y;
-    char unts[30];
-    std::istringstream is(newValues);
-    is >> x >> y >> unts;
-    G4String unt = unts;
-
-    vertexZMin = x*G4UIcommand::ValueOf(unt);
-    vertexZMax = y*G4UIcommand::ValueOf(unt);
-
-    CDSSDActionGun->SetRandomVertexZPositionVal(vertexZMin,vertexZMax);
-  }
 
 }
 

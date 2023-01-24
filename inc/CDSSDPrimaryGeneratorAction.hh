@@ -66,15 +66,12 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   G4double GetExEnergyOfScattered() {return exEnergyOfScattered;}
   G4double GetExEnergyOfRecoiled()  {return exEnergyOfRecoiled;}
 
-  void SetVertexPosition(G4ThreeVector apos) {vertexPosition=apos;}
-  G4ThreeVector GetVertexPosition(){return vertexPosition;}
   // end of corresponding Kine part
 
   void SetReactionQ(G4double val) { reactionQ = val;}
   void SetLabEnergy(G4double val) { labEnergy = val;}
 
   void SetThetaLabAngle(G4double val) { thetaLabAngle = val;}
-  void SetVertexZPosition(G4double val) { vertexZPosition = val;} // vertex Z position, dypang 080704
 
   void SetRandomThetaVal(G4double min, G4double max) {
     randomThetaMin = min;
@@ -88,13 +85,6 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     randomPhiMax = max;
   }
 
-  void SetRandomVertexZPosition(G4String val) {randomVertexZPosition=val; }
-
-  void SetRandomVertexZPositionVal(G4double min, G4double max) {
-    randomVertexZPositionMin = min;
-    randomVertexZPositionMax = max;
-  }
-
   G4double GetRandomThetaMin() {return randomThetaMin;}
   G4double GetRandomThetaMax() {return randomThetaMax;}
 
@@ -105,7 +95,6 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   G4double GetReactionQ(){return reactionQ;}
   G4double GetLabEnergy(){return labEnergy;}
   G4double GetThetaLabAngle(){return thetaLabAngle;}
-  G4double GetVertexZPosition(){return vertexZPosition;}
 
   void SetParticleDefinition(G4ParticleDefinition * aParticleDefinition) {particleGun->SetParticleDefinition(aParticleDefinition);}
   
@@ -118,10 +107,8 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   
   CDSSDPrimaryGeneratorMessenger* gunMessenger;  ///< Pointer to messenger
 
-
   G4Ions* scatteredIon;         ///< Pointer to scattered ion
   G4Ions* recoilIon;            ///< Pointer to recoil ion
-
   G4double scatteredIonCharge;  ///< Charge of scattered ion
   G4double recoilIonCharge;     ///< Charge of recoil ion
 
@@ -129,12 +116,6 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   G4double labEnergy;           ///< Laboratory energy
   G4double thetaLabAngle;       ///< Polar angle in the laboratory system
 
-  //vertex
-  G4String randomVertexZPosition;
-  G4double randomVertexZPositionMin;  ///< Minimum value for the (random) Z position of the vertex
-  G4double randomVertexZPositionMax;  ///< Maximum value for the (random) Z position of the vertex
-  G4double vertexZPosition;           ///< Value for the (random) Z position of the vertex
-  
   G4String randomTheta;
   G4double randomThetaMin;
   G4double randomPhiMin;
@@ -152,7 +133,6 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   G4double  exEnergyOfTarget;      ///< Energy of the target ion
   G4double  exEnergyOfScattered;   ///< Energy of the scattered ion
   G4double  exEnergyOfRecoiled;    ///< Energy of the recoil ion
-  G4ThreeVector vertexPosition;    ///< Position of the vertex
   
   G4double thetaLab1;
   G4double phiLab1;

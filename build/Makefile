@@ -48,10 +48,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/cmake/1204/bin/cmake
+CMAKE_COMMAND = /snap/cmake/1216/bin/cmake
 
 # The command to remove a file.
-RM = /snap/cmake/1204/bin/cmake -E rm -f
+RM = /snap/cmake/1216/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -78,7 +78,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/snap/cmake/1204/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/cmake/1216/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -574,6 +574,114 @@ src/CDSSDSi1SD.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CDssdsim.dir/build.make CMakeFiles/CDssdsim.dir/src/CDSSDSi1SD.cc.s
 .PHONY : src/CDSSDSi1SD.cc.s
 
+src/CDSSDSi2DetectorConstruction.o: src/CDSSDSi2DetectorConstruction.cc.o
+.PHONY : src/CDSSDSi2DetectorConstruction.o
+
+# target to build an object file
+src/CDSSDSi2DetectorConstruction.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cd.dir/build.make CMakeFiles/cd.dir/src/CDSSDSi2DetectorConstruction.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CDssdsim.dir/build.make CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorConstruction.cc.o
+.PHONY : src/CDSSDSi2DetectorConstruction.cc.o
+
+src/CDSSDSi2DetectorConstruction.i: src/CDSSDSi2DetectorConstruction.cc.i
+.PHONY : src/CDSSDSi2DetectorConstruction.i
+
+# target to preprocess a source file
+src/CDSSDSi2DetectorConstruction.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cd.dir/build.make CMakeFiles/cd.dir/src/CDSSDSi2DetectorConstruction.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CDssdsim.dir/build.make CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorConstruction.cc.i
+.PHONY : src/CDSSDSi2DetectorConstruction.cc.i
+
+src/CDSSDSi2DetectorConstruction.s: src/CDSSDSi2DetectorConstruction.cc.s
+.PHONY : src/CDSSDSi2DetectorConstruction.s
+
+# target to generate assembly for a file
+src/CDSSDSi2DetectorConstruction.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cd.dir/build.make CMakeFiles/cd.dir/src/CDSSDSi2DetectorConstruction.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CDssdsim.dir/build.make CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorConstruction.cc.s
+.PHONY : src/CDSSDSi2DetectorConstruction.cc.s
+
+src/CDSSDSi2DetectorMessenger.o: src/CDSSDSi2DetectorMessenger.cc.o
+.PHONY : src/CDSSDSi2DetectorMessenger.o
+
+# target to build an object file
+src/CDSSDSi2DetectorMessenger.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cd.dir/build.make CMakeFiles/cd.dir/src/CDSSDSi2DetectorMessenger.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CDssdsim.dir/build.make CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorMessenger.cc.o
+.PHONY : src/CDSSDSi2DetectorMessenger.cc.o
+
+src/CDSSDSi2DetectorMessenger.i: src/CDSSDSi2DetectorMessenger.cc.i
+.PHONY : src/CDSSDSi2DetectorMessenger.i
+
+# target to preprocess a source file
+src/CDSSDSi2DetectorMessenger.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cd.dir/build.make CMakeFiles/cd.dir/src/CDSSDSi2DetectorMessenger.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CDssdsim.dir/build.make CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorMessenger.cc.i
+.PHONY : src/CDSSDSi2DetectorMessenger.cc.i
+
+src/CDSSDSi2DetectorMessenger.s: src/CDSSDSi2DetectorMessenger.cc.s
+.PHONY : src/CDSSDSi2DetectorMessenger.s
+
+# target to generate assembly for a file
+src/CDSSDSi2DetectorMessenger.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cd.dir/build.make CMakeFiles/cd.dir/src/CDSSDSi2DetectorMessenger.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CDssdsim.dir/build.make CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorMessenger.cc.s
+.PHONY : src/CDSSDSi2DetectorMessenger.cc.s
+
+src/CDSSDSi2GeantHit.o: src/CDSSDSi2GeantHit.cc.o
+.PHONY : src/CDSSDSi2GeantHit.o
+
+# target to build an object file
+src/CDSSDSi2GeantHit.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cd.dir/build.make CMakeFiles/cd.dir/src/CDSSDSi2GeantHit.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CDssdsim.dir/build.make CMakeFiles/CDssdsim.dir/src/CDSSDSi2GeantHit.cc.o
+.PHONY : src/CDSSDSi2GeantHit.cc.o
+
+src/CDSSDSi2GeantHit.i: src/CDSSDSi2GeantHit.cc.i
+.PHONY : src/CDSSDSi2GeantHit.i
+
+# target to preprocess a source file
+src/CDSSDSi2GeantHit.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cd.dir/build.make CMakeFiles/cd.dir/src/CDSSDSi2GeantHit.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CDssdsim.dir/build.make CMakeFiles/CDssdsim.dir/src/CDSSDSi2GeantHit.cc.i
+.PHONY : src/CDSSDSi2GeantHit.cc.i
+
+src/CDSSDSi2GeantHit.s: src/CDSSDSi2GeantHit.cc.s
+.PHONY : src/CDSSDSi2GeantHit.s
+
+# target to generate assembly for a file
+src/CDSSDSi2GeantHit.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cd.dir/build.make CMakeFiles/cd.dir/src/CDSSDSi2GeantHit.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CDssdsim.dir/build.make CMakeFiles/CDssdsim.dir/src/CDSSDSi2GeantHit.cc.s
+.PHONY : src/CDSSDSi2GeantHit.cc.s
+
+src/CDSSDSi2SD.o: src/CDSSDSi2SD.cc.o
+.PHONY : src/CDSSDSi2SD.o
+
+# target to build an object file
+src/CDSSDSi2SD.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cd.dir/build.make CMakeFiles/cd.dir/src/CDSSDSi2SD.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CDssdsim.dir/build.make CMakeFiles/CDssdsim.dir/src/CDSSDSi2SD.cc.o
+.PHONY : src/CDSSDSi2SD.cc.o
+
+src/CDSSDSi2SD.i: src/CDSSDSi2SD.cc.i
+.PHONY : src/CDSSDSi2SD.i
+
+# target to preprocess a source file
+src/CDSSDSi2SD.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cd.dir/build.make CMakeFiles/cd.dir/src/CDSSDSi2SD.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CDssdsim.dir/build.make CMakeFiles/CDssdsim.dir/src/CDSSDSi2SD.cc.i
+.PHONY : src/CDSSDSi2SD.cc.i
+
+src/CDSSDSi2SD.s: src/CDSSDSi2SD.cc.s
+.PHONY : src/CDSSDSi2SD.s
+
+# target to generate assembly for a file
+src/CDSSDSi2SD.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cd.dir/build.make CMakeFiles/cd.dir/src/CDSSDSi2SD.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CDssdsim.dir/build.make CMakeFiles/CDssdsim.dir/src/CDSSDSi2SD.cc.s
+.PHONY : src/CDSSDSi2SD.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -632,6 +740,18 @@ help:
 	@echo "... src/CDSSDSi1SD.o"
 	@echo "... src/CDSSDSi1SD.i"
 	@echo "... src/CDSSDSi1SD.s"
+	@echo "... src/CDSSDSi2DetectorConstruction.o"
+	@echo "... src/CDSSDSi2DetectorConstruction.i"
+	@echo "... src/CDSSDSi2DetectorConstruction.s"
+	@echo "... src/CDSSDSi2DetectorMessenger.o"
+	@echo "... src/CDSSDSi2DetectorMessenger.i"
+	@echo "... src/CDSSDSi2DetectorMessenger.s"
+	@echo "... src/CDSSDSi2GeantHit.o"
+	@echo "... src/CDSSDSi2GeantHit.i"
+	@echo "... src/CDSSDSi2GeantHit.s"
+	@echo "... src/CDSSDSi2SD.o"
+	@echo "... src/CDSSDSi2SD.i"
+	@echo "... src/CDSSDSi2SD.s"
 .PHONY : help
 
 

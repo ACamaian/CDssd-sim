@@ -34,9 +34,6 @@ private:
   G4UIcommand*                 randomThetaValCmd;      ///< Sets the limits in the Theta angle for the scattered particle.
   G4UIcommand*                 randomPhiValCmd;        ///< Sets the limits in the Phi angle for the scattered particle.
 
-  G4UIcmdWithAString*          randomVertexZPositionCmd;      ///< Randomize the reaction vertex Z position
-  G4UIcommand*                 randomVertexZPositionRangeCmd; ///< Set the min and max Z-value of random vertex position
-  G4UIcmdWithADoubleAndUnit*   vertexZPositionCmd;     ///< Set the Z-value of the reaction vertex.
     
   //Kine Parameter
   G4UIdirectory*               KineDir;                ///< Directory for CINE commands

@@ -44,12 +44,11 @@ CDSSDPrimaryGeneratorAction::CDSSDPrimaryGeneratorAction()
   particleGun->SetParticleMomentumDirection(G4ThreeVector(0,0,1));
 
   thetaLabAngle = 45 * deg;   // 45 degrees (TH)
-
   thetaCMAngle = 45 * deg;
+
+  randomTheta = "off";
   randomThetaMin = 0.*deg;
   randomThetaMax = 180.*deg;
-
-  vertexZPosition = 0 *mm;
 
   //building the messenger
   gunMessenger = new CDSSDPrimaryGeneratorMessenger(this);
@@ -84,16 +83,6 @@ void CDSSDPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   G4double energy1=0.;
   G4double energy2=0.;
   
-  // vertex_z0 decides the z position of the vertex. The beam is tracked till vertex_z0 is reached ...
-  G4double vertex_z0 = 0;
-  
-  if(randomVertexZPosition=="off"){
-    vertex_z0 = vertexZPosition;
-  }
-  else if(randomVertexZPosition=="on"){
-    vertex_z0 = randomVertexZPositionMin + G4UniformRand()*(randomVertexZPositionMax-randomVertexZPositionMin);
-  }  
-
   //KINE object...
   CDSSDKine* KINE = new CDSSDKine();
   
@@ -170,7 +159,7 @@ void CDSSDPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   }
   
   //-- Set the second gun to the desired vertex
-  particleGun->SetParticlePosition(G4ThreeVector(0.0,0.0,vertex_z0));
+  particleGun->SetParticlePosition(zero);
 
   //---Generating the primary vertex for scattered Ion
   G4ThreeVector direction1 = G4ThreeVector(sin(thetaLab1)*cos(phiLab1),
