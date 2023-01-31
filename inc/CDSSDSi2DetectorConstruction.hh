@@ -22,7 +22,7 @@ private:
   G4double si2RminActive;
   G4double si2RmaxActive;  
   G4double si2Thickness;
-     G4double si2AlThickness;
+  G4double si2AlThickness;
   
   G4double si2NSlices;
   G4double DPhigap;
@@ -32,7 +32,8 @@ private:
   G4NistManager *nistman;
 
   G4LogicalVolume* motherSi2_log;       
-
+    G4LogicalVolume* Si2Active_log;
+  
   G4VPhysicalVolume* ConstructSi2(G4LogicalVolume*);
 
 public:
@@ -42,6 +43,8 @@ public:
   G4VPhysicalVolume* Construct(G4LogicalVolume*);
 
   G4LogicalVolume* GetLogicalVolume(){return motherSi2_log;};
+  G4LogicalVolume* GetActiveLogicalVolume(){return Si2Active_log;};
+  
   
   void SetRmin(G4double val) {si2Rmin = val;}
   void SetRmax(G4double val) {si2Rmax = val;}
@@ -53,6 +56,18 @@ public:
   void SetNSlices (G4double val) {si2NSlices = val;}    
   void SetDPhiGap (G4double val) {DPhigap = val;}
   void SetDPhiSi (G4double val) {DPhisi = val;}  
+  
+  G4double GetNSlices() {return si2NSlices;}
+    
+  G4double GetZPos(){return si2PosZ;}
+  G4double GetThickness() {return si2Thickness;}
+  G4double GetAlThickness() {return si2AlThickness;}
+  
+  G4double GetDPhiGap() {return DPhigap;}
+  G4double GetDPhiSi() {return DPhisi;}  
+  
+  G4double GetRminActive(){return si2RminActive;}
+  G4double GetRmaxActive(){return si2RmaxActive;}
   
 };
 #endif

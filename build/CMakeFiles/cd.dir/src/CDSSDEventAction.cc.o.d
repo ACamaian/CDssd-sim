@@ -369,23 +369,20 @@ CMakeFiles/cd.dir/src/CDSSDEventAction.cc.o: \
  /home/camaiani/Software/install/geant4/include/Geant4/G4THitsCollection.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4Allocator.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4ThreeVector.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4Threading.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4Step.hh \
+ /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDSi2GeantHit.hh \
  /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDSi1SD.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4VSensitiveDetector.hh \
+ /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDSi1DetectorConstruction.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4NistManager.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4NistElementBuilder.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4NistMaterialBuilder.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4ICRU90StoppingData.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4Pow.hh \
+ /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDSi2SD.hh \
+ /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDSi2DetectorConstruction.hh \
  /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDSi1GeantHit.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4RunManager.hh \
- /usr/include/c++/7/list /usr/include/c++/7/bits/stl_list.h \
- /usr/include/c++/7/bits/list.tcc \
- /home/camaiani/Software/install/geant4/include/Geant4/rundefs.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4Event.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/evtdefs.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4PrimaryVertex.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4PrimaryParticle.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4DCofThisEvent.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4VDigiCollection.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4TrajectoryContainer.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4VTrajectory.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4VUserEventInformation.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4EventManager.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4StackManager.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4UserStackingAction.hh \
@@ -393,10 +390,14 @@ CMakeFiles/cd.dir/src/CDSSDEventAction.cc.o: \
  /home/camaiani/Software/install/geant4/include/Geant4/G4StackedTrack.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4TrackStack.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4SmartTrackStack.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4TrajectoryContainer.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/evtdefs.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4VTrajectory.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4PrimaryTransformer.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4ParticleTable.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4ParticleTableIterator.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4ParticleTable.icc \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4PrimaryParticle.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4TrackingManager.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4SteppingManager.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/Randomize.hh \
@@ -506,7 +507,6 @@ CMakeFiles/cd.dir/src/CDSSDEventAction.cc.o: \
  /home/camaiani/Software/install/geant4/include/Geant4/G4UItokenNum.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4ApplicationState.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4UserTrackingAction.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4RunManagerKernel.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4AnalysisManager.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4GenericAnalysisManager.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4ToolsAnalysisManager.hh \
@@ -568,6 +568,10 @@ CMakeFiles/cd.dir/src/CDSSDEventAction.cc.o: \
  /home/camaiani/Software/install/geant4/include/Geant4/G4GenericFileManager.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4GenericFileManager.icc \
  /home/camaiani/Software/install/geant4/include/Geant4/G4Event.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4PrimaryVertex.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4DCofThisEvent.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4VDigiCollection.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4VUserEventInformation.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4HCofThisEvent.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4UnitsTable.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4UnitsTable.icc

@@ -73,6 +73,7 @@
 #/CDSSD/gun/randomThetaVal 0 180
 #/CDSSD/gun/randomPhiVal 0 360
 /CDSSD/gun/Kine/userThetaCM 10 deg
+/CDSSD/gun/Kine/userPhiCM 45 deg
 
 #
 # Visualization setting

@@ -5,7 +5,6 @@
 #define CDSSDRunAction_h 1
 
 #include "CDSSDEventAction.hh"
-
 #include "G4AnalysisManager.hh"
 #include "G4UserRunAction.hh"
 #include "globals.hh"
@@ -24,7 +23,7 @@ public:
   
 private:
   CDSSDEventAction *fEventAction = nullptr;
-
+  
   
 };
 

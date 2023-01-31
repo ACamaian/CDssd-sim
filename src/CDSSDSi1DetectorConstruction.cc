@@ -75,9 +75,7 @@ G4VPhysicalVolume* CDSSDSi1DetectorConstruction::Construct(G4LogicalVolume* moth
 //////////////////////////////////////////////////////////////////
 /// Constructs the Si1 volume detector elements
 G4VPhysicalVolume* CDSSDSi1DetectorConstruction::ConstructSi1(G4LogicalVolume* motherLog) {
-      
-    G4cout << si1Thickness+si1AlThickness << G4endl;
-    
+          
     G4VSolid* motherSi1 = new G4Tubs("motherSi1", si1RminActive, si1RmaxActive, (si1Thickness+si1AlThickness)/2., 0., 360 *deg);
     motherSi1_log = new G4LogicalVolume(motherSi1, nistman->FindOrBuildMaterial("G4_Galactic"), "motherSi1_log", 0, 0, 0);
     G4VPhysicalVolume* motherSi1_phys = new G4PVPlacement(0, G4ThreeVector(0.,0.,si1PosZ-(si1Thickness+si1AlThickness)/2), motherSi1_log, "motherSi1_phys",  motherLog, false, 0, true);
@@ -95,8 +93,8 @@ G4VPhysicalVolume* CDSSDSi1DetectorConstruction::ConstructSi1(G4LogicalVolume* m
     auto gapP = new G4PVPlacement(0, G4ThreeVector(0.,0.,0.), gapL, "GapP", sliceL, false, 0, true);
         
     auto siS = new G4Tubs("Si1", si1RminActive, si1RmaxActive, si1Thickness/2., -DPhiSlice/2. + DPhigap, DPhisi);
-    auto siL = new G4LogicalVolume(siS, nistman->FindOrBuildMaterial("G4_Si"), "Si1L"); 
-    auto siP = new G4PVPlacement(0,G4ThreeVector(0.,0., -si1AlThickness/2.), siL, "Si1P", sliceL, false, 0, true);
+    Si1Active_log = new G4LogicalVolume(siS, nistman->FindOrBuildMaterial("G4_Si"), "Si1ActiveL"); 
+    auto siP = new G4PVPlacement(0,G4ThreeVector(0.,0., -si1AlThickness/2.), Si1Active_log, "Si1P", sliceL, false, 0, true);
         
     //and and Al layer on the junction side
     auto alS = new G4Tubs("Al", si1RminActive, si1RmaxActive, si1AlThickness/2., -DPhiSlice/2. +DPhigap, DPhisi);
@@ -111,8 +109,7 @@ G4VPhysicalVolume* CDSSDSi1DetectorConstruction::ConstructSi1(G4LogicalVolume* m
     auto deadSout = new G4Tubs("deadOut", si1RmaxActive, si1Rmax, (si1Thickness+si1AlThickness)/2., 0., 360*deg);
     auto deadLout = new G4LogicalVolume(deadSout, nistman->FindOrBuildMaterial("G4_TEFLON"),"dead");
     auto deadPout = new G4PVPlacement(0, G4ThreeVector(0.,0.,si1PosZ-(si1Thickness+si1AlThickness)/2.), deadLout, "dead",  motherLog, false, 0, true);
-    
-   
+       
     
     return motherSi1_phys;
 }

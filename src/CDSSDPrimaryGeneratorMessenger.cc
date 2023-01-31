@@ -248,6 +248,14 @@ CDSSDPrimaryGeneratorMessenger::CDSSDPrimaryGeneratorMessenger(CDSSDPrimaryGener
   KineUserThetaCMCmd->SetDefaultValue(45.);
   KineUserThetaCMCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
   
+  KineUserPhiAngleCmd = new G4UIcmdWithADoubleAndUnit("/CDSSD/gun/Kine/userPhiCM",this);
+  KineUserPhiAngleCmd->SetGuidance("Sets phi CM angle for scattered particle (in degrees)");
+  KineUserPhiAngleCmd->SetParameterName("userPhiCM",false);
+  KineUserPhiAngleCmd->SetRange("userPhiCM>=0.");
+  KineUserPhiAngleCmd->SetUnitCategory("Angle");
+  KineUserPhiAngleCmd->SetDefaultValue(45.);
+  KineUserPhiAngleCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+  
   reactionQCmd = new G4UIcmdWithADoubleAndUnit("/CDSSD/gun/Kine/reactionQ",this);
   reactionQCmd->SetGuidance("Sets the reaction Q ");
   reactionQCmd->SetParameterName("reactionQ",false);

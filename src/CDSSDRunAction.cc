@@ -1,10 +1,10 @@
 /// \file CDSSDRunAction.cc
 /// \brief Implementation of the CDSSDRunAction class
 
-#include "CDSSDRunAction.hh"
-#include "CDSSDEventAction.hh"
 
 #include "G4RunManager.hh"
+#include "CDSSDRunAction.hh"
+#include "CDSSDEventAction.hh"
 #include "G4Run.hh"
 
 
@@ -19,13 +19,29 @@ CDSSDRunAction::CDSSDRunAction(CDSSDEventAction *event)
   
   // Create analysis manager
   G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
-  G4cout << "Using " << analysisManager->GetType() << G4endl;
-
 
   // Creating ntuple
   //
   analysisManager->CreateNtuple("CDSSDevents","CDSSDevents");
-  //analysisManager->CreateNtupleDColumn("Edephit", fEventAction->GetEtothit());
+  analysisManager->CreateNtupleIColumn("EventID", fEventAction->GetEventID());
+  analysisManager->CreateNtupleIColumn("TrackID", fEventAction->GetTID());
+  analysisManager->CreateNtupleIColumn("ParentID", fEventAction->GetPID());
+  analysisManager->CreateNtupleIColumn("ParticleID", fEventAction->GetPDG());
+  analysisManager->CreateNtupleIColumn("DetID", fEventAction->GetDetID());
+  
+  analysisManager->CreateNtupleDColumn("Zpart", fEventAction->GetCharge());
+  analysisManager->CreateNtupleDColumn("Apart", fEventAction->GetMass());
+  
+  analysisManager->CreateNtupleDColumn("Xin", fEventAction->GetXin());
+  analysisManager->CreateNtupleDColumn("Yin", fEventAction->GetYin());
+  analysisManager->CreateNtupleDColumn("Zin", fEventAction->GetZin());
+ 
+  analysisManager->CreateNtupleIColumn("ISec", fEventAction->GetISec());
+  analysisManager->CreateNtupleIColumn("IRadius", fEventAction->GetIRadius());
+  analysisManager->CreateNtupleIColumn("IAzimuth", fEventAction->GetIAzimuth());
+  
+  analysisManager->CreateNtupleDColumn("Edep", fEventAction->GetEDep());
+  
   analysisManager->FinishNtuple();
 
 }
@@ -34,9 +50,9 @@ CDSSDRunAction::CDSSDRunAction(CDSSDEventAction *event)
 
 CDSSDRunAction::~CDSSDRunAction()
 {
-  G4cout << "Deleting Run Action" << G4endl;
-
-  delete G4AnalysisManager::Instance();
+//   G4cout << "Deleting Run Action" << G4endl;
+// 
+//   delete G4AnalysisManager::Instance();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -44,10 +60,10 @@ CDSSDRunAction::~CDSSDRunAction()
 void CDSSDRunAction::BeginOfRunAction(const G4Run* aRun)
 { 
 
-    G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
-
-  const G4int verboseLevel = G4RunManager::GetRunManager()->GetVerboseLevel();
-  if(verboseLevel>=2){
+   auto analysisManager = G4AnalysisManager::Instance();
+   const G4int verboseLevel = G4RunManager::GetRunManager()->GetVerboseLevel();
+   
+   if(verboseLevel>=2){
     G4cout << "##################################################################"
 	   << G4endl
 	   << "###########   CDSSDRunAction::BeginOfRunAction()  ##############"
@@ -70,19 +86,25 @@ void CDSSDRunAction::BeginOfRunAction(const G4Run* aRun)
 
 void CDSSDRunAction::EndOfRunAction(const G4Run* aRun)
 {
-  
+  const G4int verboseLevel = G4RunManager::GetRunManager()->GetVerboseLevel();
+  if(verboseLevel>=2){
+       G4cout << "##################################################################"<< G4endl
+       << "###########   CDSSDRunAction::EndOfRunAction()  ##############"<< G4endl
+       << "###    Run " << aRun->GetRunID() << " ends." << G4endl;
+       G4cout << "##################################################################"<< G4endl;
+  }
+    
+    
   // print histogram statistics
   //
-  G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
+  auto analysisManager = G4AnalysisManager::Instance();
   
   // save histograms & ntuple
   //
 
-  analysisManager->Write();
-  analysisManager->CloseFile();
-  
-  delete analysisManager;
-
+   analysisManager->Write();
+   analysisManager->CloseFile();
+   
 }
 
 

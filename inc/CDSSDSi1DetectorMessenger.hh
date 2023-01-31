@@ -33,7 +33,11 @@ private:
   G4UIcmdWithADoubleAndUnit *thickCmd;
   G4UIcmdWithADoubleAndUnit *thickAlCmd;
   G4UIcmdWithADoubleAndUnit *zPosCmd;
+
   G4UIcmdWithADouble *nSlicesCmd;
+  G4UIcmdWithADouble *nRadialCmd;
+  G4UIcmdWithADouble *nAziCmd;
+
   G4UIcmdWithADoubleAndUnit *dPhiGapCmd;
   G4UIcmdWithADoubleAndUnit *dPhiSiCmd;
   

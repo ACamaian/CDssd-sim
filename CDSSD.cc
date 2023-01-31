@@ -27,6 +27,7 @@
 
 int main(int argc,char** argv)
 {
+    
  // Detect interactive mode (if no arguments) and define UI session
   //
   G4UIExecutive* ui = 0;
@@ -42,8 +43,8 @@ int main(int argc,char** argv)
   
   // Construct the default run manager
   //
-  auto* runManager =    G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default);
-
+  auto runManager =    G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default);
+   
   //Analysys toolkit
   // CDSSDROOTAnalysis *analysis = new CDSSDROOTAnalysis();
 
@@ -95,4 +96,5 @@ int main(int argc,char** argv)
   delete visManager;
   G4cout << "Deleting Run Manager" << G4endl;
   delete runManager;
+  G4cout << "Done" << G4endl;
 }

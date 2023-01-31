@@ -8,77 +8,40 @@
 #include "G4PhysicalConstants.hh"
 #include "G4SystemOfUnits.hh"
 
-G4Allocator<CDSSDSi1GeantHit>* CDSSDSi1GeantHitAllocator;
+#include <iomanip>
+
+G4ThreadLocal G4Allocator<CDSSDSi1GeantHit>* CDSSDSi1GeantHitAllocator = nullptr;
+
+
 
 //////////////////////////////////////////////////////////////////
-/// Constructor
-CDSSDSi1GeantHit::CDSSDSi1GeantHit() {
+
+G4bool CDSSDSi1GeantHit::operator==(const CDSSDSi1GeantHit& right) const
+{
+  return ( this == &right ) ? true : false;
 }
 
-//////////////////////////////////////////////////////////////////
-/// Destructor
-CDSSDSi1GeantHit::~CDSSDSi1GeantHit() {
-}
-
-//////////////////////////////////////////////////////////////////
-/// Copy constructor
-CDSSDSi1GeantHit::CDSSDSi1GeantHit(const CDSSDSi1GeantHit& right) : G4VHit() {
-  edep = right.edep;
-  // particleCharge = right.particleCharge;
-  // particleMass = right.particleMass;
-  // particleID = right.particleID;
-  // prePos = right.prePos;
-  // postPos = right.postPos;
-  // detName = right.detName;
-  // detID = right.detID;
-  // preToF = right.preToF;
-  // postToF = right.postToF;
-  // stepLength = right.stepLength;
-  // stepEnergy = right.stepEnergy;
-}
-
-//////////////////////////////////////////////////////////////////
-/// Operator =
-const CDSSDSi1GeantHit& CDSSDSi1GeantHit::operator=(const CDSSDSi1GeantHit& right){
-  edep = right.edep;
-  // particleCharge = right.particleCharge;
-  // particleMass = right.particleMass;
-  // particleID = right.particleID;
-  // prePos = right.prePos;
-  // postPos = right.postPos;
-  // detName = right.detName;
-  // detID = right.detID;
-  // preToF = right.preToF;
-  // postToF = right.postToF;
-  // stepLength = right.stepLength;
-  // stepEnergy = right.stepEnergy;
-
-  return *this;
-}
-
-//////////////////////////////////////////////////////////////////
-/// Operator ==
-G4int CDSSDSi1GeantHit::operator==(const CDSSDSi1GeantHit& right) const{
-  return (this==&right) ? 1 : 0;
-}
-
-// //////////////////////////////////////////////////////////////////
-// /// Draws the Hit. A clear red point on the Hit position
-// void CDSSDSi1GeantHit::Draw(){
-//   G4VVisManager* pVVisManager = G4VVisManager::GetConcreteInstance();
-//   if(pVVisManager) {
-//     G4Circle circle(prePos);
-//     circle.SetScreenSize(4);
-//     circle.SetFillStyle(G4Circle::filled);
-//     G4Colour colour(1.,0.,0.);
-//     G4VisAttributes attribs(colour);
-//     circle.SetVisAttributes(attribs);
-//     pVVisManager->Draw(circle);
-//   }
-// }
 
 //////////////////////////////////////////////////////////////////
 /// Prints full information about the calGeantHit
 void CDSSDSi1GeantHit::Print(){
 
+}
+
+void CDSSDSi1GeantHit::Reset(){
+    
+    trackID = -1;          ///< ID for each track
+    parentID = -1;         ///< ID for the parent track
+
+    edep = 0;             ///< Energy deposited
+    particleCharge = -1;   ///< Charge of the particle
+    particleMass = -1;     ///< Mass of the particle
+    particleID = -1;       ///< Particle ID according to the GDP-coding
+    pos = {0,0,0};          ///< Position of the hit in absolute coordinates
+    detName = "";          ///< Detector name where energy is deposited
+    detID = -1;            ///< Detector ID
+    islice = -1;
+    iradius = -1;
+    iphi = -1;
+    
 }

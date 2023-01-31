@@ -126,20 +126,15 @@ void CDSSDPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   if(KINE->GetNoSolution()) G4cout << "Kine NO solution, check your input!" << G4endl;
   
   G4double thetaBeam1, thetaBeam2;
-  thetaBeam1 = KINE->GetANGAs(0);    // unit: rad- scattered 
-  thetaBeam2 = KINE->GetANGAr(0);    // unit: rad - recoil
-  energy1    = KINE->GetANGAs(1);    // unit: MeV
-  energy2    = KINE->GetANGAr(1);    // unit: MeV
+  thetaBeam1 = KINE->GetANGAs(0);    // unit: rad- scattered in LAB
+  thetaBeam2 = KINE->GetANGAr(0);    // unit: rad - recoil in LAB
+  energy1    = KINE->GetANGAs(1);    // unit: MeV in LAB
+  energy2    = KINE->GetANGAr(1);    // unit: MeV in LAB
   
-  if(verboseLevel>1){
-    G4cout << "Kine: Scattered energy CM:" << KINE->GetANGAs(1) << " MeV" << G4endl;
-    G4cout << "Kine: Recoiled energy CM:" << KINE->GetANGAr(1) << " MeV" << G4endl;
-    G4cout << "Kine: Scattered angle CM:"  << KINE->GetANGAs(0)/deg << " deg" << G4endl;
-    G4cout << "Kine: recoiled  angle CM:"  << KINE->GetANGAr(0)/deg << " deg" << G4endl;
-  }
-
   G4double phiBeam1=0., phiBeam2=0.;
-  phiBeam1 = 2*TMath::Pi() * G4UniformRand();         //flat probability in phi
+  phiBeam1 = GetPhiCMAngle();
+  G4cout << phiBeam1 << G4endl;
+  //phiBeam1 = GetPhi2*TMath::Pi() * G4UniformRand();         //flat probability in phi
   if(phiBeam1<TMath::Pi()) phiBeam2 = phiBeam1 + TMath::Pi();
   else  phiBeam2 = phiBeam1 - TMath::Pi();
   
@@ -156,6 +151,8 @@ void CDSSDPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
     G4cout << "Kine: Recoiled energy LAB:" << energy2 << " MeV" << G4endl;
     G4cout << "Kine: Scattered angle LAB:"  << thetaLab1 / deg << " deg" << G4endl;
     G4cout << "Kine: recoiled  angle LAB:"  <<thetaLab2 / deg  << " deg" << G4endl;
+    G4cout << "Kine: Scattered Phi angle LAB:"  << phiBeam1 /deg  << " deg" << G4endl;
+    G4cout << "Kine: recoiled  Phi angle LAB:"  << phiBeam2 /deg  << " deg" << G4endl;
   }
   
   //-- Set the second gun to the desired vertex

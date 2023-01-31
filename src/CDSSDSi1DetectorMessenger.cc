@@ -28,6 +28,8 @@
 /// - /CDSSD/si1/setAlThickness;
 /// - /CDSSD/si1/setZPos
 /// - /CDSSD/si1/setNSlices;
+/// - /CDSSD/si1/setNRadialStrips;
+/// - /CDSSD/si1/setNAzimuthalStrips;
 /// - /CDSSD/si1/setDPhiSi;
 /// - /CDSSD/si1/setDPhiGap;
 
@@ -101,8 +103,16 @@ CDSSDSi1DetectorMessenger:: CDSSDSi1DetectorMessenger(CDSSDSi1DetectorConstructi
   dPhiSiCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
     
   nSlicesCmd = new G4UIcmdWithADouble("/CDSSD/si1/setNSlices",this);
-  nSlicesCmd->SetParameterName("si1SliceDPhi",false);
+  nSlicesCmd->SetParameterName("si1NSlices",false);
   nSlicesCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+  
+  nRadialCmd = new G4UIcmdWithADouble("/CDSSD/si1/setNRadialStrips",this);
+  nRadialCmd->SetParameterName("si1NRadialStrips",false);
+  nRadialCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+  
+  nAziCmd = new G4UIcmdWithADouble("/CDSSD/si1/setNAzimuthalStrips",this);
+  nAziCmd->SetParameterName("si1NAzimuthalStrips",false);
+  nAziCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
   
 }
 
@@ -152,7 +162,12 @@ void CDSSDSi1DetectorMessenger::SetNewValue(G4UIcommand* command,
       if(command == nSlicesCmd)
         CDSSDSi1Detector->SetNSlices(nSlicesCmd->GetNewDoubleValue(newValue));
       
+      if(command == nAziCmd)
+        CDSSDSi1Detector->SetNAzimuthalStrips(nAziCmd->GetNewDoubleValue(newValue));
       
+      if(command == nRadialCmd)
+        CDSSDSi1Detector->SetNRadialStrips(nRadialCmd->GetNewDoubleValue(newValue));
+           
      
 }
 

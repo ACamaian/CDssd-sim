@@ -3,20 +3,31 @@
 
 #include "G4VSensitiveDetector.hh"
 #include "CDSSDSi2GeantHit.hh"
+#include "CDSSDSi2DetectorConstruction.hh"
 
 class G4Step;
 class G4HCofThisEvent;
 
 class CDSSDSi2SD : public G4VSensitiveDetector {
-private:
-  CDSSDSi2GeantHitsCollection* hitsCollection = nullptr; ///< Geant step-like hits collect.
 
 public:
-  CDSSDSi2SD(G4String);
-  ~CDSSDSi2SD();
-  
-  void Initialize(G4HCofThisEvent*) override;
-  G4bool ProcessHits(G4Step*,G4TouchableHistory*) override;
-  void EndOfEvent(G4HCofThisEvent*) override;
+    CDSSDSi2SD(const G4String& name,
+                  const G4String& hitsCollectionName,
+                  CDSSDSi2DetectorConstruction *si2Det);
+    
+    ~CDSSDSi2SD() override = default;
+    
+    // methods from base class
+    void   Initialize(G4HCofThisEvent* hitCollection) override;
+    G4bool ProcessHits(G4Step* step, G4TouchableHistory* history) override;
+    void   EndOfEvent(G4HCofThisEvent* hitCollection) override;
+
+  private:
+    CDSSDSi2GeantHitsCollection* fHitsCollection = nullptr;
+    G4int NofSlices;
+    
+    CDSSDSi2DetectorConstruction *Si2Det;
+    
+    CDSSDSi2GeantHit *newHit;
 };
 #endif

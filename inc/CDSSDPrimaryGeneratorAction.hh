@@ -45,6 +45,8 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   void SetPhiCMAngle(G4double val){phiCMAngle=val; }
 
   G4double GetThetaCMAngle(){return thetaCMAngle;}
+  G4double GetPhiCMAngle(){return phiCMAngle;}
+  
   
   void SetMassOfProjectile(G4double val){massOfProjectile=val;}
   void SetMassOfTarget(G4double val){massOfTarget=val;}

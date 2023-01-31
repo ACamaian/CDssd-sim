@@ -124,16 +124,13 @@ void CDSSDDetectorConstruction::ConstructSDandField(){
   SDman = G4SDManager::GetSDMpointer();
   
   // Si1 volume sensitive detector
-  G4String si1SDname = "si1SD";
-  si1SD = new CDSSDSi1SD(si1SDname);
+  si1SD = new CDSSDSi1SD("Si1SD", "Si1HitsCollection", si1Det);
   SDman->AddNewDetector(si1SD);
-  SetSensitiveDetector(si1Det->GetLogicalVolume()->GetName(), si1SD);  
+  SetSensitiveDetector(si1Det->GetActiveLogicalVolume(),si1SD);
   
-  // Si2 volume sensitive detector
-  G4String si2SDname = "si2SD";
-  si2SD = new CDSSDSi2SD(si2SDname);
+  si2SD = new CDSSDSi2SD("Si2SD", "Si2HitsCollection", si2Det);
   SDman->AddNewDetector(si2SD);
-  SetSensitiveDetector(si2Det->GetLogicalVolume()->GetName(), si2SD);  
+  SetSensitiveDetector(si2Det->GetActiveLogicalVolume(),si2SD);  
 
 }
 

@@ -93,8 +93,8 @@ G4VPhysicalVolume* CDSSDSi2DetectorConstruction::ConstructSi2(G4LogicalVolume* m
     auto gapP = new G4PVPlacement(0, G4ThreeVector(0.,0.,0.), gapL, "GapP", sliceL, false, 0, true);
     
     auto siS = new G4Tubs("Si2", si2RminActive, si2RmaxActive, si2Thickness/2., -DPhiSlice/2. + DPhigap, DPhisi);
-    auto siL = new G4LogicalVolume(siS, nistman->FindOrBuildMaterial("G4_Si"), "Si2L"); 
-    auto siP = new G4PVPlacement(0,G4ThreeVector(0.,0., -si2AlThickness/2.), siL, "Si2P", sliceL, false, 0, true);
+    Si2Active_log = new G4LogicalVolume(siS, nistman->FindOrBuildMaterial("G4_Si"), "Si2ActiveL"); 
+    auto siP = new G4PVPlacement(0,G4ThreeVector(0.,0., -si2AlThickness/2.), Si2Active_log, "Si2P", sliceL, false, 0, true);
         
      //and and Al layer on the junction side
     auto alS = new G4Tubs("Al", si2RminActive, si2RmaxActive, si2AlThickness/2., -DPhiSlice/2. +DPhigap, DPhisi);
