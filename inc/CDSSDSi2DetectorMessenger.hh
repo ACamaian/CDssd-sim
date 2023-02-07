@@ -37,6 +37,8 @@ private:
   G4UIcmdWithADoubleAndUnit *dPhiGapCmd;
   G4UIcmdWithADoubleAndUnit *dPhiSiCmd;
   
+  G4UIcmdWithADouble *resCmd;
+  
   void SetNewValue(G4UIcommand*, G4String);
 
 public:

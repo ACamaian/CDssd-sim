@@ -22,6 +22,10 @@
 #include "G4SystemOfUnits.hh"
 #include "Randomize.hh"
 
+#include <fstream>
+#include <sstream>
+#include <string>
+
 #include <TMath.h>
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -30,6 +34,8 @@ CDSSDPrimaryGeneratorAction::CDSSDPrimaryGeneratorAction()
 : G4VUserPrimaryGeneratorAction(),
   particleGun(0), scatteredIon(0), recoilIon(0){
   
+  G4cout << "Primary generator Construction" << G4endl;    
+      
   G4ThreeVector zero;
   particleTable = G4ParticleTable::GetParticleTable();
   ionTable = G4IonTable::GetIonTable();
@@ -46,13 +52,17 @@ CDSSDPrimaryGeneratorAction::CDSSDPrimaryGeneratorAction()
   thetaLabAngle = 45 * deg;   // 45 degrees (TH)
   thetaCMAngle = 45 * deg;
 
-  randomTheta = "off";
-  randomThetaMin = 0.*deg;
-  randomThetaMax = 180.*deg;
+  uniformTheta = "off";
+  thetaMin = 0.*deg;
+  thetaMax = 80.*deg;
+  
+  singleTheta = "off";
+  
+  expoTheta="off";
 
   //building the messenger
   gunMessenger = new CDSSDPrimaryGeneratorMessenger(this);
-
+   
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -73,15 +83,18 @@ void CDSSDPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
 
   G4ThreeVector zero;
 
+  //--
+  //At the first event , I'm reading the E* from a file if present
+  //--
+  if(GetEstarFromAFile()=="on"){
+   if(estar_map.size()==0){ //not read yet
+       estar_map = readEstarMap();
+           }      
+     }
+  
   //---
   //Reaction Products: I generate only the reaction products, according to the set values for beam, and target
   //---
-  
- 
-  G4double theta1=0.;
-  G4double theta2=0.;
-  G4double energy1=0.;
-  G4double energy2=0.;
   
   //KINE object...
   CDSSDKine* KINE = new CDSSDKine();
@@ -91,19 +104,48 @@ void CDSSDPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   KINE->SetMassOfScattered(GetMassOfScattered());
   KINE->SetMassOfRecoiled(GetMassOfRecoiled());
   
+  if(GetEstarFromAFile()=="on"){
+  G4int r; 
+  G4double w; 
+  G4double x;
+  do{
+      r = G4UniformRand() * estar_map.size();
+      w = estar_map[r][2];     
+      x = G4UniformRand(); //0 to 1 
+     }
+     while(x>w); 
+   SetExEnergyOfScattered(G4RandGauss::shoot(estar_map[r][0], estar_map[r][1]));       
+  }
   KINE->SetExEnergyOfProjectile(GetExEnergyOfProjectile());
   KINE->SetExEnergyOfTarget(GetExEnergyOfTarget());
-  KINE->SetExEnergyOfScattered(GetExEnergyOfScattered());
   KINE->SetExEnergyOfRecoiled(GetExEnergyOfRecoiled());
+  KINE->SetExEnergyOfScattered(GetExEnergyOfScattered());
   
   KINE->SetLabEnergy(GetLabEnergy());
 
+  //--
+  //Reaction Cross Section shaping
+  //--
+  G4double thetacm_s=0;
+  G4double xval=0, yval=0;
+
   //flat distribution between theta_min and theta_max
-  if(randomTheta=="on") SetThetaCMAngle((randomThetaMin +((randomThetaMax-randomThetaMin) * G4UniformRand())) * rad);
-  else if(randomTheta=="off"){}  
-  //if we want to set the theta according to a given function we have to do it here
-  
-  KINE->SetThetaCMAngle(GetThetaCMAngle()/deg);  // units: degree
+  if(uniformTheta=="on") {
+      thetacm_s = (thetaMin +((thetaMax-thetaMin) * G4UniformRand())) * rad;
+  }
+  if(singleTheta=="on") {
+      thetacm_s = GetThetaCMAngle();
+  }
+  if(expoTheta=="on") {
+      do{
+      thetacm_s = thetaMin + G4UniformRand()*(thetaMax-thetaMin);
+      yval=GetExpoSigma0() * TMath::Exp(-thetacm_s/GetExpoVariance());     
+      xval = (1000-0)*G4UniformRand(); //0 to 1 barn/str
+     }
+     while(xval>yval);
+  }
+  SetThetaCMAngle(thetacm_s);  
+  KINE->SetThetaCMAngle(thetacm_s/deg);  // units: degree
   
   if(verboseLevel>1){
     G4cout << " KINE: Setting (atomic) masses to :" << GetMassOfProjectile()
@@ -128,27 +170,34 @@ void CDSSDPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   G4double thetaBeam1, thetaBeam2;
   thetaBeam1 = KINE->GetANGAs(0);    // unit: rad- scattered in LAB
   thetaBeam2 = KINE->GetANGAr(0);    // unit: rad - recoil in LAB
-  energy1    = KINE->GetANGAs(1);    // unit: MeV in LAB
-  energy2    = KINE->GetANGAr(1);    // unit: MeV in LAB
+  energyLab1    = KINE->GetANGAs(1);    // unit: MeV in LAB
+  energyLab2    = KINE->GetANGAr(1);    // unit: MeV in LAB
   
   G4double phiBeam1=0., phiBeam2=0.;
-  phiBeam1 = GetPhiCMAngle();
-  G4cout << phiBeam1 << G4endl;
-  //phiBeam1 = GetPhi2*TMath::Pi() * G4UniformRand();         //flat probability in phi
+   //G4cout << phiBeam1 << G4endl;
+  if(uniformPhi=="on"){
+    phiBeam1 = phiMin + (phiMax-phiMin)*G4UniformRand();         //flat probability in phi
+    }
+  if(singlePhi=="on"){
+     phiBeam1 = GetPhiCMAngle();    
+  }
   if(phiBeam1<TMath::Pi()) phiBeam2 = phiBeam1 + TMath::Pi();
-  else  phiBeam2 = phiBeam1 - TMath::Pi();
-  
-  thetaLab1 = thetaBeam1;
+    else  phiBeam2 = phiBeam1 - TMath::Pi();
+    
+  SetPhiCMAngle(phiBeam1);  
+    
+  thetaLab1 = thetaBeam1; //the scattered
   phiLab1   = phiBeam1; 
   
-  thetaLab2 = thetaBeam2;
+  thetaLab2 = thetaBeam2; //the recoil
   phiLab2   = phiBeam2; 
 
+  
   delete KINE;
   
   if(verboseLevel>1){
-    G4cout << "Kine: Scattered energy LAB:" << energy1 << " MeV" << G4endl;
-    G4cout << "Kine: Recoiled energy LAB:" << energy2 << " MeV" << G4endl;
+    G4cout << "Kine: Scattered energy LAB:" << energyLab1 << " MeV" << G4endl;
+    G4cout << "Kine: Recoiled energy LAB:" << energyLab2 << " MeV" << G4endl;
     G4cout << "Kine: Scattered angle LAB:"  << thetaLab1 / deg << " deg" << G4endl;
     G4cout << "Kine: recoiled  angle LAB:"  <<thetaLab2 / deg  << " deg" << G4endl;
     G4cout << "Kine: Scattered Phi angle LAB:"  << phiBeam1 /deg  << " deg" << G4endl;
@@ -158,17 +207,6 @@ void CDSSDPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   //-- Set the second gun to the desired vertex
   particleGun->SetParticlePosition(zero);
 
-  //---Generating the primary vertex for scattered Ion
-  G4ThreeVector direction1 = G4ThreeVector(sin(thetaLab1)*cos(phiLab1),
-					   sin(thetaLab1)*sin(phiLab1),
-					   cos(thetaLab1));
-  particleGun->SetParticleDefinition(scatteredIon);
-  particleGun->SetParticleCharge(scatteredIonCharge);
-  particleGun->SetParticleMomentumDirection(direction1);
-  particleGun->SetParticleEnergy(energy1);
-  
-  particleGun->GeneratePrimaryVertex(anEvent);
-
   //---Generating the primary vertex for recoil Ion
   G4ThreeVector direction2 = G4ThreeVector(sin(thetaLab2)*cos(phiLab2),
 					   sin(thetaLab2)*sin(phiLab2),
@@ -176,13 +214,73 @@ void CDSSDPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   particleGun->SetParticleDefinition(recoilIon);
   particleGun->SetParticleCharge(recoilIonCharge);
   particleGun->SetParticleMomentumDirection(direction2);
-  particleGun->SetParticleEnergy(energy2);
+  particleGun->SetParticleEnergy(energyLab2);
   
   particleGun->GeneratePrimaryVertex(anEvent);
+  
+  //---
+  //Decay of the scattered
+  //--
+//   if(inflightDecay=="on"){
+//     G4double ex = GetExEnergyOfScattered();
+//     if(emitUniform="on"){  
+//         double thetapart = G4UniformRand()*M_PI;
+//         double phipart = G4UniformRand()*2*M_PI;
+//       
+//         double zp = GetScatteredIon().charge;
+//         double ap = GetScatteredIon().mass;
+//         
+//         G4double << zp << " " << ap << G4endl;
+//     }
+//   }
+//   else{
+  //---Generating the primary vertex for scattered Ion
+  G4ThreeVector direction1 = G4ThreeVector(sin(thetaLab1)*cos(phiLab1),
+					   sin(thetaLab1)*sin(phiLab1),
+					   cos(thetaLab1));
+  particleGun->SetParticleDefinition(scatteredIon);
+  particleGun->SetParticleCharge(scatteredIonCharge);
+  particleGun->SetParticleMomentumDirection(direction1);
+  particleGun->SetParticleEnergy(energyLab1);
+  particleGun->GeneratePrimaryVertex(anEvent);
+ // }
+  
+  
 }
-
-
-
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
+std::map<int, std::vector<double>> CDSSDPrimaryGeneratorAction::readEstarMap(){
+    
+      std::ifstream in (GetEstarFileName(), std::ifstream::in);
+      std::string line;
+      int nlevel=0;
+      
+      if(!in.good()){
+       G4cout << "Estar File not good: " << GetEstarFileName() << G4endl;   
+      }
+            
+      std::map<int, std::vector<double>> map;
+      
+      while (getline(in,line)){
+        if(line[0]=='#') continue;
+        
+        std::stringstream ss;
+        ss.str(line);
+        
+        double estar, width, br;
+        ss >> estar >> width >> br;
+        
+        std::vector<double> temp;
+        temp.push_back(estar * keV);
+        temp.push_back(width * keV);
+        temp.push_back(br);
+                
+        map.emplace(nlevel, temp);
+        nlevel++;
+      }
+      
+      in.close();
+      
+      return map;
+}

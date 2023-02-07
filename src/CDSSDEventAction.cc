@@ -4,7 +4,6 @@
 #include "CDSSDEventAction.hh"
 #include "CDSSDSi1SD.hh"
 #include "CDSSDSi2SD.hh"
-#include "CDSSDSi1GeantHit.hh"
 
 #include "G4EventManager.hh"
 #include "G4AnalysisManager.hh"
@@ -21,6 +20,16 @@
 CDSSDEventAction::CDSSDEventAction()
 : G4UserEventAction()
 {} 
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+CDSSDEventAction::CDSSDEventAction(CDSSDPrimaryGeneratorAction *gene, CDSSDDetectorConstruction *d)
+: G4UserEventAction()
+{
+    generator = gene;
+    dets = d;
+    
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -54,9 +63,7 @@ void CDSSDEventAction::EndOfEventAction(const G4Event* evt)
        << "###########   CDSSDEventAction::EndOfEventAction()  ##############"<< G4endl
        << "###    Event " << evt->GetEventID() << " ends." << G4endl;
        G4cout << "##################################################################"<< G4endl;
-       
-       G4cout << "\n Looping on Hits Collection and storing results---" << G4endl;
-       
+              
   }    
     
     
@@ -75,7 +82,17 @@ void CDSSDEventAction::EndOfEventAction(const G4Event* evt)
   ISec.clear();
   IRadius.clear();
   IAzimuth.clear();
-  Edep.clear();    
+  ThetaRiv.clear();
+  PhiRiv.clear();
+  EdepSi1.clear();    
+  EdepSi2.clear();  
+  ThetaCM.clear();
+  PhiCM.clear();
+  ThetaLab.clear();
+  PhiLab.clear();
+  ELab.clear();
+  Estar.clear();
+  ECM.clear();
   
   EventID.push_back(evt->GetEventID());
   
@@ -87,6 +104,24 @@ void CDSSDEventAction::EndOfEventAction(const G4Event* evt)
   G4double charge=0, mass=0, etot_dep=0;
   G4int trackID=-1, particleID=-1, parentID=-1, detID=-1, isec=-1, iradius=-1, iazimuth=-1;
   G4String detName;
+  
+  //---
+  // Primary quantities from the PrimGenerator
+  //---
+  
+  ThetaCM.push_back(generator->GetThetaCMAngle()); 
+  ThetaCM.push_back(M_PI-generator->GetThetaCMAngle()); 
+  PhiCM.push_back(generator->GetPhiCMAngle()); 
+  PhiCM.push_back(generator->GetPhiLabRecoil()); 
+  
+  ThetaLab.push_back(generator->GetThetaLabScattered());
+  ThetaLab.push_back(generator->GetThetaLabRecoil());
+  PhiLab.push_back(generator->GetPhiLabScattered());
+  PhiLab.push_back(generator->GetPhiLabRecoil());
+  ELab.push_back(generator->GetELabScattered());
+  ELab.push_back(generator->GetELabRecoil());
+  Estar.push_back(generator->GetExEnergyOfScattered());
+  Estar.push_back(generator->GetExEnergyOfRecoiled());
   
   //-----------
   //Si1
@@ -104,6 +139,9 @@ void CDSSDEventAction::EndOfEventAction(const G4Event* evt)
     auto si1Hit = (*si1HC)[ii];    //how access hit from a hit collection
                   
        edep = si1Hit->GetEdep();
+       G4double sigma = dets->GetSi1Detector()->GetResolution() * edep;
+       edep = G4RandGauss::shoot(edep, sigma);
+       
        xin = si1Hit->GetPos().x();
        yin = si1Hit->GetPos().y();
        zin = si1Hit->GetPos().z();
@@ -118,21 +156,23 @@ void CDSSDEventAction::EndOfEventAction(const G4Event* evt)
        iazimuth = si1Hit->GetIPhi();
        detName = si1Hit->GetDetName();
       
-      
-       TrackID.push_back(trackID);
-       ParentID.push_back(parentID);
-       ParticleID.push_back(particleID);
-       DetID.push_back(detID);
-       Charge.push_back(charge);
-       Mass.push_back(mass);
-       Xin.push_back(xin);
-       Yin.push_back(yin);
-       Zin.push_back(zin);
-       Edep.push_back(edep);  
+//        TrackID.push_back(trackID);
+//        ParentID.push_back(parentID);
+//        ParticleID.push_back(particleID);
+//        DetID.push_back(detID);
+//        Charge.push_back(charge);
+//        Mass.push_back(mass);
+//        Xin.push_back(xin);
+//        Yin.push_back(yin);
+//        Zin.push_back(zin);
+       EdepSi1.push_back(edep);  
        ISec.push_back(isec);
        IRadius.push_back(iradius);
        IAzimuth.push_back(iazimuth);
+       ThetaRiv.push_back(si1Hit->GetThetaRiv());
+       PhiRiv.push_back(si1Hit->GetPhiRiv());
       
+       
     } //end loop on Si1Hit entries
     
     
@@ -154,6 +194,9 @@ void CDSSDEventAction::EndOfEventAction(const G4Event* evt)
     auto si2Hit = (*si2HC)[ii];    //how access hit from a hit collection
                         
       edep = si2Hit->GetEdep();
+      G4double sigma = dets->GetSi2Detector()->GetResolution() * edep;
+      edep = G4RandGauss::shoot(edep, sigma);
+      
        xin = si2Hit->GetPos().x();
        yin = si2Hit->GetPos().y();
        zin = si2Hit->GetPos().z();
@@ -167,17 +210,17 @@ void CDSSDEventAction::EndOfEventAction(const G4Event* evt)
        detName = si2Hit->GetDetName();
       
       
-       TrackID.push_back(trackID);
-       ParentID.push_back(parentID);
-       ParticleID.push_back(particleID);
-       DetID.push_back(detID);
-       Charge.push_back(charge);
-       Mass.push_back(mass);
-       Xin.push_back(xin);
-       Yin.push_back(yin);
-       Zin.push_back(zin);
-       Edep.push_back(edep);  
-       ISec.push_back(isec);
+//        TrackID.push_back(trackID);
+//        ParentID.push_back(parentID);
+//        ParticleID.push_back(particleID);
+//        DetID.push_back(detID);
+//        Charge.push_back(charge);
+//        Mass.push_back(mass);
+//        Xin.push_back(xin);
+//        Yin.push_back(yin);
+//        Zin.push_back(zin);
+       EdepSi2.push_back(edep);  
+       //ISec.push_back(isec);
        
        
    } //end loop on Si2Hit entries

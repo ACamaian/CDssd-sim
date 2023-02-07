@@ -21,7 +21,7 @@ public:
     void   Initialize(G4HCofThisEvent* hitCollection) override;
     G4bool ProcessHits(G4Step* step, G4TouchableHistory* history) override;
     void   EndOfEvent(G4HCofThisEvent* hitCollection) override;
-
+    
   private:
     CDSSDSi1GeantHitsCollection* fHitsCollection = nullptr;
     CDSSDSi1DetectorConstruction *Si1Det;

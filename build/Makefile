@@ -466,6 +466,33 @@ src/CDSSDRunAction.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CDssdsim.dir/build.make CMakeFiles/CDssdsim.dir/src/CDSSDRunAction.cc.s
 .PHONY : src/CDSSDRunAction.cc.s
 
+src/CDSSDRunActionMessenger.o: src/CDSSDRunActionMessenger.cc.o
+.PHONY : src/CDSSDRunActionMessenger.o
+
+# target to build an object file
+src/CDSSDRunActionMessenger.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cd.dir/build.make CMakeFiles/cd.dir/src/CDSSDRunActionMessenger.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CDssdsim.dir/build.make CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.o
+.PHONY : src/CDSSDRunActionMessenger.cc.o
+
+src/CDSSDRunActionMessenger.i: src/CDSSDRunActionMessenger.cc.i
+.PHONY : src/CDSSDRunActionMessenger.i
+
+# target to preprocess a source file
+src/CDSSDRunActionMessenger.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cd.dir/build.make CMakeFiles/cd.dir/src/CDSSDRunActionMessenger.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CDssdsim.dir/build.make CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.i
+.PHONY : src/CDSSDRunActionMessenger.cc.i
+
+src/CDSSDRunActionMessenger.s: src/CDSSDRunActionMessenger.cc.s
+.PHONY : src/CDSSDRunActionMessenger.s
+
+# target to generate assembly for a file
+src/CDSSDRunActionMessenger.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cd.dir/build.make CMakeFiles/cd.dir/src/CDSSDRunActionMessenger.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CDssdsim.dir/build.make CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.s
+.PHONY : src/CDSSDRunActionMessenger.cc.s
+
 src/CDSSDSi1DetectorConstruction.o: src/CDSSDSi1DetectorConstruction.cc.o
 .PHONY : src/CDSSDSi1DetectorConstruction.o
 
@@ -728,6 +755,9 @@ help:
 	@echo "... src/CDSSDRunAction.o"
 	@echo "... src/CDSSDRunAction.i"
 	@echo "... src/CDSSDRunAction.s"
+	@echo "... src/CDSSDRunActionMessenger.o"
+	@echo "... src/CDSSDRunActionMessenger.i"
+	@echo "... src/CDSSDRunActionMessenger.s"
 	@echo "... src/CDSSDSi1DetectorConstruction.o"
 	@echo "... src/CDSSDSi1DetectorConstruction.i"
 	@echo "... src/CDSSDSi1DetectorConstruction.s"

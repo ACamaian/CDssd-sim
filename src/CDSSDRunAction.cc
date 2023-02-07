@@ -27,6 +27,15 @@ CDSSDRunAction::CDSSDRunAction(CDSSDEventAction *event)
   analysisManager->CreateNtupleIColumn("TrackID", fEventAction->GetTID());
   analysisManager->CreateNtupleIColumn("ParentID", fEventAction->GetPID());
   analysisManager->CreateNtupleIColumn("ParticleID", fEventAction->GetPDG());
+
+  analysisManager->CreateNtupleDColumn("ThetaCMPrim", fEventAction->GetThetaCM());
+  analysisManager->CreateNtupleDColumn("PhiCMPrim", fEventAction->GetPhiCM());
+  
+  analysisManager->CreateNtupleDColumn("ELabPrim", fEventAction->GetELab());
+  analysisManager->CreateNtupleDColumn("EstarPrim", fEventAction->GetEstar());
+  analysisManager->CreateNtupleDColumn("ThetaLabPrim", fEventAction->GetThetaLab());
+  analysisManager->CreateNtupleDColumn("PhiLabPrim", fEventAction->GetPhiLab());
+  
   analysisManager->CreateNtupleIColumn("DetID", fEventAction->GetDetID());
   
   analysisManager->CreateNtupleDColumn("Zpart", fEventAction->GetCharge());
@@ -40,9 +49,15 @@ CDSSDRunAction::CDSSDRunAction(CDSSDEventAction *event)
   analysisManager->CreateNtupleIColumn("IRadius", fEventAction->GetIRadius());
   analysisManager->CreateNtupleIColumn("IAzimuth", fEventAction->GetIAzimuth());
   
-  analysisManager->CreateNtupleDColumn("Edep", fEventAction->GetEDep());
+  analysisManager->CreateNtupleDColumn("ThetaRiv", fEventAction->GetThetaRiv());
+  analysisManager->CreateNtupleDColumn("PhiRiv", fEventAction->GetPhiRiv());
+  analysisManager->CreateNtupleDColumn("EdepSi1", fEventAction->GetEDepSi1());
+  analysisManager->CreateNtupleDColumn("EdepSi2", fEventAction->GetEDepSi2());
+    
   
   analysisManager->FinishNtuple();
+  
+  runMessenger = new CDSSDRunActionMessenger(this);
 
 }
 
@@ -77,7 +92,7 @@ void CDSSDRunAction::BeginOfRunAction(const G4Run* aRun)
   G4RunManager::GetRunManager()->SetRandomNumberStore(true);
   
   // Open an output file
-  G4String fileName = "output/CDSSD.root";
+  G4String fileName = GetOutputFileName();
   analysisManager->OpenFile(fileName);
   
 }

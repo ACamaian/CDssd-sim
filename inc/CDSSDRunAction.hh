@@ -5,6 +5,7 @@
 #define CDSSDRunAction_h 1
 
 #include "CDSSDEventAction.hh"
+#include "CDSSDRunActionMessenger.hh"
 #include "G4AnalysisManager.hh"
 #include "G4UserRunAction.hh"
 #include "globals.hh"
@@ -20,10 +21,15 @@ public:
   void BeginOfRunAction(const G4Run*) override;
   void  EndOfRunAction(const G4Run*) override;
   
+  void SetOutputFileName (G4String name) {outputFileName = name;}
+  
+  G4String GetOutputFileName(){return outputFileName;}
   
 private:
   CDSSDEventAction *fEventAction = nullptr;
-  
+  CDSSDRunActionMessenger* runMessenger;
+
+  G4String outputFileName;  
   
 };
 

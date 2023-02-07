@@ -28,6 +28,8 @@ private:
   G4double DPhigap;
   G4double DPhisi;
   
+  G4double res;
+  
   G4double si2PosZ;  
   G4NistManager *nistman;
 
@@ -57,6 +59,8 @@ public:
   void SetDPhiGap (G4double val) {DPhigap = val;}
   void SetDPhiSi (G4double val) {DPhisi = val;}  
   
+  G4double SetResolution(G4double val) {res=val;}
+  
   G4double GetNSlices() {return si2NSlices;}
     
   G4double GetZPos(){return si2PosZ;}
@@ -68,6 +72,8 @@ public:
   
   G4double GetRminActive(){return si2RminActive;}
   G4double GetRmaxActive(){return si2RmaxActive;}
+  
+  G4double GetResolution(){return res;}
   
 };
 #endif

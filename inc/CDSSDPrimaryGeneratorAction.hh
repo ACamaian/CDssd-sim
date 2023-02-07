@@ -20,6 +20,9 @@
 
 #include "CDSSDPrimaryGeneratorMessenger.hh"
 
+#include <map>
+#include <vector>
+
 class G4ParticleGun;
 class G4Event;
 class G4Box;
@@ -47,7 +50,13 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   G4double GetThetaCMAngle(){return thetaCMAngle;}
   G4double GetPhiCMAngle(){return phiCMAngle;}
   
-  
+  G4double GetThetaLabScattered(){return thetaLab1;}
+  G4double GetPhiLabScattered(){return phiLab1;}
+  G4double GetELabScattered(){return energyLab1;}
+  G4double GetThetaLabRecoil(){return thetaLab2;}
+  G4double GetPhiLabRecoil(){return phiLab2;}
+  G4double GetELabRecoil(){return energyLab2;}
+    
   void SetMassOfProjectile(G4double val){massOfProjectile=val;}
   void SetMassOfTarget(G4double val){massOfTarget=val;}
   void SetMassOfScattered(G4double val){massOfScattered=val;}
@@ -68,6 +77,12 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   G4double GetExEnergyOfScattered() {return exEnergyOfScattered;}
   G4double GetExEnergyOfRecoiled()  {return exEnergyOfRecoiled;}
 
+  //Estar from a File
+  void SetEstarFromAFile(G4String val){estarFromAFile=val;}
+  void SetEstarFileName(G4String val){estarFileName=val;}
+  G4String GetEstarFromAFile(){return estarFromAFile;}
+  G4String GetEstarFileName(){return estarFileName;}
+  
   // end of corresponding Kine part
 
   void SetReactionQ(G4double val) { reactionQ = val;}
@@ -75,20 +90,36 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 
   void SetThetaLabAngle(G4double val) { thetaLabAngle = val;}
 
+  void SetRandomTheta(G4String ss) {uniformTheta=ss;}
   void SetRandomThetaVal(G4double min, G4double max) {
-    randomThetaMin = min;
-    randomThetaMax = max;
+    thetaMin = min;
+    thetaMax = max;
   }
-  
-  void SetRandomTheta(G4String ss) { randomTheta=ss;}
-
+  void SetRandomPhi(G4String ss) {uniformPhi=ss;}
   void SetRandomPhiVal(G4double min, G4double max) {
-    randomPhiMin = min;
-    randomPhiMax = max;
+    phiMin = min;
+    phiMax = max;
+  }  
+  
+  void SetExpoTheta(G4String ss) {expoTheta=ss;}
+  void SetExpoThetaVal(G4double min, G4double max) {
+    thetaMin = min;
+    thetaMax = max;
   }
+  void SetExpoParams(G4double sigma, G4double var){
+    sigma0 = sigma;
+    variance = var;      
+  }
+  G4double GetExpoVariance() {return variance;}
+  G4double GetExpoSigma0() {return sigma0;}
+  
+  void SetSingleTheta(G4String ss) {singleTheta=ss;}
+   void SetSinglePhi(G4String ss) {singlePhi=ss;}
 
-  G4double GetRandomThetaMin() {return randomThetaMin;}
-  G4double GetRandomThetaMax() {return randomThetaMax;}
+  void SetThetaMin(G4double val) {thetaMin=val;}
+  void SetThetaMax(G4double val) {thetaMax=val;}
+  G4double GetThetaMin() {return thetaMin;}
+  G4double GetThetaMax() {return thetaMax;}
 
   G4Ions* GetScatteredIon(){return scatteredIon;}
   G4Ions* GetRecoilIon(){return recoilIon;}
@@ -96,6 +127,7 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   G4double GetRecoilIonCharge(){return recoilIonCharge;}
   G4double GetReactionQ(){return reactionQ;}
   G4double GetLabEnergy(){return labEnergy;}
+  
   G4double GetThetaLabAngle(){return thetaLabAngle;}
 
   void SetParticleDefinition(G4ParticleDefinition * aParticleDefinition) {particleGun->SetParticleDefinition(aParticleDefinition);}
@@ -118,12 +150,21 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   G4double labEnergy;           ///< Laboratory energy
   G4double thetaLabAngle;       ///< Polar angle in the laboratory system
 
-  G4String randomTheta;
-  G4double randomThetaMin;
-  G4double randomPhiMin;
-  G4double randomThetaMax;
-  G4double randomPhiMax;
-
+  G4String uniformTheta;
+  G4double thetaMin;
+  G4double thetaMax;
+  
+  G4String uniformPhi;
+  G4double phiMin;
+  G4double phiMax;
+  
+  G4String expoTheta;  
+  G4double variance;
+  G4double sigma0;
+  
+  G4String singleTheta;
+  G4String singlePhi;
+  
   //reaction global parameter
   G4double  thetaCMAngle;          ///< Center of mass polar angle
   G4double  phiCMAngle;          ///< Center of mass azimuthal angle
@@ -136,10 +177,18 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   G4double  exEnergyOfScattered;   ///< Energy of the scattered ion
   G4double  exEnergyOfRecoiled;    ///< Energy of the recoil ion
   
+  G4double energyLab1;
   G4double thetaLab1;
   G4double phiLab1;
+  G4double energyLab2;
   G4double thetaLab2;
   G4double phiLab2;
+  
+  G4String estarFromAFile;
+  G4String estarFileName;
+  
+  std::map<int, std::vector<double>> readEstarMap();
+  std::map<int, std::vector<double>> estar_map;
 
 };
 

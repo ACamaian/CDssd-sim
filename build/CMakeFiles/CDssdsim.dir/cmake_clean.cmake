@@ -25,6 +25,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/CDssdsim.dir/src/CDSSDPrimaryGeneratorMessenger.cc.o.d"
   "CMakeFiles/CDssdsim.dir/src/CDSSDRunAction.cc.o"
   "CMakeFiles/CDssdsim.dir/src/CDSSDRunAction.cc.o.d"
+  "CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.o"
+  "CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.o.d"
   "CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorConstruction.cc.o"
   "CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorConstruction.cc.o.d"
   "CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorMessenger.cc.o"

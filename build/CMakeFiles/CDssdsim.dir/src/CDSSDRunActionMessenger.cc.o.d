@@ -1,11 +1,8 @@
-CMakeFiles/CDssdsim.dir/src/CDSSDEventAction.cc.o: \
- /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDEventAction.cc \
+CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.o: \
+ /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDRunActionMessenger.cc \
  /usr/include/stdc-predef.h \
- /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDEventAction.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4UserEventAction.hh \
- /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDPrimaryGeneratorAction.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4VPrimaryGenerator.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4ThreeVector.hh \
+ /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDRunActionMessenger.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4UImessenger.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/globals.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4ios.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4Types.hh \
@@ -219,16 +216,27 @@ CMakeFiles/CDssdsim.dir/src/CDSSDEventAction.cc.o: \
  /usr/include/c++/7/mutex /usr/include/c++/7/chrono \
  /usr/include/c++/7/ratio /usr/include/c++/7/bits/parse_numbers.h \
  /usr/include/c++/7/bits/std_mutex.h \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4UIdirectory.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4UIcommand.hh \
+ /usr/include/c++/7/vector /usr/include/c++/7/bits/stl_uninitialized.h \
+ /usr/include/c++/7/bits/stl_vector.h \
+ /usr/include/c++/7/bits/stl_bvector.h /usr/include/c++/7/bits/vector.tcc \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4UIparameter.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4UItokenNum.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4ApplicationState.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4ThreeVector.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Vector/ThreeVector.h \
  /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Utility/defs.h \
  /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Vector/ThreeVector.icc \
+ /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDRunAction.hh \
+ /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDEventAction.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4UserEventAction.hh \
+ /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDPrimaryGeneratorAction.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4VPrimaryGenerator.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4VUserPrimaryGeneratorAction.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4ParticleGun.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4VPrimaryGenerator.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4ParticleDefinition.hh \
- /usr/include/c++/7/vector /usr/include/c++/7/bits/stl_uninitialized.h \
- /usr/include/c++/7/bits/stl_vector.h \
- /usr/include/c++/7/bits/stl_bvector.h /usr/include/c++/7/bits/vector.tcc \
  /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Units/PhysicalConstants.h \
  /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Units/SystemOfUnits.h \
  /home/camaiani/Software/install/geant4/include/Geant4/G4PDefManager.hh \
@@ -398,12 +406,6 @@ CMakeFiles/CDssdsim.dir/src/CDSSDEventAction.cc.o: \
  /home/camaiani/Software/install/geant4/include/Geant4/G4UserLimits.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4UserLimits.icc \
  /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDPrimaryGeneratorMessenger.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4UImessenger.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4UIdirectory.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4UIcommand.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4UIparameter.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4UItokenNum.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4ApplicationState.hh \
  /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDSi1GeantHit.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4VHit.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4THitsCollection.hh \
@@ -411,123 +413,7 @@ CMakeFiles/CDssdsim.dir/src/CDSSDEventAction.cc.o: \
  /home/camaiani/Software/install/geant4/include/Geant4/G4Threading.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4Step.hh \
  /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDSi2GeantHit.hh \
- /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDSi1SD.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4VSensitiveDetector.hh \
- /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDSi1DetectorConstruction.hh \
- /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDSi2SD.hh \
- /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDSi2DetectorConstruction.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4EventManager.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4StackManager.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4UserStackingAction.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4ClassificationOfNewTrack.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4StackedTrack.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4TrackStack.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4SmartTrackStack.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4PrimaryTransformer.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4TrackingManager.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4SteppingManager.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/Randomize.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/Randomize.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/DualRand.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandomEngine.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandomEngine.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/JamesRandom.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/MixMaxRng.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/MTwistEngine.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RanecuEngine.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RanluxEngine.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/Ranlux64Engine.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RanluxppEngine.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RanshiEngine.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandBinomial.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/Random.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/Random.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Utility/memory.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandBinomial.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandBreitWigner.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandFlat.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Utility/thread_local.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandFlat.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandBreitWigner.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandChiSquare.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandChiSquare.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandExponential.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandExponential.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandExpZiggurat.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandBit.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandBit.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandGamma.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandGamma.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandGauss.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandGauss.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandGaussQ.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandGaussQ.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandGaussZiggurat.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandGeneral.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandGeneral.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandLandau.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandLandau.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandPoissonQ.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandPoisson.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandPoisson.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandPoissonQ.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandStudentT.h \
- /home/camaiani/Software/install/geant4/include/Geant4/CLHEP/Random/RandStudentT.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4Navigator.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4GRSVolume.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4GRSVolume.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4GRSSolid.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4GRSSolid.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4TouchableHistoryHandle.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4NormalNavigation.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4VSolid.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4VSolid.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4AuxiliaryNavServices.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4AuxiliaryNavServices.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4NormalNavigation.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4VoxelNavigation.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4NavigationLogger.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4BlockingList.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4BlockingList.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4SmartVoxelProxy.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4SmartVoxelProxy.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4SmartVoxelNode.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4SmartVoxelNode.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4SmartVoxelHeader.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4SmartVoxelHeader.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4VoxelNavigation.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4ParameterisedNavigation.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4VPVParameterisation.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4VVolumeMaterialScanner.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4ParameterisedNavigation.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4ReplicaNavigation.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4ReplicaNavigation.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4RegularNavigation.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4VExternalNavigation.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4Navigator.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4ProcessManager.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4VProcess.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4PhysicsTable.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4PhysicsTable.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4VParticleChange.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4TrackFastVector.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4FastVector.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4VParticleChange.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4ForceCondition.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4GPILSelection.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4ParticleChange.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4ParticleChange.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4ProcessType.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4ProcessVector.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4ProcessVector.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4ProcessManager.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4NoProcess.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4UserSteppingAction.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4VSteppingVerbose.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/trkgdefs.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4TrackingMessenger.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4UImessenger.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4UserTrackingAction.hh \
+ /home/camaiani/Tecnica/Garfield/CDssd-sim/inc/CDSSDRunActionMessenger.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4AnalysisManager.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4GenericAnalysisManager.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4ToolsAnalysisManager.hh \
@@ -558,6 +444,7 @@ CMakeFiles/CDssdsim.dir/src/CDSSDEventAction.cc.o: \
  /home/camaiani/Software/install/geant4/include/Geant4/G4BaseFileManager.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4VTHnFileManager.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4ToolsAnalysisMessenger.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4UImessenger.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4THnManager.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4THnManager.icc \
  /home/camaiani/Software/install/geant4/include/Geant4/tools/histo/h1d \
@@ -588,6 +475,12 @@ CMakeFiles/CDssdsim.dir/src/CDSSDEventAction.cc.o: \
  /home/camaiani/Software/install/geant4/include/Geant4/G4GenericAnalysisManager.icc \
  /home/camaiani/Software/install/geant4/include/Geant4/G4GenericFileManager.hh \
  /home/camaiani/Software/install/geant4/include/Geant4/G4GenericFileManager.icc \
- /home/camaiani/Software/install/geant4/include/Geant4/G4HCofThisEvent.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4UnitsTable.hh \
- /home/camaiani/Software/install/geant4/include/Geant4/G4UnitsTable.icc
+ /home/camaiani/Software/install/geant4/include/Geant4/G4UserRunAction.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4UIdirectory.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4UIcmdWithAString.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4UIcmdWithAnInteger.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4UIcmdWithADouble.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4UIcmdWithADoubleAndUnit.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4UIcmdWith3VectorAndUnit.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4UIcmdWith3Vector.hh \
+ /home/camaiani/Software/install/geant4/include/Geant4/G4UIcmdWithoutParameter.hh

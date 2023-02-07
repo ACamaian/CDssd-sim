@@ -1,0 +1,6 @@
+#Ne20 - excited level to be considered
+#E - width - BR [!! Sum_BR must be 1] - units are keV
+0	0.1	0.5
+5787	0.028	0.25
+6725	19	0.125
+7156	8	0.125	

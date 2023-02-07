@@ -54,14 +54,8 @@ G4bool CDSSDSi1SD::ProcessHits(G4Step* aStep, G4TouchableHistory*){
   //function is directly implemented here:  
   G4double edep = aStep->GetTotalEnergyDeposit();
   
-  // step length
-  G4double stepLength = 0.;
-  if (aStep->GetTrack()->GetDefinition()->GetPDGCharge()!= 0.) {
-    stepLength = aStep->GetStepLength();
-  }
+  if(edep<=0) return false;
 
-  if (edep==0. && stepLength ==0.) return false;
-  
   auto touchable = (aStep->GetPreStepPoint()->GetTouchable());
     
   // Get calorimeter cell id
@@ -100,7 +94,7 @@ G4bool CDSSDSi1SD::ProcessHits(G4Step* aStep, G4TouchableHistory*){
       G4double rmin = Si1Det->GetRminActive();
       G4double rmax = Si1Det->GetRmaxActive();
       G4double dr =(rmax - rmin)/Si1Det->GetNRadialStrips();
-      G4int ir=radius/dr;
+      G4int ir=(radius-rmin)/dr;
       
       //G4cout << dr << " " << touchable->GetCopyNumber(1) << " " << dphi/deg << G4endl;
       
@@ -116,7 +110,24 @@ G4bool CDSSDSi1SD::ProcessHits(G4Step* aStep, G4TouchableHistory*){
       newHit->SetISlice(touchable->GetCopyNumber(1));
       newHit->SetIRadius(ir);
       newHit->SetIPhi(iphi);
-      newHit->SetEdep(edep);      
+      newHit->SetEdep(edep);   
+      
+      //sampling the angles according to the detector resolution
+      
+      G4double zz = center[2];
+      G4double rr = rmin + ir*dr + dr/2.;
+      G4double pp = phimin + iphi*dphi + dphi/2.;
+      
+      G4double theta = acos(zz / sqrt(pow(zz,2) + pow(rr*cos(pp),2) + pow(rr*sin(pp),2)));
+     
+//       G4cout << inPos[0] << " " << inPos[1] << " " << inPos[2] << G4endl;
+//       G4cout << touchable->GetCopyNumber(1) << " " << ir << " " << iphi << G4endl;
+//       G4cout << zz << " " << rr << " " << pp << " " << G4endl;
+//       G4cout << theta*180/3.14 << G4endl;
+      
+      newHit->SetPhiRiv(pp);
+      newHit->SetThetaRiv(theta);
+      
       
       //filling the hit
 

@@ -237,10 +237,24 @@ CMakeFiles/CDssdsim.dir/src/CDSSDRunAction.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CDssdsim.dir/src/CDSSDRunAction.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDRunAction.cc -o CMakeFiles/CDssdsim.dir/src/CDSSDRunAction.cc.s
 
+CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.o: CMakeFiles/CDssdsim.dir/flags.make
+CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.o: /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDRunActionMessenger.cc
+CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.o: CMakeFiles/CDssdsim.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.o -MF CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.o.d -o CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.o -c /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDRunActionMessenger.cc
+
+CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDRunActionMessenger.cc > CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.i
+
+CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDRunActionMessenger.cc -o CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.s
+
 CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorConstruction.cc.o: CMakeFiles/CDssdsim.dir/flags.make
 CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorConstruction.cc.o: /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDSi1DetectorConstruction.cc
 CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorConstruction.cc.o: CMakeFiles/CDssdsim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorConstruction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorConstruction.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorConstruction.cc.o -MF CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorConstruction.cc.o.d -o CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorConstruction.cc.o -c /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDSi1DetectorConstruction.cc
 
 CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorConstruction.cc.i: cmake_force
@@ -254,7 +268,7 @@ CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorConstruction.cc.s: cmake_force
 CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorMessenger.cc.o: CMakeFiles/CDssdsim.dir/flags.make
 CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorMessenger.cc.o: /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDSi1DetectorMessenger.cc
 CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorMessenger.cc.o: CMakeFiles/CDssdsim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorMessenger.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorMessenger.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorMessenger.cc.o -MF CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorMessenger.cc.o.d -o CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorMessenger.cc.o -c /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDSi1DetectorMessenger.cc
 
 CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorMessenger.cc.i: cmake_force
@@ -268,7 +282,7 @@ CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorMessenger.cc.s: cmake_force
 CMakeFiles/CDssdsim.dir/src/CDSSDSi1GeantHit.cc.o: CMakeFiles/CDssdsim.dir/flags.make
 CMakeFiles/CDssdsim.dir/src/CDSSDSi1GeantHit.cc.o: /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDSi1GeantHit.cc
 CMakeFiles/CDssdsim.dir/src/CDSSDSi1GeantHit.cc.o: CMakeFiles/CDssdsim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/CDssdsim.dir/src/CDSSDSi1GeantHit.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/CDssdsim.dir/src/CDSSDSi1GeantHit.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CDssdsim.dir/src/CDSSDSi1GeantHit.cc.o -MF CMakeFiles/CDssdsim.dir/src/CDSSDSi1GeantHit.cc.o.d -o CMakeFiles/CDssdsim.dir/src/CDSSDSi1GeantHit.cc.o -c /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDSi1GeantHit.cc
 
 CMakeFiles/CDssdsim.dir/src/CDSSDSi1GeantHit.cc.i: cmake_force
@@ -282,7 +296,7 @@ CMakeFiles/CDssdsim.dir/src/CDSSDSi1GeantHit.cc.s: cmake_force
 CMakeFiles/CDssdsim.dir/src/CDSSDSi1SD.cc.o: CMakeFiles/CDssdsim.dir/flags.make
 CMakeFiles/CDssdsim.dir/src/CDSSDSi1SD.cc.o: /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDSi1SD.cc
 CMakeFiles/CDssdsim.dir/src/CDSSDSi1SD.cc.o: CMakeFiles/CDssdsim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/CDssdsim.dir/src/CDSSDSi1SD.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/CDssdsim.dir/src/CDSSDSi1SD.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CDssdsim.dir/src/CDSSDSi1SD.cc.o -MF CMakeFiles/CDssdsim.dir/src/CDSSDSi1SD.cc.o.d -o CMakeFiles/CDssdsim.dir/src/CDSSDSi1SD.cc.o -c /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDSi1SD.cc
 
 CMakeFiles/CDssdsim.dir/src/CDSSDSi1SD.cc.i: cmake_force
@@ -296,7 +310,7 @@ CMakeFiles/CDssdsim.dir/src/CDSSDSi1SD.cc.s: cmake_force
 CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorConstruction.cc.o: CMakeFiles/CDssdsim.dir/flags.make
 CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorConstruction.cc.o: /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDSi2DetectorConstruction.cc
 CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorConstruction.cc.o: CMakeFiles/CDssdsim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorConstruction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorConstruction.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorConstruction.cc.o -MF CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorConstruction.cc.o.d -o CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorConstruction.cc.o -c /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDSi2DetectorConstruction.cc
 
 CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorConstruction.cc.i: cmake_force
@@ -310,7 +324,7 @@ CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorConstruction.cc.s: cmake_force
 CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorMessenger.cc.o: CMakeFiles/CDssdsim.dir/flags.make
 CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorMessenger.cc.o: /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDSi2DetectorMessenger.cc
 CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorMessenger.cc.o: CMakeFiles/CDssdsim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorMessenger.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorMessenger.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorMessenger.cc.o -MF CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorMessenger.cc.o.d -o CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorMessenger.cc.o -c /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDSi2DetectorMessenger.cc
 
 CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorMessenger.cc.i: cmake_force
@@ -324,7 +338,7 @@ CMakeFiles/CDssdsim.dir/src/CDSSDSi2DetectorMessenger.cc.s: cmake_force
 CMakeFiles/CDssdsim.dir/src/CDSSDSi2GeantHit.cc.o: CMakeFiles/CDssdsim.dir/flags.make
 CMakeFiles/CDssdsim.dir/src/CDSSDSi2GeantHit.cc.o: /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDSi2GeantHit.cc
 CMakeFiles/CDssdsim.dir/src/CDSSDSi2GeantHit.cc.o: CMakeFiles/CDssdsim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/CDssdsim.dir/src/CDSSDSi2GeantHit.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/CDssdsim.dir/src/CDSSDSi2GeantHit.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CDssdsim.dir/src/CDSSDSi2GeantHit.cc.o -MF CMakeFiles/CDssdsim.dir/src/CDSSDSi2GeantHit.cc.o.d -o CMakeFiles/CDssdsim.dir/src/CDSSDSi2GeantHit.cc.o -c /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDSi2GeantHit.cc
 
 CMakeFiles/CDssdsim.dir/src/CDSSDSi2GeantHit.cc.i: cmake_force
@@ -338,7 +352,7 @@ CMakeFiles/CDssdsim.dir/src/CDSSDSi2GeantHit.cc.s: cmake_force
 CMakeFiles/CDssdsim.dir/src/CDSSDSi2SD.cc.o: CMakeFiles/CDssdsim.dir/flags.make
 CMakeFiles/CDssdsim.dir/src/CDSSDSi2SD.cc.o: /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDSi2SD.cc
 CMakeFiles/CDssdsim.dir/src/CDSSDSi2SD.cc.o: CMakeFiles/CDssdsim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/CDssdsim.dir/src/CDSSDSi2SD.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/CDssdsim.dir/src/CDSSDSi2SD.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CDssdsim.dir/src/CDSSDSi2SD.cc.o -MF CMakeFiles/CDssdsim.dir/src/CDSSDSi2SD.cc.o.d -o CMakeFiles/CDssdsim.dir/src/CDSSDSi2SD.cc.o -c /home/camaiani/Tecnica/Garfield/CDssd-sim/src/CDSSDSi2SD.cc
 
 CMakeFiles/CDssdsim.dir/src/CDSSDSi2SD.cc.i: cmake_force
@@ -363,6 +377,7 @@ CDssdsim_OBJECTS = \
 "CMakeFiles/CDssdsim.dir/src/CDSSDPrimaryGeneratorAction.cc.o" \
 "CMakeFiles/CDssdsim.dir/src/CDSSDPrimaryGeneratorMessenger.cc.o" \
 "CMakeFiles/CDssdsim.dir/src/CDSSDRunAction.cc.o" \
+"CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.o" \
 "CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorConstruction.cc.o" \
 "CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorMessenger.cc.o" \
 "CMakeFiles/CDssdsim.dir/src/CDSSDSi1GeantHit.cc.o" \
@@ -387,6 +402,7 @@ CDssdsim: CMakeFiles/CDssdsim.dir/src/CDSSDPhysicsListMessenger.cc.o
 CDssdsim: CMakeFiles/CDssdsim.dir/src/CDSSDPrimaryGeneratorAction.cc.o
 CDssdsim: CMakeFiles/CDssdsim.dir/src/CDSSDPrimaryGeneratorMessenger.cc.o
 CDssdsim: CMakeFiles/CDssdsim.dir/src/CDSSDRunAction.cc.o
+CDssdsim: CMakeFiles/CDssdsim.dir/src/CDSSDRunActionMessenger.cc.o
 CDssdsim: CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorConstruction.cc.o
 CDssdsim: CMakeFiles/CDssdsim.dir/src/CDSSDSi1DetectorMessenger.cc.o
 CDssdsim: CMakeFiles/CDssdsim.dir/src/CDSSDSi1GeantHit.cc.o
@@ -444,7 +460,7 @@ CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4global.so
 CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4clhep.so
 CDssdsim: /home/camaiani/Software/install/geant4/lib/libG4ptl.so.0.0.2
 CDssdsim: CMakeFiles/CDssdsim.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Linking CXX executable CDssdsim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Linking CXX executable CDssdsim"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CDssdsim.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

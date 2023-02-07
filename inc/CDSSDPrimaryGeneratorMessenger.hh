@@ -30,10 +30,19 @@ private:
   G4UIcmdWithoutParameter*     listCmd;                ///< List available particles.
   G4UIcmdWithAString*          particleCmd;            ///< Select the incident particle.
  
+  G4UIcmdWithAString*          singleThetaCmd;
   G4UIcmdWithAString*          randomThetaCmd;      ///< Sets the limits in the Theta angle for the scattered particle.
   G4UIcommand*                 randomThetaValCmd;      ///< Sets the limits in the Theta angle for the scattered particle.
-  G4UIcommand*                 randomPhiValCmd;        ///< Sets the limits in the Phi angle for the scattered particle.
+  
 
+  G4UIcmdWithAString*          singlePhiCmd;      
+  G4UIcmdWithAString*          randomPhiCmd;  
+  G4UIcommand*                 randomPhiValCmd;        ///< Sets the limits in the Phi angle for the scattered particle.
+  
+  G4UIcmdWithAString*          expoThetaCmd;        
+  G4UIcommand*                 expoThetaValCmd;  
+  G4UIcommand*                 expoThetaParamsCmd;
+    
     
   //Kine Parameter
   G4UIdirectory*               KineDir;                ///< Directory for CINE commands
@@ -45,6 +54,9 @@ private:
   G4UIcmdWithADoubleAndUnit*   KineUserThetaCMCmd;     ///< Sets theta CM angle for scattered particle (in degrees)
   G4UIcmdWithADoubleAndUnit*   KineUserPhiAngleCmd;    ///< User set phi angle for outgoing particle in the Lab system (in degrees)
 
+  G4UIcmdWithAString*          estarFileCmd;
+  G4UIcmdWithAString*          estarFileNameCmd;
+  
   //Reaction parameter
   G4UIcommand* scatteredIonCmd;              ///< Set properties of scattered ion to be generated.
   G4UIcommand* recoilIonCmd;                 ///< Set properties of recoil ion to be generated.

@@ -17,6 +17,8 @@
 /CDSSD/si1/setNSlices 4 # 360deg/NSlices MUST BE equal to sliceDPhi+sliceOffset
 /CDSSD/si1/setDPhiGap 8 deg
 /CDSSD/si1/setDPhiSi 82 deg 
+/CDSSD/si1/setNRadialStrips 16
+/CDSSD/si1/setNAzimuthalStrips 24
 
 #QQQ1 four quadrants 1500um thick
 /CDSSD/si2/setRmin 11.50 mm #QQQ1 D chip inner 11.50mm
@@ -53,7 +55,7 @@
 
 # Initialize kernel
 /control/saveHistory
-/run/verbose 2
+/run/verbose 0
 /event/verbose 0
 /tracking/verbose 0
 
@@ -69,13 +71,17 @@
 /CDSSD/gun/Kine/recoiledIon 1 2 1 0. 2.
 /CDSSD/gun/Kine/reactionQ 0. MeV
 /CDSSD/gun/Kine/labEnergy 80 MeV
-/CDSSD/gun/randomTheta off
-#/CDSSD/gun/randomThetaVal 0 180
-#/CDSSD/gun/randomPhiVal 0 360
-/CDSSD/gun/Kine/userThetaCM 10 deg
-/CDSSD/gun/Kine/userPhiCM 45 deg
+/CDSSD/gun/uniformTheta off
+/CDSSD/gun/uniformThetaVal 0 180
+/CDSSD/gun/uniformPhi on
+/CDSSD/gun/uniformPhiVal 0 360
+/CDSSD/gun/singleTheta on
+/CDSSD/gun/Kine/userThetaCM 4.9 deg
+/CDSSD/gun/singlePhi on
+/CDSSD/gun/Kine/userPhiCM 9 deg
+#/CDSSD/gun/expoTheta on
+#/CDSSD/gun/expoThetaVal 2 180 deg
+#/CDSSD/gun/expoThetaParams 100 0.2 #mbar/st - rad
 
-#
-# Visualization setting
+
 /control/execute vis.mac
-#/control/execute simple_run.mac

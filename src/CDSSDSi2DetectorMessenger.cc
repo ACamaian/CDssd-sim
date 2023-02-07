@@ -103,6 +103,10 @@ CDSSDSi2DetectorMessenger:: CDSSDSi2DetectorMessenger(CDSSDSi2DetectorConstructi
   nSlicesCmd->SetParameterName("si2SliceDPhi",false);
   nSlicesCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
   
+  resCmd = new G4UIcmdWithADouble("/CDSSD/si2/resolution",this);
+  resCmd->SetParameterName("si2Resolution",false);
+  resCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+  
 }
 
 //////////////////////////////////////////////////////////////////
@@ -152,6 +156,8 @@ void CDSSDSi2DetectorMessenger::SetNewValue(G4UIcommand* command,
       if(command == nSlicesCmd)
         CDSSDSi2Detector->SetNSlices(nSlicesCmd->GetNewDoubleValue(newValue));
       
+      if(command == resCmd)
+        CDSSDSi2Detector->SetResolution(resCmd->GetNewDoubleValue(newValue));
       
      
 }

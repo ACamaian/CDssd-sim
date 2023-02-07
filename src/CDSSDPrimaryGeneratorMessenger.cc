@@ -27,19 +27,27 @@
 /// command included in this CDSSDPrimaryGeneratorMessenger:
 /// - /CDSSD/gun/List
 /// - /CDSSD/gun/particle
-/// - /CDSSD/gun/randomTheta
-/// - /CDSSD/gun/randomThetaVal
-/// - /CDSSD/gun/randomPhiVal
+/// - /CDSSD/gun/uniformTheta
+/// - /CDSSD/gun/uniformThetaVal
+/// - /CDSSD/gun/expoTheta
+/// - /CDSSD/gun/expoThetaVal
+/// - /CDSSD/gun/expoThetaParams
+/// - /CDSSD/gun/uniformPhi
+/// - /CDSSD/gun/uniformPhiVal
 /// - /CDSSD/gun/Kine/incidentIon
 /// - /CDSSD/gun/Kine/targetIon
 /// - /CDSSD/gun/Kine/scatteredIon
 /// - /CDSSD/gun/Kine/recoilIon
+/// - /CDSSD/gun/singleTheta
 /// - /CDSSD/gun/Kine/userThetaCM
 /// - /CDSSD/gun/Kine/userPhiAngle
+/// - /CDSSD/gun/estarFromAFile
+/// - /CDSSD/gun/estarFileName
+
 
 CDSSDPrimaryGeneratorMessenger::CDSSDPrimaryGeneratorMessenger(CDSSDPrimaryGeneratorAction* CDSSDGun)
   : CDSSDActionGun(CDSSDGun) {
-
+      
   particleTable = G4ParticleTable::GetParticleTable();
   ionTable = G4IonTable::GetIonTable();
 
@@ -72,16 +80,17 @@ CDSSDPrimaryGeneratorMessenger::CDSSDPrimaryGeneratorMessenger(CDSSDPrimaryGener
   candidateList += "ion ";
   particleCmd->SetCandidates(candidateList);
 
+  //-- uniform theta and phi
 
-  randomThetaCmd = new G4UIcmdWithAString("/CDSSD/gun/randomTheta",this);
+  randomThetaCmd = new G4UIcmdWithAString("/CDSSD/gun/uniformTheta",this);
   randomThetaCmd->SetGuidance("Randomize the thetaCM angle of the scattered ion");
   randomThetaCmd->SetGuidance("Choice : on, off(default");
   randomThetaCmd->SetParameterName("choice",true);
   randomThetaCmd->SetDefaultValue("off");
   randomThetaCmd->SetCandidates("on off");
   randomThetaCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
-
-  randomThetaValCmd = new G4UIcommand("/CDSSD/gun/randomThetaVal", this);
+  
+  randomThetaValCmd = new G4UIcommand("/CDSSD/gun/uniformThetaVal", this);
   randomThetaValCmd->SetGuidance("Sets the limits in the Theta angle for the scattered particle.");
   randomThetaValCmd->SetGuidance("The value is randomly chosen between the limits.");
   parameter = new G4UIparameter("thetaMin", 'd', omitable = true);
@@ -93,8 +102,16 @@ CDSSDPrimaryGeneratorMessenger::CDSSDPrimaryGeneratorMessenger(CDSSDPrimaryGener
   parameter = new G4UIparameter("unit", 's', omitable = true);
   parameter->SetDefaultValue("deg");
   randomThetaValCmd->SetParameter(parameter);
+  
+  randomPhiCmd = new G4UIcmdWithAString("/CDSSD/gun/uniformPhi",this);
+  randomPhiCmd->SetGuidance("Randomize the Phi angle of the scattered ion");
+  randomPhiCmd->SetGuidance("Choice : on, off(default");
+  randomPhiCmd->SetParameterName("choice",true);
+  randomPhiCmd->SetDefaultValue("off");
+  randomPhiCmd->SetCandidates("on off");
+  randomPhiCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
 
-  randomPhiValCmd = new G4UIcommand("/CDSSD/gun/randomPhiVal", this);
+  randomPhiValCmd = new G4UIcommand("/CDSSD/gun/uniformPhiVal", this);
   randomPhiValCmd->SetGuidance("Sets the limits in the Phi angle for the scattered particle.");
   randomPhiValCmd->SetGuidance("The value is randomly chosen between the limits.");
   parameter = new G4UIparameter("phiMin", 'd', omitable = true);
@@ -107,6 +124,73 @@ CDSSDPrimaryGeneratorMessenger::CDSSDPrimaryGeneratorMessenger(CDSSDPrimaryGener
   parameter->SetDefaultValue("deg");
   randomPhiValCmd->SetParameter(parameter);
 
+  //--- singleTheta and phi
+  
+  singleThetaCmd = new G4UIcmdWithAString("/CDSSD/gun/singleTheta",this);
+  singleThetaCmd->SetGuidance("Enable the scattered ion emission on a single theta and phi (userPhiCM)");
+  singleThetaCmd->SetGuidance("Choice : on, off(default");
+  singleThetaCmd->SetParameterName("choice",true);
+  singleThetaCmd->SetDefaultValue("off");
+  singleThetaCmd->SetCandidates("on off");
+  singleThetaCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+    
+  KineUserThetaCMCmd = new G4UIcmdWithADoubleAndUnit("/CDSSD/gun/Kine/userThetaCM",this);
+  KineUserThetaCMCmd->SetGuidance("Sets theta CM angle for scattered particle (in degrees)");
+  KineUserThetaCMCmd->SetParameterName("userThetaCM",false);
+  KineUserThetaCMCmd->SetRange("userThetaCM>=0.");
+  KineUserThetaCMCmd->SetUnitCategory("Angle");
+  KineUserThetaCMCmd->SetDefaultValue(45.);
+  KineUserThetaCMCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+  
+  singlePhiCmd = new G4UIcmdWithAString("/CDSSD/gun/singlePhi",this);
+  singlePhiCmd->SetGuidance("Enable the scattered ion emission on a single theta and phi (userPhiCM)");
+  singlePhiCmd->SetGuidance("Choice : on, off(default");
+  singlePhiCmd->SetParameterName("choice",true);
+  singlePhiCmd->SetDefaultValue("off");
+  singlePhiCmd->SetCandidates("on off");
+  singlePhiCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+  
+  
+  KineUserPhiAngleCmd = new G4UIcmdWithADoubleAndUnit("/CDSSD/gun/Kine/userPhiCM",this);
+  KineUserPhiAngleCmd->SetGuidance("Sets phi CM angle for scattered particle (in degrees)");
+  KineUserPhiAngleCmd->SetParameterName("userPhiCM",false);
+  KineUserPhiAngleCmd->SetRange("userPhiCM>=0.");
+  KineUserPhiAngleCmd->SetUnitCategory("Angle");
+  KineUserPhiAngleCmd->SetDefaultValue(45.);
+  KineUserPhiAngleCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+  
+  //--exponential theta
+  
+  expoThetaCmd = new G4UIcmdWithAString("/CDSSD/gun/expoTheta",this);
+  expoThetaCmd->SetGuidance("Distribute exponentialy the thetaCM angle of the scattered ion");
+  expoThetaCmd->SetGuidance("Choice : on, off(default");
+  expoThetaCmd->SetParameterName("choice",true);
+  expoThetaCmd->SetDefaultValue("off");
+  expoThetaCmd->SetCandidates("on off");
+  expoThetaCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+  
+  expoThetaValCmd = new G4UIcommand("/CDSSD/gun/expoThetaVal", this);
+  expoThetaValCmd->SetGuidance("Sets the limits in the Theta angle for the scattered particle.");
+  expoThetaValCmd->SetGuidance("The value is exponentialy chosen between the limits.");
+  parameter = new G4UIparameter("thetaMin", 'd', omitable = true);
+  parameter->SetDefaultValue(0.);
+  expoThetaValCmd->SetParameter(parameter);
+  parameter = new G4UIparameter("thetaMax", 'd', omitable = true);
+  parameter->SetDefaultValue(180.);
+  expoThetaValCmd->SetParameter(parameter);
+  parameter = new G4UIparameter("unit", 's', omitable = true);
+  parameter->SetDefaultValue("deg");
+  expoThetaValCmd->SetParameter(parameter);
+  
+  expoThetaParamsCmd = new G4UIcommand("/CDSSD/gun/expoThetaParams", this);
+  expoThetaParamsCmd->SetGuidance("Sets the ds/domega at zero deg and the variance");
+  parameter = new G4UIparameter("sigma0", 'd', omitable = true);
+  parameter->SetDefaultValue(1);
+  expoThetaParamsCmd->SetParameter(parameter);
+  parameter = new G4UIparameter("variance", 'd', omitable = true);
+  parameter->SetDefaultValue(0.2);
+  expoThetaParamsCmd->SetParameter(parameter);
+  
   labEnergyCmd = new G4UIcmdWithADoubleAndUnit("/CDSSD/gun/labEnergy",this);
   labEnergyCmd->SetGuidance("Sets the laboratory energy.");
   labEnergyCmd->SetParameterName("labEnergy",false);
@@ -122,6 +206,20 @@ CDSSDPrimaryGeneratorMessenger::CDSSDPrimaryGeneratorMessenger(CDSSDPrimaryGener
   thetaLabAngleCmd->SetUnitCategory("Angle");
   thetaLabAngleCmd->SetDefaultValue(45.);
   thetaLabAngleCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+  
+  // Estar File input
+  estarFileCmd = new G4UIcmdWithAString("/CDSSD/gun/estarFromAFile",this);
+  estarFileCmd->SetGuidance("Read the E* from a file");
+  estarFileCmd->SetGuidance("Choice : on, off(default");
+  estarFileCmd->SetParameterName("choice",true);
+  estarFileCmd->SetDefaultValue("off");
+  estarFileCmd->SetCandidates("on off");
+  estarFileCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+  
+  estarFileNameCmd = new G4UIcmdWithAString("/CDSSD/gun/estarFileName",this);
+  estarFileNameCmd->SetGuidance("E* from a file Name");
+  estarFileNameCmd->SetDefaultValue("estarQP.dat");
+  estarFileNameCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
   
   //commands affecting the Kine kinematic reaction generator
   KineDir = new G4UIdirectory("/CDSSD/gun/Kine/");
@@ -239,23 +337,6 @@ CDSSDPrimaryGeneratorMessenger::CDSSDPrimaryGeneratorMessenger(CDSSDPrimaryGener
   KineLabEnergyCmd->SetDefaultValue(100.);
   KineLabEnergyCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
 
-  
-  KineUserThetaCMCmd = new G4UIcmdWithADoubleAndUnit("/CDSSD/gun/Kine/userThetaCM",this);
-  KineUserThetaCMCmd->SetGuidance("Sets theta CM angle for scattered particle (in degrees)");
-  KineUserThetaCMCmd->SetParameterName("userThetaCM",false);
-  KineUserThetaCMCmd->SetRange("userThetaCM>=0.");
-  KineUserThetaCMCmd->SetUnitCategory("Angle");
-  KineUserThetaCMCmd->SetDefaultValue(45.);
-  KineUserThetaCMCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
-  
-  KineUserPhiAngleCmd = new G4UIcmdWithADoubleAndUnit("/CDSSD/gun/Kine/userPhiCM",this);
-  KineUserPhiAngleCmd->SetGuidance("Sets phi CM angle for scattered particle (in degrees)");
-  KineUserPhiAngleCmd->SetParameterName("userPhiCM",false);
-  KineUserPhiAngleCmd->SetRange("userPhiCM>=0.");
-  KineUserPhiAngleCmd->SetUnitCategory("Angle");
-  KineUserPhiAngleCmd->SetDefaultValue(45.);
-  KineUserPhiAngleCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
-  
   reactionQCmd = new G4UIcmdWithADoubleAndUnit("/CDSSD/gun/Kine/reactionQ",this);
   reactionQCmd->SetGuidance("Sets the reaction Q ");
   reactionQCmd->SetParameterName("reactionQ",false);
@@ -276,6 +357,15 @@ CDSSDPrimaryGeneratorMessenger::~CDSSDPrimaryGeneratorMessenger() {
   delete randomThetaCmd;
   delete randomThetaValCmd;
   delete randomPhiValCmd;
+    
+  delete singleThetaCmd;
+  
+  delete estarFileCmd;
+  delete estarFileNameCmd;
+  
+  delete expoThetaCmd;
+  delete expoThetaValCmd;
+  delete expoThetaParamsCmd;
   
   delete labEnergyCmd;
   delete thetaLabAngleCmd;
@@ -313,6 +403,19 @@ void CDSSDPrimaryGeneratorMessenger::SetNewValue(G4UIcommand* command,
   if( command == randomThetaCmd ){
     CDSSDActionGun->SetRandomTheta(newValues);
   }
+  
+  if( command == singleThetaCmd ){
+    CDSSDActionGun->SetSingleTheta(newValues);
+  }
+  
+  if( command == singlePhiCmd ){
+    CDSSDActionGun->SetSinglePhi(newValues);
+  }
+  
+   if( command == expoThetaCmd ){
+    CDSSDActionGun->SetExpoTheta(newValues);
+  }
+  
 
   if( command == randomThetaValCmd ){
     G4double thetaMax, thetaMin;
@@ -329,7 +432,41 @@ void CDSSDPrimaryGeneratorMessenger::SetNewValue(G4UIcommand* command,
 
     CDSSDActionGun->SetRandomThetaVal(thetaMin,thetaMax);
   }
+  
+  if( command == expoThetaValCmd ){
+    G4double thetaMax, thetaMin;
+    //    ConvertToDoublePair(newValues, thetaMin, thetaMax);
 
+    G4double x, y;
+    char unts[30];
+    std::istringstream is(newValues);
+    is >> x >> y >> unts;
+    G4String unt = unts;
+
+    thetaMin = x*G4UIcommand::ValueOf(unt);
+    thetaMax = y*G4UIcommand::ValueOf(unt);
+
+    CDSSDActionGun->SetExpoThetaVal(thetaMin,thetaMax);
+  }
+
+  if( command == expoThetaParamsCmd ){
+    G4double sigma0, var;
+    //    ConvertToDoublePair(newValues, thetaMin, thetaMax);
+
+    G4double x, y;
+    std::istringstream is(newValues);
+    is >> x >> y;
+
+    sigma0 = x;
+    var = y;
+
+    CDSSDActionGun->SetExpoParams(sigma0,var);
+  }
+
+  if( command == randomPhiCmd ){
+    CDSSDActionGun->SetRandomPhi(newValues);
+  }
+  
   if( command == randomPhiValCmd ){
     G4double phiMax, phiMin;
     //    ConvertToDoublePair(newValues, thetaMin, thetaMax);
@@ -345,6 +482,8 @@ void CDSSDPrimaryGeneratorMessenger::SetNewValue(G4UIcommand* command,
 
     CDSSDActionGun->SetRandomPhiVal(phiMin,phiMax);
   }
+  
+  
 
   if( command == KineIncidentIonCmd )
     KineIncidentIonCommand(newValues);
@@ -381,6 +520,12 @@ void CDSSDPrimaryGeneratorMessenger::SetNewValue(G4UIcommand* command,
    if( command == thetaLabAngleCmd )
     CDSSDActionGun->SetThetaLabAngle(thetaLabAngleCmd->GetNewDoubleValue(newValues));
 
+   if(command == estarFileCmd)
+       CDSSDActionGun->SetEstarFromAFile(newValues);
+   
+   if(command == estarFileNameCmd)
+       CDSSDActionGun->SetEstarFileName(newValues);
+   
 }
 
 

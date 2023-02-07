@@ -31,6 +31,8 @@ private:
   G4double si1NRadialStrips;
   G4double si1NAzimuthalStrips;
   
+  G4double res;
+  
   G4double si1PosZ;  
   G4NistManager *nistman;
 
@@ -61,6 +63,8 @@ public:
   void SetNRadialStrips (G4double val) {si1NRadialStrips = val;}
   void SetNAzimuthalStrips (G4double val) {si1NAzimuthalStrips = val;}
   
+  void SetResolution (G4double val) {res=val;}
+  
   G4double GetNSlices() {return si1NSlices;}
   G4double GetNRadialStrips() {return si1NRadialStrips;}
   G4double GetNAzimuthalStrips() {return si1NAzimuthalStrips;}
@@ -74,5 +78,7 @@ public:
   
   G4double GetRminActive(){return si1RminActive;}
   G4double GetRmaxActive(){return si1RmaxActive;}
+  
+  G4double GetResolution(){return res;}
 };
 #endif

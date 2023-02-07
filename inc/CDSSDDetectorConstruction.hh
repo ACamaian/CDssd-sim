@@ -88,7 +88,7 @@ public:
   
   CDSSDSi1SD* GetSi1SD(void){return si1SD;}
   CDSSDSi2SD* GetSi2SD(void){return si2SD;}
-
+  
   void UpdateGeometry();
     
 };

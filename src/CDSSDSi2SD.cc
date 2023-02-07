@@ -45,14 +45,8 @@ G4bool CDSSDSi2SD::ProcessHits(G4Step* aStep, G4TouchableHistory*){
   //function is directly implemented here:  
   G4double edep = aStep->GetTotalEnergyDeposit();
   
-  // step length
-  G4double stepLength = 0.;
-  if (aStep->GetTrack()->GetDefinition()->GetPDGCharge()!= 0.) {
-    stepLength = aStep->GetStepLength();
-  }
-
-  if (edep==0. && stepLength ==0.) return false;
-  
+  if(edep<=0) return false;
+    
   auto touchable = (aStep->GetPreStepPoint()->GetTouchable());
     
   // Get calorimeter cell id

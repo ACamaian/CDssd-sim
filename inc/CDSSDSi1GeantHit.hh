@@ -23,6 +23,8 @@ private:
    G4int islice;
    G4int iradius;
    G4int iphi;
+   G4double thetaRiv;
+   G4double phiRiv;
 
 
 public:
@@ -52,6 +54,8 @@ public:
    void SetISlice(G4int val){islice = val;}
    void SetIRadius(G4int val){iradius=val;};
    void SetIPhi(G4int val) {iphi = val;}
+   void SetThetaRiv(G4double val) {thetaRiv = val;}
+   void SetPhiRiv(G4double val) {phiRiv = val;}
    
    void AddEnergy(G4double val){edep += val;}
 
@@ -67,6 +71,8 @@ public:
    G4int GetISlice(){return islice;}
    G4int GetIRadius(){return iradius;}
    G4int GetIPhi() {return iphi;}
+   G4double GetThetaRiv() {return thetaRiv;}
+    G4double GetPhiRiv() {return phiRiv;}
    
 
 };

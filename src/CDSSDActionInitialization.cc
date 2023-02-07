@@ -60,10 +60,11 @@ void CDSSDActionInitialization::Build() const
 {
 
   //G4cout << "Primary Generator Action" << G4endl;
-  SetUserAction(new CDSSDPrimaryGeneratorAction);
+    auto generator = new CDSSDPrimaryGeneratorAction();
+  SetUserAction(generator);
   
   //G4cout << "Event Action" << G4endl;
-  CDSSDEventAction *eventAction = new CDSSDEventAction();
+  CDSSDEventAction *eventAction = new CDSSDEventAction(generator, fDetConstruction);
   SetUserAction(eventAction); 
   
   // G4cout << "Run Action" << G4endl;

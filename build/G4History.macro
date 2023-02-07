@@ -1,6 +1,6 @@
 /run/verbose 0
 /event/verbose 0
-/tracking/verbose 2
+/tracking/verbose 0
 /run/numberOfThreads 1
 /run/initialize
 /CDSSD/gun/Kine/incidentIon 8 16 8 0. 16.
@@ -9,7 +9,57 @@
 /CDSSD/gun/Kine/recoiledIon 1 2 1 0. 2.
 /CDSSD/gun/Kine/reactionQ 0. MeV
 /CDSSD/gun/Kine/labEnergy 80 MeV
-/CDSSD/gun/randomTheta off
-/CDSSD/gun/Kine/userThetaCM 10 deg
-/CDSSD/gun/Kine/userPhiCM 189 deg
-/run/beamOn 1
+/CDSSD/gun/uniformTheta off
+/CDSSD/gun/uniformThetaVal 0 180
+/CDSSD/gun/uniformPhi on
+/CDSSD/gun/uniformPhiVal 0 360
+/CDSSD/gun/singleTheta on
+/CDSSD/gun/Kine/userThetaCM 4.9 deg
+/CDSSD/gun/singlePhi on
+/CDSSD/gun/Kine/userPhiCM 9 deg
+/control/execute vis.mac
+/vis/open OGL 600x600-0+0
+/vis/sceneHandler/create OGL
+/vis/viewer/create ! ! 600x600-0+0
+/vis/viewer/refresh
+/vis/viewer/set/autoRefresh false
+/vis/verbose errors
+/vis/drawVolume
+/vis/scene/create
+/vis/scene/add/volume world -1 -1 none m 0 0 0 0 0 0
+/vis/sceneHandler/attach
+/vis/viewer/set/viewpointVector -1 0 0
+/vis/viewer/set/lightsVector -1 0 0
+/vis/scene/add/scale
+/vis/scene/notifyHandlers
+/vis/scene/add/axes
+/vis/scene/notifyHandlers
+/vis/scene/add/eventID
+/vis/scene/notifyHandlers
+/vis/viewer/set/style wireframe
+/vis/viewer/set/auxiliaryEdge true
+/vis/viewer/set/lineSegmentsPerCircle 100
+/vis/viewer/reset
+/vis/viewer/refresh
+/vis/viewer/set/hiddenEdge 0
+/vis/viewer/refresh
+/vis/viewer/set/viewpointThetaPhi 115. 145.
+/vis/viewer/refresh
+/vis/viewer/zoom 1.0
+/vis/viewer/refresh
+/vis/viewer/flush
+/vis/viewer/refresh viewer-0
+/vis/viewer/update viewer-0
+/vis/viewer/set/style wireframe
+/vis/viewer/refresh
+/vis/viewer/flush
+/vis/viewer/refresh viewer-0
+/vis/viewer/update viewer-0
+/vis/scene/endOfEventAction accumulate 10
+/vis/scene/add/trajectories
+/tracking/storeTrajectory 1
+/vis/scene/notifyHandlers
+/vis/scene/add/hits
+/vis/scene/notifyHandlers
+/vis/set/touchable World 0
+/vis/viewer/select viewer-0 (OpenGLStoredQt)

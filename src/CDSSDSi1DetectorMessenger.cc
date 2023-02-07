@@ -114,6 +114,10 @@ CDSSDSi1DetectorMessenger:: CDSSDSi1DetectorMessenger(CDSSDSi1DetectorConstructi
   nAziCmd->SetParameterName("si1NAzimuthalStrips",false);
   nAziCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
   
+  resCmd = new G4UIcmdWithADouble("/CDSSD/si1/resolution",this);
+  resCmd->SetParameterName("si1Resolution",false);
+  resCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+  
 }
 
 //////////////////////////////////////////////////////////////////
@@ -167,6 +171,9 @@ void CDSSDSi1DetectorMessenger::SetNewValue(G4UIcommand* command,
       
       if(command == nRadialCmd)
         CDSSDSi1Detector->SetNRadialStrips(nRadialCmd->GetNewDoubleValue(newValue));
+      
+      if(command == resCmd)
+        CDSSDSi1Detector->SetResolution(resCmd->GetNewDoubleValue(newValue));
            
      
 }

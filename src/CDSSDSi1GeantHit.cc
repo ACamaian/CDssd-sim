@@ -43,5 +43,7 @@ void CDSSDSi1GeantHit::Reset(){
     islice = -1;
     iradius = -1;
     iphi = -1;
+    thetaRiv = -1;
+    phiRiv = -1;
     
 }

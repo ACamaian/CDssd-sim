@@ -22,6 +22,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/camaiani/Software/install/geant4/lib/Geant4-11.0.3/PTL/PTLTargets.cmake"
   "/home/camaiani/Software/install/geant4/lib/Geant4-11.0.3/UseGeant4.cmake"
   "/home/camaiani/Tecnica/Garfield/CDssd-sim/CMakeLists.txt"
+  "/home/camaiani/Tecnica/Garfield/CDssd-sim/EstarNe20.dat"
   "/home/camaiani/Tecnica/Garfield/CDssd-sim/FindROOT.cmake"
   "CMakeFiles/3.25.2/CMakeCCompiler.cmake"
   "CMakeFiles/3.25.2/CMakeCXXCompiler.cmake"
@@ -96,6 +97,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "init_vis.mac"
   "run.mac"
   "vis.mac"
+  "EstarNe20.dat"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 

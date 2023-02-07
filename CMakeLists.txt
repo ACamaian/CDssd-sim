@@ -103,6 +103,7 @@ set(CDSCRIPT
   init_vis.mac
   run.mac
   vis.mac
+  EstarNe20.dat
  )
 
 foreach(_script ${CDSCRIPT})
