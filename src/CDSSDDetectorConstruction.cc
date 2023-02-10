@@ -29,7 +29,7 @@ CDSSDDetectorConstruction::CDSSDDetectorConstruction():
   G4cout << "CDSSD Detector Construction" << G4endl;
 
   //initialize the G4NISTMaterial manager
-  nistman = G4NistManager::Instance();
+  auto nistman = G4NistManager::Instance();
 
   //default values of half-length -> size of World (2x2x2 m3)
   worldSizeX = 1.*m;
@@ -51,7 +51,7 @@ CDSSDDetectorConstruction::CDSSDDetectorConstruction():
 /// Destructor
 CDSSDDetectorConstruction::~CDSSDDetectorConstruction() {
 
-  if(detectorMessenger != NULL) delete detectorMessenger;
+ // if(detectorMessenger != NULL) delete detectorMessenger;
  
 }
 
@@ -69,6 +69,8 @@ G4VPhysicalVolume* CDSSDDetectorConstruction::Construct() {
 
 G4VPhysicalVolume* CDSSDDetectorConstruction::ConstructCDSSD() {
 
+  auto nistman = G4NistManager::Instance(); 
+  
   //--------------------------
   //World Volume
   //--------------------------
@@ -121,7 +123,7 @@ void CDSSDDetectorConstruction::ConstructSDandField(){
   G4cout << "Setting the SD volumes" << G4endl;
 
   //The SD manager
-  SDman = G4SDManager::GetSDMpointer();
+  auto SDman = G4SDManager::GetSDMpointer();
   
    // Si1 volume sensitive detector
    auto si1SD = new CDSSDSi1SD("Si1SD", "Si1HitsCollection", si1Det);
@@ -139,6 +141,8 @@ void CDSSDDetectorConstruction::ConstructSDandField(){
 /// Define the materials to be used
 void CDSSDDetectorConstruction::DefineMaterials() {
 
+  auto nistman = G4NistManager::Instance();  
+    
   //
   // define materials
   //
@@ -184,6 +188,7 @@ void CDSSDDetectorConstruction::DefineMaterials() {
 ////////////////////////////////////////////////////////////////
 /// Sets the material the target is made of
 void CDSSDDetectorConstruction::SetTargetMaterial (G4String mat) {
+    auto nistman = G4NistManager::Instance();
   G4Material* pttoMaterial = nistman->FindOrBuildMaterial(mat);
   if (pttoMaterial) targetMaterial = pttoMaterial;
 }

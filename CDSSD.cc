@@ -1,7 +1,6 @@
 #include <time.h>
 
 #include "G4RunManagerFactory.hh"
-#include "G4RunManager.hh"
 #include "G4UImanager.hh"
 #include "G4UIterminal.hh"
 #include "G4UItcsh.hh"
@@ -43,7 +42,7 @@ int main(int argc,char** argv)
   
   // Construct the default run manager
   //
-  auto runManager =    G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default);
+  auto* runManager =    G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default);
    
   //Analysys toolkit
   // CDSSDROOTAnalysis *analysis = new CDSSDROOTAnalysis();

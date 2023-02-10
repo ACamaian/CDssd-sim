@@ -26,8 +26,7 @@ CDSSDEventAction::CDSSDEventAction()
 CDSSDEventAction::CDSSDEventAction(CDSSDPrimaryGeneratorAction *gene, CDSSDDetectorConstruction *d)
 : G4UserEventAction()
 {
-    G4cout << "Construct Event Action" << G4endl;
-    
+       
     generator = gene;
     dets = d;
     
@@ -221,9 +220,7 @@ void CDSSDEventAction::EndOfEventAction(const G4Event* evt)
        Zin.push_back(zin);
        EdepSi2.push_back(edep);  
        ISec.push_back(isec);
-  
-       if(si2Nentries>1) G4cout << charge << " " << edep << G4endl;
-       
+         
    } //end loop on Si2Hit entries
   
   

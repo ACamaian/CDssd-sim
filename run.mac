@@ -63,7 +63,7 @@
 /event/verbose 0
 /tracking/verbose 0
 
-/run/numberOfThreads 1
+/run/numberOfThreads 4
 /run/printProgress 10000
 /run/initialize
 

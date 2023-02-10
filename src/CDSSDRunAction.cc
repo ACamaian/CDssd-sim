@@ -61,7 +61,6 @@ CDSSDRunAction::CDSSDRunAction(CDSSDEventAction *event)
   
   runMessenger = new CDSSDRunActionMessenger(this);
 
-  G4cout << "Construct Run Action" << G4endl;  
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -105,12 +104,32 @@ void CDSSDRunAction::BeginOfRunAction(const G4Run* aRun)
 void CDSSDRunAction::EndOfRunAction(const G4Run* aRun)
 {
   const G4int verboseLevel = G4RunManager::GetRunManager()->GetVerboseLevel();
+
+
   if(verboseLevel>=2){
-       G4cout << "##################################################################"<< G4endl
+      G4cout << "##################################################################"<< G4endl
        << "###########   CDSSDRunAction::EndOfRunAction()  ##############"<< G4endl
        << "###    Run " << aRun->GetRunID() << " ends." << G4endl;
        G4cout << "##################################################################"<< G4endl;
+      
+    if (IsMaster()) {
+    G4cout
+     << G4endl
+     << "--------------------End of Global Run-----------------------";
   }
+  else {
+    G4cout
+     << G4endl
+     << "--------------------End of Local Run------------------------";
+  }
+
+
+      
+      
+      
+  }
+    
+    
     
     
   // print histogram statistics

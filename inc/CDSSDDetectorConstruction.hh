@@ -30,10 +30,6 @@ class CDSSDSi2SD;
 
 class CDSSDDetectorConstruction : public G4VUserDetectorConstruction {
 private:
-
-  G4NistManager *nistman; //Pointer to NIST Material Manager 
-  
-  G4SDManager* SDman;     //Pointer to SD manager
     
   G4UserLimits* limit;
 
