@@ -59,7 +59,7 @@ public:
   void SetDPhiGap (G4double val) {DPhigap = val;}
   void SetDPhiSi (G4double val) {DPhisi = val;}  
   
-  G4double SetResolution(G4double val) {res=val;}
+  void SetResolution(G4double val) {res=val;}
   
   G4double GetNSlices() {return si2NSlices;}
     

@@ -7,10 +7,10 @@
 #----
 #QQQ2 16 strips, 2mm each along theta
 #QQQ2 24 strips, 3.4 deg each along phi
-/CDSSD/si1/setRmin 11.50 mm #QQQ2 D chip inner 11.50mm
-/CDSSD/si1/setRmax 85 mm #QQQ2 D chip outer 85.00mm
-/CDSSD/si1/setRminActive 18 mm #QQQ2 D active inner 18
-/CDSSD/si1/setRmaxActive 82 mm #QQQ2 D active outer 82
+/CDSSD/si1/setRmin 5.75 mm #QQQ2 D chip inner 11.50mm
+/CDSSD/si1/setRmax 42.5 mm #QQQ2 D chip outer 85.00mm
+/CDSSD/si1/setRminActive 9 mm #QQQ2 D active inner 18
+/CDSSD/si1/setRmaxActive 41 mm #QQQ2 D active outer 82
 /CDSSD/si1/setThickness 20 um
 /CDSSD/si1/setAlThickness 0.5 um
 /CDSSD/si1/setZPos -100 mm
@@ -21,16 +21,22 @@
 /CDSSD/si1/setNAzimuthalStrips 24
 
 #QQQ1 four quadrants 1500um thick
-/CDSSD/si2/setRmin 11.50 mm #QQQ1 D chip inner 11.50mm
-/CDSSD/si2/setRmax 103 mm #QQQ1 D chip outer 103 mm
-/CDSSD/si2/setRminActive 18 mm #QQQ1 D active inner 18
-/CDSSD/si2/setRmaxActive 100 mm #QQQ1 D active outer 82
+/CDSSD/si2/setRmin 5.75 mm #QQQ1 D chip inner 11.50mm
+/CDSSD/si2/setRmax 51.5 mm #QQQ1 D chip outer 103 mm
+/CDSSD/si2/setRminActive 9 mm #QQQ1 D active inner 18
+/CDSSD/si2/setRmaxActive 41 mm #QQQ1 D active outer 82
 /CDSSD/si2/setThickness 1500 um
 /CDSSD/si2/setAlThickness 0.5 um
 /CDSSD/si2/setZPos -101 mm
 /CDSSD/si2/setNSlices 4 # 360deg/NSlices MUST BE equal to sliceDPhi+sliceOffset
 /CDSSD/si2/setDPhiGap 8 deg
 /CDSSD/si2/setDPhiSi 82 deg 
+#---
+#Output File Name
+#---
+/CDSSD/action/setOutputFileName output/cdssd_standardQQQ_z100.root
+
+
 
 #----
 #Setting the physics List
@@ -75,13 +81,13 @@
 /CDSSD/gun/uniformThetaVal 0 180
 /CDSSD/gun/uniformPhi on
 /CDSSD/gun/uniformPhiVal 0 360
-/CDSSD/gun/singleTheta on
+/CDSSD/gun/singleTheta off
 /CDSSD/gun/Kine/userThetaCM 4.9 deg
-/CDSSD/gun/singlePhi on
+/CDSSD/gun/singlePhi off
 /CDSSD/gun/Kine/userPhiCM 9 deg
-#/CDSSD/gun/expoTheta on
-#/CDSSD/gun/expoThetaVal 2 180 deg
-#/CDSSD/gun/expoThetaParams 100 0.2 #mbar/st - rad
+/CDSSD/gun/expoTheta on
+/CDSSD/gun/expoThetaVal 2 20 deg
+/CDSSD/gun/expoThetaParams 100 0.2 #mbar/st - rad
 
 
 /control/execute vis.mac

@@ -25,7 +25,7 @@
 //////////////////////////////////////////////////////////////////
 /// Constructor: initialize all variables, materials and pointers
 CDSSDDetectorConstruction::CDSSDDetectorConstruction(): 
-    si1SD(0), si2SD(0), solidWorld(0), worldLog(0),  worldPhys(0){
+  solidWorld(0), worldLog(0),  worldPhys(0){
   G4cout << "CDSSD Detector Construction" << G4endl;
 
   //initialize the G4NISTMaterial manager
@@ -123,14 +123,14 @@ void CDSSDDetectorConstruction::ConstructSDandField(){
   //The SD manager
   SDman = G4SDManager::GetSDMpointer();
   
-  // Si1 volume sensitive detector
-  si1SD = new CDSSDSi1SD("Si1SD", "Si1HitsCollection", si1Det);
-  SDman->AddNewDetector(si1SD);
-  SetSensitiveDetector(si1Det->GetActiveLogicalVolume(),si1SD);
-  
-  si2SD = new CDSSDSi2SD("Si2SD", "Si2HitsCollection", si2Det);
-  SDman->AddNewDetector(si2SD);
-  SetSensitiveDetector(si2Det->GetActiveLogicalVolume(),si2SD);  
+   // Si1 volume sensitive detector
+   auto si1SD = new CDSSDSi1SD("Si1SD", "Si1HitsCollection", si1Det);
+   SDman->AddNewDetector(si1SD);
+   SetSensitiveDetector(si1Det->GetActiveLogicalVolume(),si1SD);
+   
+   auto si2SD = new CDSSDSi2SD("Si2SD", "Si2HitsCollection", si2Det);
+   SDman->AddNewDetector(si2SD);
+   SetSensitiveDetector(si2Det->GetActiveLogicalVolume(),si2SD);  
 
 }
 

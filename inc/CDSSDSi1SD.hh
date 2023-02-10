@@ -5,6 +5,8 @@
 #include "CDSSDSi1GeantHit.hh"
 #include "CDSSDSi1DetectorConstruction.hh"
 
+#include <vector>
+
 class G4Step;
 class G4HCofThisEvent;
 
@@ -29,10 +31,8 @@ public:
     G4int NofSlices;
     G4int NofRadial;
     G4int NofAzimuthal;
-  
-    G4int tempID=-1;
     
-    CDSSDSi1GeantHit *newHit;
+    G4int countTracks;
     
 };
 #endif

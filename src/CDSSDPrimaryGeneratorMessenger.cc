@@ -51,8 +51,6 @@ CDSSDPrimaryGeneratorMessenger::CDSSDPrimaryGeneratorMessenger(CDSSDPrimaryGener
   particleTable = G4ParticleTable::GetParticleTable();
   ionTable = G4IonTable::GetIonTable();
 
-  G4cout << "here " << G4endl;
-
   G4bool omitable;
   G4UIparameter* parameter;
 

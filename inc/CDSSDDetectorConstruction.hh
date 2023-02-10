@@ -50,10 +50,8 @@ private:
   G4double  targetThickness;
   
   CDSSDSi1DetectorConstruction* si1Det;          ///< Pointer to target constructor 
-  CDSSDSi1SD *si1SD;
   CDSSDSi2DetectorConstruction* si2Det;          ///< Pointer to target constructor 
-  CDSSDSi2SD *si2SD;
-  
+    
   CDSSDDetectorMessenger* detectorMessenger;  ///< Pointer to the Messenger
 
   void DefineMaterials();
@@ -86,8 +84,7 @@ public:
   CDSSDSi1DetectorConstruction* GetSi1Detector() {return si1Det;}
   CDSSDSi2DetectorConstruction* GetSi2Detector() {return si2Det;}
   
-  CDSSDSi1SD* GetSi1SD(void){return si1SD;}
-  CDSSDSi2SD* GetSi2SD(void){return si2SD;}
+ 
   
   void UpdateGeometry();
     

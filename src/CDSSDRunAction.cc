@@ -14,6 +14,8 @@ CDSSDRunAction::CDSSDRunAction(CDSSDEventAction *event)
   : G4UserRunAction(), fEventAction(event)
 { 
 
+  
+    
   // set printing event number per each event
   G4RunManager::GetRunManager()->SetPrintProgress(1);
   
@@ -59,6 +61,7 @@ CDSSDRunAction::CDSSDRunAction(CDSSDEventAction *event)
   
   runMessenger = new CDSSDRunActionMessenger(this);
 
+  G4cout << "Construct Run Action" << G4endl;  
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

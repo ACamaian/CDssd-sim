@@ -1,4 +1,0 @@
-/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/cd.dir
-/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/CDssdsim.dir
-/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/edit_cache.dir
-/home/camaiani/Tecnica/Garfield/CDssd-sim/build/CMakeFiles/rebuild_cache.dir

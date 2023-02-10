@@ -13,7 +13,7 @@ private:
  G4int         trackID;          ///< ID for each track
   G4int         parentID;         ///< ID for the parent track
 
-   G4double      edep;             ///< Energy deposited
+   G4double      edep=0;             ///< Energy deposited
    G4double      particleCharge;   ///< Charge of the particle
    G4double      particleMass;     ///< Mass of the particle
    G4int         particleID;       ///< Particle ID according to the GDP-coding
@@ -40,7 +40,7 @@ public:
 
    void SetTrackID(G4int track){ trackID = track; }
    void SetParentID(G4int track){ parentID = track; }
-  void SetEdep(G4double de){ edep = de; }
+   void SetEdep(G4double de){ edep = de; }
    void SetParticleCharge(G4double pc){particleCharge=pc;}
    void SetParticleMass(G4double pm){particleMass=pm;}
    void SetParticleID(G4int pi){particleID=pi;}

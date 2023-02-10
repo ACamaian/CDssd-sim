@@ -33,7 +33,6 @@ void CDSSDSi2GeantHit::Reset(){
     
     trackID = -1;          ///< ID for each track
     parentID = -1;         ///< ID for the parent track
-
     edep = 0;             ///< Energy deposited
     particleCharge = -1;   ///< Charge of the particle
     particleMass = -1;     ///< Mass of the particle

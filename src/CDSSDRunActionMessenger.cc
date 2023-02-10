@@ -13,10 +13,14 @@
 /// Constructor
 /// command included in this AnalysisMessenger:
 /// - /CDSSD/action/setOutputFileName
+
+
 CDSSDRunActionMessenger::
 CDSSDRunActionMessenger(CDSSDRunAction* run)
   :runAction(run) {
 
+      G4cout << "Run Messenger" << G4endl;
+      
   actionDir = new G4UIdirectory("/CDSSD/action/");
   actionDir->SetGuidance("RunAction control");
 
@@ -24,7 +28,7 @@ CDSSDRunActionMessenger(CDSSDRunAction* run)
   outputFileNameCmd = new G4UIcmdWithAString("/CDSSD/action/setOutputFileName",this);
   outputFileNameCmd->SetGuidance("Select the output ROOT file name");
   outputFileNameCmd->SetParameterName("output",false);
-  outputFileNameCmd->SetDefaultValue("output.root");
+  outputFileNameCmd->SetDefaultValue("output/output.root");
   outputFileNameCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
   
 }
@@ -32,10 +36,7 @@ CDSSDRunActionMessenger(CDSSDRunAction* run)
 //////////////////////////////////////////////////////////////////
 /// Destructor
 CDSSDRunActionMessenger::~CDSSDRunActionMessenger() {
-  delete actionDir;
-
-  delete outputFileNameCmd;;
-  
+ 
 }
 
 

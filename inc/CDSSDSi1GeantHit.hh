@@ -72,7 +72,7 @@ public:
    G4int GetIRadius(){return iradius;}
    G4int GetIPhi() {return iphi;}
    G4double GetThetaRiv() {return thetaRiv;}
-    G4double GetPhiRiv() {return phiRiv;}
+   G4double GetPhiRiv() {return phiRiv;}
    
 
 };

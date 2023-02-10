@@ -26,6 +26,8 @@ CDSSDEventAction::CDSSDEventAction()
 CDSSDEventAction::CDSSDEventAction(CDSSDPrimaryGeneratorAction *gene, CDSSDDetectorConstruction *d)
 : G4UserEventAction()
 {
+    G4cout << "Construct Event Action" << G4endl;
+    
     generator = gene;
     dets = d;
     
@@ -40,7 +42,7 @@ CDSSDEventAction::~CDSSDEventAction()
 
 void CDSSDEventAction::BeginOfEventAction(const G4Event* evt)
 {    
-    
+     
  const G4int verboseLevel = G4EventManager::GetEventManager()->GetVerboseLevel();   
  if(verboseLevel>=2){
        G4cout << "##################################################################"<< G4endl
@@ -156,15 +158,15 @@ void CDSSDEventAction::EndOfEventAction(const G4Event* evt)
        iazimuth = si1Hit->GetIPhi();
        detName = si1Hit->GetDetName();
       
-//        TrackID.push_back(trackID);
-//        ParentID.push_back(parentID);
-//        ParticleID.push_back(particleID);
-//        DetID.push_back(detID);
-//        Charge.push_back(charge);
-//        Mass.push_back(mass);
-//        Xin.push_back(xin);
-//        Yin.push_back(yin);
-//        Zin.push_back(zin);
+       TrackID.push_back(trackID);
+       ParentID.push_back(parentID);
+       ParticleID.push_back(particleID);
+       DetID.push_back(detID);
+       Charge.push_back(charge);
+       Mass.push_back(mass);
+       Xin.push_back(xin);
+       Yin.push_back(yin);
+       Zin.push_back(zin);
        EdepSi1.push_back(edep);  
        ISec.push_back(isec);
        IRadius.push_back(iradius);
@@ -172,7 +174,6 @@ void CDSSDEventAction::EndOfEventAction(const G4Event* evt)
        ThetaRiv.push_back(si1Hit->GetThetaRiv());
        PhiRiv.push_back(si1Hit->GetPhiRiv());
       
-       
     } //end loop on Si1Hit entries
     
     
@@ -189,7 +190,7 @@ void CDSSDEventAction::EndOfEventAction(const G4Event* evt)
   // Get hits collections and loop on it
   auto si2HC = GetHitsCollectionSi2(fsi2HCID, evt);
   G4int si2Nentries = si2HC->entries();   
-  
+    
   for(int ii=0; ii<si2Nentries; ii++){
     auto si2Hit = (*si2HC)[ii];    //how access hit from a hit collection
                         
@@ -208,24 +209,25 @@ void CDSSDEventAction::EndOfEventAction(const G4Event* evt)
        detID = si2Hit->GetDetID();
        isec = si2Hit->GetISlice();
        detName = si2Hit->GetDetName();
-      
-      
-//        TrackID.push_back(trackID);
-//        ParentID.push_back(parentID);
-//        ParticleID.push_back(particleID);
-//        DetID.push_back(detID);
-//        Charge.push_back(charge);
-//        Mass.push_back(mass);
-//        Xin.push_back(xin);
-//        Yin.push_back(yin);
-//        Zin.push_back(zin);
+             
+       TrackID.push_back(trackID);
+       ParentID.push_back(parentID);
+       ParticleID.push_back(particleID);
+       DetID.push_back(detID);
+       Charge.push_back(charge);
+       Mass.push_back(mass);
+       Xin.push_back(xin);
+       Yin.push_back(yin);
+       Zin.push_back(zin);
        EdepSi2.push_back(edep);  
-       //ISec.push_back(isec);
-       
+       ISec.push_back(isec);
+  
+       if(si2Nentries>1) G4cout << charge << " " << edep << G4endl;
        
    } //end loop on Si2Hit entries
- 
- 
+  
+  
+  
   analysisManager->AddNtupleRow(0);
  
 }

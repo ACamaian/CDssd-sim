@@ -49,7 +49,8 @@ CDSSDActionInitialization::~CDSSDActionInitialization()
 void CDSSDActionInitialization::BuildForMaster() const
 { //needed by MultiThread Mode
 
-  CDSSDEventAction *eventAction =0;
+  CDSSDEventAction *eventAction=0;
+  
   CDSSDRunAction* runAction =new CDSSDRunAction(eventAction);
   SetUserAction(runAction);
 }
@@ -60,7 +61,7 @@ void CDSSDActionInitialization::Build() const
 {
 
   //G4cout << "Primary Generator Action" << G4endl;
-    auto generator = new CDSSDPrimaryGeneratorAction();
+  auto generator = new CDSSDPrimaryGeneratorAction();
   SetUserAction(generator);
   
   //G4cout << "Event Action" << G4endl;

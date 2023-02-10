@@ -5,6 +5,8 @@
 #include "CDSSDSi2GeantHit.hh"
 #include "CDSSDSi2DetectorConstruction.hh"
 
+#include <map>
+
 class G4Step;
 class G4HCofThisEvent;
 
@@ -27,7 +29,7 @@ public:
     G4int NofSlices;
     
     CDSSDSi2DetectorConstruction *Si2Det;
-    
-    CDSSDSi2GeantHit *newHit;
+       
+    G4int countTracks;
 };
 #endif
