@@ -34,7 +34,7 @@
 #---
 #Output File Name
 #---
-/CDSSD/action/setOutputFileName output/cdssd_standardQQQ_z50_estar.root
+/CDSSD/action/setOutputFileName output/cdssd_standardQQQ_z100_estar.root
 
 #----
 #Setting the physics List
@@ -78,7 +78,7 @@
 /CDSSD/gun/Kine/reactionQ 3.256 MeV
 /CDSSD/gun/estarFromAFile on
 /CDSSD/gun/estarFileName EstarNe20.dat
-/CDSSD/gun/Kine/labEnergy 80 MeV
+/CDSSD/gun/Kine/labEnergy 160 MeV
 /CDSSD/gun/uniformTheta off
 /CDSSD/gun/uniformThetaVal 0 180 #Angles in the CM frame
 /CDSSD/gun/uniformPhi on
@@ -96,4 +96,4 @@
 #----
 #Shooting the beam
 #----
-/run/beamOn 1000000
+/run/beamOn 16000000

@@ -19,7 +19,7 @@ CDSSDRunActionMessenger::
 CDSSDRunActionMessenger(CDSSDRunAction* run)
   :runAction(run) {
 
-      G4cout << "Run Messenger" << G4endl;
+    //  G4cout << "Run Messenger" << G4endl;
       
   actionDir = new G4UIdirectory("/CDSSD/action/");
   actionDir->SetGuidance("RunAction control");

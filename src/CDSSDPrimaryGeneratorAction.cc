@@ -34,7 +34,7 @@ CDSSDPrimaryGeneratorAction::CDSSDPrimaryGeneratorAction()
 : G4VUserPrimaryGeneratorAction(),
   particleGun(0), scatteredIon(0), recoilIon(0){
   
-  G4cout << "Primary generator Construction" << G4endl;    
+  //G4cout << "Primary generator Construction" << G4endl;    
       
   G4ThreeVector zero;
   particleTable = G4ParticleTable::GetParticleTable();
