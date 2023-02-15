@@ -104,7 +104,9 @@ set(CDSCRIPT
   run.mac
   vis.mac
   EstarNe20.dat
- )
+  Ne20_5alpha_bcs_decay_path.dat
+    awm95.txt
+   )
 
 foreach(_script ${CDSCRIPT})
   configure_file(

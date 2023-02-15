@@ -43,6 +43,9 @@
 /// - /CDSSD/gun/Kine/userPhiAngle
 /// - /CDSSD/gun/estarFromAFile
 /// - /CDSSD/gun/estarFileName
+/// - /CDSSD/gun/inFlightDecayScattered
+/// - /CDSSD/gun/inFlightDecayScatteredFileName
+
 
 
 CDSSDPrimaryGeneratorMessenger::CDSSDPrimaryGeneratorMessenger(CDSSDPrimaryGeneratorAction* CDSSDGun)
@@ -342,6 +345,19 @@ CDSSDPrimaryGeneratorMessenger::CDSSDPrimaryGeneratorMessenger(CDSSDPrimaryGener
   reactionQCmd->SetDefaultValue(0.);
   reactionQCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
 
+  inFlightCmd = new G4UIcmdWithAString("/CDSSD/gun/inFlightDecayScattered",this);
+  inFlightCmd->SetGuidance("Turn on the scattered inflight decay");
+  inFlightCmd->SetGuidance("Choice : on, off(default");
+  inFlightCmd->SetParameterName("choice",true);
+  inFlightCmd->SetDefaultValue("off");
+  inFlightCmd->SetCandidates("on off");
+  inFlightCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+  
+  inFlightNameCmd = new G4UIcmdWithAString("/CDSSD/gun/inFlightDecayScatteredFileName",this);
+  inFlightNameCmd->SetGuidance("Decay scheme file Name");
+  inFlightNameCmd->SetDefaultValue("inFlightQP.dat");
+  inFlightNameCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+  
 }
 
 //////////////////////////////////////////////////////////////////
@@ -356,6 +372,9 @@ CDSSDPrimaryGeneratorMessenger::~CDSSDPrimaryGeneratorMessenger() {
   delete randomThetaValCmd;
   delete randomPhiValCmd;
     
+  delete inFlightCmd;
+  delete inFlightNameCmd;
+  
   delete singleThetaCmd;
   
   delete estarFileCmd;
@@ -412,6 +431,14 @@ void CDSSDPrimaryGeneratorMessenger::SetNewValue(G4UIcommand* command,
   
    if( command == expoThetaCmd ){
     CDSSDActionGun->SetExpoTheta(newValues);
+  }
+  
+   if( command == inFlightCmd ){
+    CDSSDActionGun->SetInFlightDecayScattered(newValues);
+  }
+  
+   if( command == inFlightNameCmd ){
+    CDSSDActionGun->SetInFlightDecayScatteredFileName(newValues);
   }
   
 
@@ -508,7 +535,7 @@ void CDSSDPrimaryGeneratorMessenger::SetNewValue(G4UIcommand* command,
   if( command == KineUserPhiAngleCmd )
     CDSSDActionGun->      SetPhiCMAngle(KineUserPhiAngleCmd->GetNewDoubleValue(newValues));
 
-  if( command == reactionQCmd )
+  if(command == reactionQCmd )
     CDSSDActionGun->
       SetReactionQ(reactionQCmd->GetNewDoubleValue(newValues));
   

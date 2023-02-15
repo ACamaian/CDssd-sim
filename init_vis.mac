@@ -13,7 +13,7 @@
 /CDSSD/si1/setRmaxActive 41 mm #QQQ2 D active outer 82
 /CDSSD/si1/setThickness 20 um
 /CDSSD/si1/setAlThickness 0.5 um
-/CDSSD/si1/setZPos -100 mm
+/CDSSD/si1/setZPos -50 mm
 /CDSSD/si1/setNSlices 4 # 360deg/NSlices MUST BE equal to sliceDPhi+sliceOffset
 /CDSSD/si1/setDPhiGap 8 deg
 /CDSSD/si1/setDPhiSi 82 deg 
@@ -27,16 +27,14 @@
 /CDSSD/si2/setRmaxActive 41 mm #QQQ1 D active outer 82
 /CDSSD/si2/setThickness 1500 um
 /CDSSD/si2/setAlThickness 0.5 um
-/CDSSD/si2/setZPos -101 mm
+/CDSSD/si2/setZPos -51 mm
 /CDSSD/si2/setNSlices 4 # 360deg/NSlices MUST BE equal to sliceDPhi+sliceOffset
 /CDSSD/si2/setDPhiGap 8 deg
 /CDSSD/si2/setDPhiSi 82 deg 
 #---
 #Output File Name
 #---
-/CDSSD/action/setOutputFileName output/cdssd_standardQQQ_z100.root
-
-
+/CDSSD/action/setOutputFileName output/vis_out.root
 
 #----
 #Setting the physics List
@@ -63,7 +61,7 @@
 /control/saveHistory
 /run/verbose 0
 /event/verbose 0
-/tracking/verbose 0
+/tracking/verbose 1
 
 /run/numberOfThreads 1
 /run/initialize
@@ -75,19 +73,22 @@
 /CDSSD/gun/Kine/targetIon 3 6 0 0. 6.
 /CDSSD/gun/Kine/scatteredIon 10 20 10 0. 20.
 /CDSSD/gun/Kine/recoiledIon 1 2 1 0. 2.
-/CDSSD/gun/Kine/reactionQ 0. MeV
-/CDSSD/gun/Kine/labEnergy 80 MeV
+/CDSSD/gun/Kine/reactionQ 3.256 MeV
+/CDSSD/gun/estarFromAFile on
+/CDSSD/gun/estarFileName EstarNe20.dat
+/CDSSD/gun/Kine/labEnergy 160 MeV
 /CDSSD/gun/uniformTheta off
-/CDSSD/gun/uniformThetaVal 0 180
+/CDSSD/gun/uniformThetaVal 0 180 #Angles in the CM frame
 /CDSSD/gun/uniformPhi on
 /CDSSD/gun/uniformPhiVal 0 360
 /CDSSD/gun/singleTheta off
-/CDSSD/gun/Kine/userThetaCM 4.9 deg
+/CDSSD/gun/Kine/userThetaCM 12 deg
 /CDSSD/gun/singlePhi off
-/CDSSD/gun/Kine/userPhiCM 9 deg
+/CDSSD/gun/Kine/userPhiCM 189 deg
 /CDSSD/gun/expoTheta on
-/CDSSD/gun/expoThetaVal 2 20 deg
+/CDSSD/gun/expoThetaVal 2 180 deg #Angles in the CM frame
 /CDSSD/gun/expoThetaParams 100 0.2 #mbar/st - rad
-
+/CDSSD/gun/inFlightDecayScattered on
+/CDSSD/gun/inFlightDecayScatteredFileName Ne20_5alpha_bcs_decay_path.dat
 
 /control/execute vis.mac

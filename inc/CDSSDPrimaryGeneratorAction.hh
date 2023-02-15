@@ -17,7 +17,6 @@
 #include "G4IonTable.hh"
 
 #include "CDSSDDetectorConstruction.hh"
-
 #include "CDSSDPrimaryGeneratorMessenger.hh"
 
 #include <map>
@@ -132,7 +131,12 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 
   void SetParticleDefinition(G4ParticleDefinition * aParticleDefinition) {particleGun->SetParticleDefinition(aParticleDefinition);}
   
-  private:
+  void SetInFlightDecayScattered(G4String val){inflightdecayscattered=val;}
+  void SetInFlightDecayScatteredFileName(G4String val){inflightdecayscatteredFile=val;}
+      
+  G4String GetInFlightDecayScatteredFileName(){return inflightdecayscatteredFile;}
+  
+private:
 
   G4ParticleGun* particleGun;                       ///< Pointer to G4particleGun object initialized in constructor
  
@@ -178,17 +182,22 @@ class CDSSDPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   G4double  exEnergyOfRecoiled;    ///< Energy of the recoil ion
   
   G4double energyLab1;
+  G4double veloLab1;
   G4double thetaLab1;
   G4double phiLab1;
   G4double energyLab2;
   G4double thetaLab2;
   G4double phiLab2;
+  G4double veloLab2;
   
   G4String estarFromAFile;
   G4String estarFileName;
   
   std::map<int, std::vector<double>> readEstarMap();
   std::map<int, std::vector<double>> estar_map;
+  
+  G4String inflightdecayscattered;
+  G4String inflightdecayscatteredFile;
 
 };
 

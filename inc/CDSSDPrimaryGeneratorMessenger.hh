@@ -79,6 +79,10 @@ private:
   void KineScatteredIonCommand(G4String newValues);
   void KineRecoilIonCommand(G4String newValues);
 
+  
+  G4UIcmdWithAString*         inFlightCmd; 
+  G4UIcmdWithAString*         inFlightNameCmd; 
+  
 public:
   CDSSDPrimaryGeneratorMessenger(CDSSDPrimaryGeneratorAction*);
   ~CDSSDPrimaryGeneratorMessenger();

@@ -1,0 +1,6 @@
+#Decay scheme Ne20 along BCS states
+#Zi Ai  E*i     Zf  Af  E*f         particle 
+10  20  21.2    8   16  15.097      alpha
+8   16  15.097  6   12  7.7         alpha
+6   12  7.7     4   8   0           alpha
+4   8   0       2   4   0           alpha

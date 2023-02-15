@@ -22,6 +22,10 @@
 #include "G4SystemOfUnits.hh"
 #include "Randomize.hh"
 
+#include "CDSSDInFlightDecay.hh"
+
+#include "Classe_formule.h"
+
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -172,9 +176,11 @@ void CDSSDPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   thetaBeam2 = KINE->GetANGAr(0);    // unit: rad - recoil in LAB
   energyLab1    = KINE->GetANGAs(1);    // unit: MeV in LAB
   energyLab2    = KINE->GetANGAr(1);    // unit: MeV in LAB
+  veloLab1 = sqrt(2*energyLab1/(GetScatteredIon()->GetAtomicMass()*Classe_formule::amu))*Classe_formule::cluce; //in mm/ns
+  veloLab2 = sqrt(2*energyLab2/(GetRecoilIon()->GetAtomicMass()*Classe_formule::amu))*Classe_formule::cluce; //in mm/ns
+  
   
   G4double phiBeam1=0., phiBeam2=0.;
-   //G4cout << phiBeam1 << G4endl;
   if(uniformPhi=="on"){
     phiBeam1 = phiMin + (phiMax-phiMin)*G4UniformRand();         //flat probability in phi
     }
@@ -204,13 +210,63 @@ void CDSSDPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
     G4cout << "Kine: recoiled  Phi angle LAB:"  << phiBeam2 /deg  << " deg" << G4endl;
   }
   
+  G4ThreeVector direction2 = G4ThreeVector(sin(thetaLab2)*cos(phiLab2),
+					   sin(thetaLab2)*sin(phiLab2),
+					   cos(thetaLab2)); // the recoil
+  G4ThreeVector direction1 = G4ThreeVector(sin(thetaLab1)*cos(phiLab1),
+					   sin(thetaLab1)*sin(phiLab1),
+					   cos(thetaLab1)); //the scattered
+  
+  if(inflightdecayscattered=="on"){
+      CDSSDInFlightDecay *decay = new CDSSDInFlightDecay(GetInFlightDecayScatteredFileName());
+      int ndecays = decay->GetNDecays();
+      int idec=0;
+      while(idec<ndecays){
+          
+          if(idec==0)decay->InitADecay(idec, direction1*veloLab1);
+          else decay->InitADecay(idec, decay->GetDaughterLabVelocity());
+          decay->ComputeADecay();
+          decay->FromCMToLab();
+          
+          
+          if(verboseLevel>1)decay->PrintADecay();
+          
+          particleGun->SetParticleDefinition(decay->GetParticleDefinitionEmitted());
+          particleGun->SetParticleCharge(decay->GetEmittedCharge());
+          particleGun->SetParticleMomentumDirection(decay->GetEmittedLabVelocity()/decay->GetEmittedLabVelocity().mag());
+          particleGun->SetParticleEnergy(decay->GetEmittedLabEkin()*MeV);
+          particleGun->GeneratePrimaryVertex(anEvent);
+          
+          if(decay->GetDaughterCharge()==2 && decay->GetDaughterMass()==4){
+             particleGun->SetParticleDefinition(decay->GetParticleDefinitionDaughter());
+             particleGun->SetParticleCharge(decay->GetDaughterCharge());
+             particleGun->SetParticleMomentumDirection(decay->GetDaughterLabVelocity()/decay->GetDaughterLabVelocity().mag());
+             particleGun->SetParticleEnergy(decay->GetDaughterLabEkin()*MeV);
+             particleGun->GeneratePrimaryVertex(anEvent); 
+             }
+          
+          idec++;
+      }
+      
+      //---Generating the primary vertex for recoiled Ion
+       particleGun->SetParticleDefinition(recoilIon);
+       particleGun->SetParticleCharge(recoilIonCharge);
+       particleGun->SetParticleMomentumDirection(direction2);
+       particleGun->SetParticleEnergy(energyLab2);
+  
+  particleGun->GeneratePrimaryVertex(anEvent);
+  
+  
+    delete decay;  
+  }
+  else{
+      
+      
   //-- Set the second gun to the desired vertex
   particleGun->SetParticlePosition(zero);
 
   //---Generating the primary vertex for recoil Ion
-  G4ThreeVector direction2 = G4ThreeVector(sin(thetaLab2)*cos(phiLab2),
-					   sin(thetaLab2)*sin(phiLab2),
-					   cos(thetaLab2));
+  
   particleGun->SetParticleDefinition(recoilIon);
   particleGun->SetParticleCharge(recoilIonCharge);
   particleGun->SetParticleMomentumDirection(direction2);
@@ -218,32 +274,14 @@ void CDSSDPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   
   particleGun->GeneratePrimaryVertex(anEvent);
   
-  //---
-  //Decay of the scattered
-  //--
-//   if(inflightDecay=="on"){
-//     G4double ex = GetExEnergyOfScattered();
-//     if(emitUniform="on"){  
-//         double thetapart = G4UniformRand()*M_PI;
-//         double phipart = G4UniformRand()*2*M_PI;
-//       
-//         double zp = GetScatteredIon().charge;
-//         double ap = GetScatteredIon().mass;
-//         
-//         G4double << zp << " " << ap << G4endl;
-//     }
-//   }
-//   else{
   //---Generating the primary vertex for scattered Ion
-  G4ThreeVector direction1 = G4ThreeVector(sin(thetaLab1)*cos(phiLab1),
-					   sin(thetaLab1)*sin(phiLab1),
-					   cos(thetaLab1));
+  
   particleGun->SetParticleDefinition(scatteredIon);
   particleGun->SetParticleCharge(scatteredIonCharge);
   particleGun->SetParticleMomentumDirection(direction1);
   particleGun->SetParticleEnergy(energyLab1);
   particleGun->GeneratePrimaryVertex(anEvent);
- // }
+  }
   
   
 }
