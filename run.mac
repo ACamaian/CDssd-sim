@@ -13,7 +13,7 @@
 /CDSSD/si1/setRmaxActive 41 mm #QQQ2 D active outer 82
 /CDSSD/si1/setThickness 20 um
 /CDSSD/si1/setAlThickness 0.5 um
-/CDSSD/si1/setZPos -20 mm
+/CDSSD/si1/setZPos -50 mm
 /CDSSD/si1/setNSlices 4 # 360deg/NSlices MUST BE equal to sliceDPhi+sliceOffset
 /CDSSD/si1/setDPhiGap 8 deg
 /CDSSD/si1/setDPhiSi 82 deg 
@@ -27,14 +27,14 @@
 /CDSSD/si2/setRmaxActive 41 mm #QQQ1 D active outer 82
 /CDSSD/si2/setThickness 1500 um
 /CDSSD/si2/setAlThickness 0.5 um
-/CDSSD/si2/setZPos -21 mm
+/CDSSD/si2/setZPos -51 mm
 /CDSSD/si2/setNSlices 4 # 360deg/NSlices MUST BE equal to sliceDPhi+sliceOffset
 /CDSSD/si2/setDPhiGap 8 deg
 /CDSSD/si2/setDPhiSi 82 deg 
 #---
 #Output File Name
 #---
-/CDSSD/action/setOutputFileName output/cdssd_standardQQQ_z20_estar20.root
+/CDSSD/action/setOutputFileName output/cdssd_standardQQQ_z50mm_Ebeam240MeV_estar0_25MeV.root
 
 #----
 #Setting the physics List
@@ -64,7 +64,7 @@
 /tracking/verbose 0
 
 /run/numberOfThreads 4
-/run/printProgress 1000
+/run/printProgress 10000
 /run/initialize
 
 
@@ -78,7 +78,7 @@
 /CDSSD/gun/Kine/reactionQ 3.256 MeV
 /CDSSD/gun/estarFromAFile on
 /CDSSD/gun/estarFileName EstarNe20.dat
-/CDSSD/gun/Kine/labEnergy 160 MeV
+/CDSSD/gun/Kine/labEnergy 240 MeV
 /CDSSD/gun/uniformTheta off
 /CDSSD/gun/uniformThetaVal 0 180 #Angles in the CM frame
 /CDSSD/gun/uniformPhi on
@@ -90,7 +90,7 @@
 /CDSSD/gun/expoTheta on
 /CDSSD/gun/expoThetaVal 2 180 deg #Angles in the CM frame
 /CDSSD/gun/expoThetaParams 100 0.2 #mbar/st - rad
-/CDSSD/gun/inFlightDecayScattered on
+/CDSSD/gun/inFlightDecayScattered off
 /CDSSD/gun/inFlightDecayScatteredFileName Ne20_5alpha_bcs_decay_path.dat
 
 
@@ -98,4 +98,4 @@
 #----
 #Shooting the beam
 #----
-/run/beamOn 100000
+/run/beamOn 1000000
